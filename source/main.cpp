@@ -2,6 +2,8 @@
 //#include <ncurses.h>
 #include "animation.h"
 #include <iostream>
+#include "enemy.h"
+#include "player.h"
 
 int main()
 {   

@@ -1,5 +1,5 @@
 #ifndef PLAYER_H
-#define PLATER_H
+#define PLAYER_H
 #include <iostream>
 #include <string>
 #include "creature.h"
