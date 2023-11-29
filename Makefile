@@ -33,7 +33,7 @@ TARGET_APP=RPG_FxxKU
 
 
 runaway:
-	$(CC) $(SRC) -o $(TARGET_APP) $(CFLAGS) $(LIBS) && ./$(TARGET_APP)
+	$(CC) $(SRC) -o $(TARGET_APP) $(CFLAGS) $(LIBS) && $(TARGET_APP)
 
 $(ODIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

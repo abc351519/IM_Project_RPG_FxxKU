@@ -1,13 +1,15 @@
 #ifndef CREATURE_H
 #define CREATURE_H
+#include <string>
 
 class Creature
 {
 private:
-    short hp;
-    short lv;
+    std::string name; // name
+    short hp; // health
+    short lv; // level
 public:
-    Creature();
-    ~Creature();
+    Creature(); // constructor
+    ~Creature(); // distructor
 };
 #endif
