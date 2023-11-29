@@ -18,14 +18,14 @@ CFLAGS=-I$(IDIR)
 LIBS=-lm #-lpthread -lpanel -lncurses
 #include header file
 #有新的標頭檔放這裡
-_DEPS=def.h hello.h
+_DEPS=def.h hello.h creature.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 #.o file output
 #有新的.o檔打在後面
-_OBJ=main.o hello.o
+_OBJ=main.o hello.o creature.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 #原始碼，新的.cpp檔放這裡
-_SRC=main.cpp hello.cpp
+_SRC=main.cpp hello.cpp creature.cpp
 SRC=$(patsubst %,$(SRCDIR)/%,*.cpp)
 
 
