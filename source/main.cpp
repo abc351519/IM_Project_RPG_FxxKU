@@ -6,8 +6,6 @@
 #include <string>
 int main()
 {   
-    std::string player_name;
-    std::cin >> player_name;
-    std::cout << player_name;
+    std::cout << "game start" << std::endl;
     return 0;
 }
