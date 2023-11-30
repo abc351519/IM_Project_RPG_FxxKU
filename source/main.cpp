@@ -7,11 +7,13 @@
 
 int main()
 {   
+    std::cout << "\033[0m";
     std::cout << "\n\n\n";
     std::cout << "   HP";
     ani::HMP_Loading(100, 100, "\033[41m");
     std::cout << '\n';
     std::cout << "   MP";
     ani::HMP_Loading(500, 269, "\033[44m");
+    
     return 0;
 }

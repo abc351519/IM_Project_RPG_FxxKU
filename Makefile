@@ -1,6 +1,6 @@
 #compiler
 CC=g++
-
+CVER=-std=c++17
 #header directory
 IDIR=include
 #.o directory
@@ -12,7 +12,7 @@ SRCDIR=source
 #NCURSE_LDIR=/opt/homebrew/Cellar/ncurses/6.4/lib
 
 #flags
-CFLAGS=-I$(IDIR)
+CFLAGS=-I$(IDIR) $(CVER) 
 #NCURSE_FLAG=-I$(NCURSE_IDIR) -L$(NCURSE_LDIR)
 #ncurse flag
 LIBS=-lm #-lpthread -lpanel -lncurses
@@ -29,7 +29,7 @@ _SRC=main.cpp hello.cpp creature.cpp animation.cpp enemy.cpp player.cpp
 SRC=$(patsubst %,$(SRCDIR)/%,*.cpp)
 
 
-TARGET_APP=RPG_FxxKU
+TARGET_APP=RPG_FxxKU.exe
 
 
 runaway:
