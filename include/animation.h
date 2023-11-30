@@ -12,6 +12,8 @@ enum CurserMove
 namespace ani{
     void clearScreen();
     void setPos(short x, short y);
+    void moveCurse(short option, short unit);
+    void drawLine(short length, short blockWidth, short direction, short timePerBlock);
     void loadWindow(const char* color);
     void HMP_Loading(short maxHMP, short nowHMP, const char* color);
 }
