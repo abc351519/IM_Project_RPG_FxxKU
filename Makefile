@@ -7,16 +7,9 @@ IDIR=include
 ODIR=obj
 #implement directory
 SRCDIR=source
-#ncurse directory
-#NCURSE_IDIR=/opt/homebrew/Cellar/ncurses/6.4/include
-#NCURSE_LDIR=/opt/homebrew/Cellar/ncurses/6.4/lib
-
 #flags
 CFLAGS=-I$(IDIR) $(CVER) 
-#NCURSE_FLAG=-I$(NCURSE_IDIR) -L$(NCURSE_LDIR)
-#ncurse flag
-LIBS=-lm #-lpthread -lpanel -lncurses
-#include header file
+LIBS=-lm 
 #有新的標頭檔放這裡
 _DEPS=def.h hello.h creature.h animation.h enemy.h player.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
@@ -26,12 +19,12 @@ _OBJ=main.o hello.o creature.o animation.o enemy.o player.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 #原始碼，新的.cpp檔放這裡
 _SRC=main.cpp hello.cpp creature.cpp animation.cpp enemy.cpp player.cpp
-SRC=$(patsubst %,$(SRCDIR)/%,*.cpp)
+SRC=$(patsubst %,$(SRCDIR)/%,$(_SRC))
 
 
 TARGET_APP=RPG_FxxKU.exe
 
-
+#安心使用
 runaway:
 	$(CC) $(SRC) -o $(TARGET_APP) $(CFLAGS) $(LIBS)
 

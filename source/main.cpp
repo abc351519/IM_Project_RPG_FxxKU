@@ -10,10 +10,12 @@ int main()
     std::cout << "\033[0m";
     std::cout << "\n\n\n";
     std::cout << "   HP";
-    ani::HMP_Loading(100, 100, "\033[41m");
+    ani::HMP_Loading(100, 1, "\033[41m");
     std::cout << '\n';
     std::cout << "   MP";
-    ani::HMP_Loading(500, 269, "\033[44m");
-    
+    ani::HMP_Loading(500, 0, "\033[44m");
+    std::cin.ignore();
+    ani::loadWindow("\033[48;5;177m");
+    std::cin.ignore();
     return 0;
 }
