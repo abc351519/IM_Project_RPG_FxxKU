@@ -1,8 +1,5 @@
 #ifndef DEF_H
 #define DEF_H
-
-#define RESET   "\033[0m"
-#define CLEANWIN "\033[2J"
 // #define MOVEUP  \033[nA //光标上移n行
 // #define MOVEDOWN    \033[nB //光标下移n行
 // #define MOVERIGHT    \033[nC //光标右移n行
@@ -30,17 +27,14 @@
 // #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 // #define BRED     "\033[41m"      /* Red */
 // #define BBLUE    "\033[44m"      /* Blue */
-
-
 namespace Global {
-    
+    const int HP_LIMIT = 1000;
     namespace Screen {
         const short winWith = 80;
         const short winHeight = 22;
-        const short winStartPosX = 2;
-        const short winStartPosY = 2;
+        const short winStartPosX = 1;
+        const short winStartPosY = 1;
     }
 }
-int cpp = 69;
 
 #endif
