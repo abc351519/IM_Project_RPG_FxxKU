@@ -38,4 +38,4 @@ run: $(TARGET_APP)
 	./$(TARGET_APP)
 
 clean: 
-	rm $(OBJ) && rm ./$(TARGET_APP)
+	rm ./$(TARGET_APP) ./RPG_FxxKU&&rm $(OBJ)
