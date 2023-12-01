@@ -10,6 +10,7 @@ enum CurserMove
 };
 
 namespace ani{
+    const short maxHMPSize = 20;
     void clearScreen();
     void setPos(short x, short y);
     void moveCurse(short option, short unit);

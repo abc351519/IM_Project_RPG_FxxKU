@@ -33,9 +33,7 @@
 
 
 namespace Global {
-    const short maxHMPSize = 20;
-
-
+    
     namespace Screen {
         const short winWith = 80;
         const short winHeight = 22;

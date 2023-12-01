@@ -157,7 +157,7 @@ void ani::loadWindow(const char* color)
 
 void ani::HMP_Loading(const short maxHMP, const short nowHMP, const char* color)
 {
-    short amountPerChar = maxHMP/Global::maxHMPSize;
+    short amountPerChar = maxHMP/ani::maxHMPSize;
     short howManyChar = nowHMP/amountPerChar;
     if ( !howManyChar && nowHMP ) //如果為零則至少顯示一格血，且血量不為零
         howManyChar++;
@@ -165,11 +165,15 @@ void ani::HMP_Loading(const short maxHMP, const short nowHMP, const char* color)
     {
         std::cout << color  << ' ';
         fflush(stdout); //刷新紀錄
-        std::this_thread::sleep_for(std::chrono::milliseconds(HMP_run_time/howManyChar));
+        std::this_thread::sleep_for(std::chrono::milliseconds(HMP_run_time/ani::maxHMPSize));
     }
-    for ( short i = 0; i < Global::maxHMPSize - howManyChar; i++ )
-        std::cout << ' ';
-    std::cout << nowHMP << '/' << maxHMP;
     std::cout << RESET; //回復原廠設定
+    for ( short i = 0; i < ani::maxHMPSize - howManyChar; i++ ){
+        std::cout << ' ';
+        std::this_thread::sleep_for(std::chrono::milliseconds(HMP_run_time/ani::maxHMPSize));
+    }
+    
+    std::cout << nowHMP << '/' << maxHMP;
+    
     return;
 }
