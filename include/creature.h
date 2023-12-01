@@ -7,20 +7,33 @@ class Creature
 {
 private:
     std::string name; // name
-    short hp; // health
+    short maxHp; // health
+    short nowHp;
+    short maxMp; // magic
+    short nowMp;
     short lv; // level
     short att; // attack
     short def; // defend
     bool isCharge; // charge
+    short areaLevel;
 public:
     Creature(); // constructor
     Creature(std::string n); // init name
-    Creature(short enemyHp, short enemyLv, short enemyAtt, short enemyDef, bool enemyIsCharge);
+    Creature(short Chp, short Cmp, short Clv, short Catt, short Cdef, bool CisCharge); // copy
     ~Creature(); // distructor
-    void attackEnemy();
+    void lossHp(short lossHpAmount);
+    void lossMp(short lossMpAmount);
+    void restoreMp();
     void defend();
     void charge();
-    void reverse();
+    void returnDamage();
+    //void changeArea(short areaNum);
+    std::string getName();
+    int getAtt();
+    int getDef();
+    bool getIsCharge();
+    short getAreaLevel();
+
 };
 
 #endif
