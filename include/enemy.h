@@ -10,6 +10,7 @@ private:
     /* data */
 public:
     Enemy();
+    Enemy(short enemyHp, short enemyLv, short enemyAtt, short enemyDef, bool enemyIsCharge);
     ~Enemy();
 };
 
