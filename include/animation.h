@@ -6,6 +6,14 @@
 #define HIDE_CURSER "\033[?25l" 
 #define SHOW_CURSER "\033[?25h" 
 
+struct Position
+{
+    short x;
+    short y;
+    Position(const short x, const short y);
+};
+
+
 enum CurserMove
 {
     MOVEUP,
@@ -24,10 +32,11 @@ namespace ani{
 
     void clearScreen();
     void setPos(short x, short y);
+    void setPos(const Position& pos);
     void moveCurse(short option, short unit);
     void curserShow(bool isON);
-    void drawLine(short length, short direction, short timePerBlock);
-    void drawRectangle(short width, short height, short timePerBlock);
+    void drawLine(const Position startPoint, short length, short direction, short timePerBlock);
+    void drawRectangle(const Position startPoint, short width, short height, short timePerBlock);
     void loadWindow(const char* color);
     void HMP_Loading(short maxHMP, short nowHMP, const char* color);
 }

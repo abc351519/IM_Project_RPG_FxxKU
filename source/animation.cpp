@@ -6,6 +6,9 @@
 #include "animation.h"
 #include "def.h"
 
+Position::Position(const short x, const short y)
+    : x(x), y(y)
+{}
 
 
 void ani::clearScreen() //清除螢幕
@@ -19,50 +22,59 @@ void ani::setPos(short x, short y) //設定游標輸出位置
     std::cout << "\033["<< y << ';' << x << 'H';
     return;
 }
-//繪畫直線
-void ani::drawLine(short length, short direction, short timePerBlock)
+void ani::setPos(const Position& pos)
 {
+    std::cout << "\033["<< pos.y << ';' << pos.x << 'H';
+    return;
+}
+
+//繪畫直線
+void ani::drawLine(const Position startPoint, short length, short direction, short timePerBlock)
+{
+    Position currentPos(startPoint);
     switch ( direction )
     {
     case CurserMove::MOVEUP:
         for ( short i = 0; i < length; i++ ) //由下到上
         {   
+            ani::setPos(currentPos);
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
-            moveCurse(CurserMove::MOVEUP,1); //向上移動
-            moveCurse(CurserMove::MOVELEFT,blockWidth); 
-            fflush(stdout); //刷新紀錄
+            currentPos.y--; //向上移動1
+            fflush(stdout); 
             std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
         }
         break;
     case CurserMove::MOVEDOWN:
         for ( short i = 0; i < length; i++ ) //從上到下
         {   
+            ani::setPos(currentPos);
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
-            moveCurse(CurserMove::MOVEDOWN,1);
-            moveCurse(CurserMove::MOVELEFT,blockWidth); 
-            fflush(stdout); //刷新紀錄
+            currentPos.y++; //向下移動1
+            fflush(stdout); 
             std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
         }
         break;
     case CurserMove::MOVERIGHT: //向右畫線
         for ( short i = 0; i < length; i++ )
         {   
+            ani::setPos(currentPos);
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
-            fflush(stdout); //刷新紀錄
+            currentPos.x += blockWidth; //向右移動2
+            fflush(stdout);
             std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
         }
         break;
     case CurserMove::MOVELEFT:
         for ( short i = 0; i < length; i++ ) //從右到左
         {   
-            moveCurse(CurserMove::MOVELEFT,blockWidth); //向左移動
+            currentPos.x -= blockWidth; //先向左移動2
+            ani::setPos(currentPos);
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
-            moveCurse(CurserMove::MOVELEFT,blockWidth); //向左移動
-            fflush(stdout); //刷新紀錄
+            fflush(stdout); 
             std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
         }
         break;
@@ -72,20 +84,25 @@ void ani::drawLine(short length, short direction, short timePerBlock)
     }
     return;
 }
-void ani::drawRectangle(short width, short height, short timePerBlock)
+void ani::drawRectangle(const Position startPoint, short width, short height, short totalRunTime)
 {
-    short totalBlockCNT =  2 * (height + width);
-
-    ani::drawLine(width,CurserMove::MOVERIGHT,timePerBlock);
     
-    ani::moveCurse(CurserMove::MOVELEFT,blockWidth);
-    ani::drawLine(height,CurserMove::MOVEDOWN,timePerBlock);
+    short totalBlockCNT =  2 * (height + width);
+    short timePerBlock = totalRunTime / totalBlockCNT;
 
-    ani::moveCurse(CurserMove::MOVERIGHT,blockWidth);
-    ani::moveCurse(CurserMove::MOVEUP,1);
-    ani::drawLine(width,CurserMove::MOVELEFT,timePerBlock);
+    Position currentPos(startPoint);
 
-    ani::drawLine(height,CurserMove::MOVEUP,timePerBlock);
+    ani::drawLine(currentPos,width,CurserMove::MOVERIGHT,timePerBlock); //畫第一條線
+
+    currentPos.x += (width-1) * ani::blockWidth;
+    ani::drawLine(currentPos,height,CurserMove::MOVEDOWN,timePerBlock); //第二條線
+
+    currentPos.y += height-1;
+    currentPos.x += ani::blockWidth;
+    ani::drawLine(currentPos,width,CurserMove::MOVELEFT,timePerBlock);
+
+    currentPos.x -= width * ani::blockWidth;
+    ani::drawLine(currentPos,height,CurserMove::MOVEUP,timePerBlock);
 
     return;
 }
@@ -124,17 +141,13 @@ void ani::curserShow(bool isON)
 }
 void ani::loadWindow(const char* color)
 {
-    short totalBlockCNT =  2 * (Global::Screen::winHeight + Global::Screen::winWith/blockWidth); //總方塊數
-    short BlockTimePerRun = ani::WIN_LOAD_TIME/totalBlockCNT; //每次跑的時間
+    Position startPoint(Global::Screen::winStartPosX,Global::Screen::winStartPosY);
     ani::clearScreen(); //清除螢幕
     std::cout << color; //設定顏色
-    ani::setPos(Global::Screen::winStartPosX,Global::Screen::winStartPosY); //設定起始位置
-    ani::drawRectangle(Global::Screen::winWith/ani::blockWidth,Global::Screen::winHeight,BlockTimePerRun);
-
+    ani::drawRectangle(startPoint,Global::Screen::winWith/ani::blockWidth,Global::Screen::winHeight,ani::WIN_LOAD_TIME);
     //清除輸出，重複
-    std::cout << RESET;
-    ani::setPos(Global::Screen::winStartPosX,Global::Screen::winStartPosY);
-    ani::drawRectangle(Global::Screen::winWith/ani::blockWidth,Global::Screen::winHeight,BlockTimePerRun);
+    std::cout << RESET; 
+    ani::drawRectangle(startPoint,Global::Screen::winWith/ani::blockWidth,Global::Screen::winHeight,ani::WIN_LOAD_TIME);
     return;
 }
 
