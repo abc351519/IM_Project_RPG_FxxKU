@@ -16,8 +16,8 @@ namespace BATTLE{
 enum gameLoopFlag{
     PLAYER_LOSE,
     PLAYER_WIN,
-    QUIT,
-    BATTLE,
+    PLAYER_QUIT,
+    PLAYER_BATTLE,
 };
 
 class Area;
@@ -33,19 +33,19 @@ private:
     void playerAttack()
     {
         if ( !player->getCanAttack() ) { //如果玩家不能攻擊
-            std::cout << "你不能攻擊\n";
+            std::cout << "You can't attack\n";
             return;
         }
         switch (enemy->startAction())
         {
         case 0:
-            std::cout << "敵人攻擊\n";
+            std::cout << "Enemy Attack\n";
             player->lossHp(enemy->getAtt()-player->getDef());
             if ( !player->getIsAlive() ) {
                 gameFlag = gameLoopFlag::PLAYER_LOSE;
                 return;
             }
-            std::cout << "玩家攻擊\n";
+            std::cout << "Player Attack\n";
             enemy->lossHp(player->getAtt()-enemy->getDef());
             if ( !enemy->getIsAlive() ) {
                 gameFlag = gameLoopFlag::PLAYER_WIN;
@@ -53,8 +53,8 @@ private:
             }
             break;
         case 1:
-            std::cout << "敵人防禦\n";
-            std::cout << "玩家進攻\n";
+            std::cout << "Enemy defend\n";
+            std::cout << "Player Attack\n";
             enemy->lossHp((player->getAtt()-enemy->getDef())/10);
             if ( !enemy->getIsAlive() ) { //如果敵人死掉的話
                 gameFlag = gameLoopFlag::PLAYER_WIN;
@@ -71,14 +71,14 @@ private:
     void playerDefense()
     { 
         if ( !player->getCanDefend() ) { //如果玩家不能防禦
-            std::cout << "你不能防禦";
+            std::cout << "You can't defend";
             return; //回到遊戲迴圈
         }
         switch ( enemy->startAction() )
         {
         case 0:
-            std::cout << "玩家防禦\n";
-            std::cout << "敵人攻擊\n";
+            std::cout << "Player defend\n";
+            std::cout << "Enemy Attack\n";
             player->lossHp((enemy->getAtt()-player->getDef())/10);
             if ( !player->getIsAlive() ) {
                 gameFlag = gameLoopFlag::PLAYER_LOSE;
@@ -86,9 +86,9 @@ private:
             }
             break;
         case 1:
-            std::cout << "玩家防禦\n";
-            std::cout << "敵人防禦\n";
-            std::cout << "笑死\n";
+            std::cout << "Player defend\n";
+            std::cout << "Enemy defend\n";
+            std::cout << "lol\n";
             player->defendFail();
             break;
         //case /*大招*/:
@@ -103,18 +103,18 @@ private:
         switch (enemy->startAction())
         {
         case 0:
-            std::cout << "敵人攻擊\n";
+            std::cout << "Enemy Attack\n";
             player->lossHp(enemy->getAtt()-player->getDef());
             if ( !player->getIsAlive() ) {
                 gameFlag = gameLoopFlag::PLAYER_LOSE;
                 return;
             }
-            std::cout << "玩家充能\n";
+            std::cout << "Player charge\n";
             player->charge();
             break;
         case 1:
-            std::cout << "敵人防禦\n";
-            std::cout << "玩家充能\n";
+            std::cout << "Enemy defend\n";
+            std::cout << "Player charge\n";
             player->charge();
             break;
         default:
@@ -126,8 +126,8 @@ private:
         switch (enemy->startAction())
         {
         case 0:
-            std::cout << "敵人攻擊\n";
-            std::cout << "玩家反彈\n";
+            std::cout << "Enemy Attack\n";
+            std::cout << "Player return\n";
             enemy->lossHp(enemy->getAtt()*2);
             if ( !enemy->getIsAlive() ) { //如果敵人死掉的話
                 gameFlag = gameLoopFlag::PLAYER_WIN;
@@ -135,16 +135,17 @@ private:
             }
             break;
         case 1:
-            std::cout << "敵人防禦\n";
-            std::cout << "玩家反彈\n";
-            std::cout << "玩家反彈失敗，接受懲罰\n";
+            std::cout << "Enemy defend\n";
+            std::cout << "Player return\n";
+            std::cout << "Player return failed\n";
             //調整玩家狀態
+            break;
         default:
             break;
         }
     }
 public:
-    static short gameFlag;
+    short gameFlag;
     Battle(Player* player, Enemy* enemy);
     ~Battle();
     void init() override; //開啟活動

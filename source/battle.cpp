@@ -4,10 +4,10 @@
 Battle::Battle(Player* player, Enemy* enemy)
     : player(player), enemy(enemy)
 {
-    gameFlag = gameLoopFlag::BATTLE; //戰鬥中
+    gameFlag = gameLoopFlag::PLAYER_BATTLE; //戰鬥中
     command[Command::ATTACK] = Activity::ATTACK; //攻擊
     command[Command::QUIT] = Activity::QUIT; //退出
-    command[Command::DEFENSE] = Activity::DEFENSE; //防禦
+    command[Command::DEFEND] = Activity::DEFEND; //防禦
     command[Command::CHARGE] = Activity::CHARGE; //充能
     command[Command::RETURN] = Activity::RETURN; //反彈
 }
@@ -33,9 +33,9 @@ void Battle::close()
 
 void Battle::gameLoop() //結束條件：玩家死掉、玩家退出
 {
-    while ( gameFlag == gameLoopFlag::BATTLE ) {
+    while ( gameFlag == gameLoopFlag::PLAYER_BATTLE ) {
         action(receiveCommand());
-        if ( gameFlag == gameLoopFlag::QUIT ) {
+        if ( gameFlag == gameLoopFlag::PLAYER_QUIT) {
             std::cout << "fuckyou\n";
             return;
         }
@@ -45,6 +45,7 @@ void Battle::gameLoop() //結束條件：玩家死掉、玩家退出
         }
         if ( gameFlag == gameLoopFlag::PLAYER_WIN) {
             std::cout << "YOU WIN\n";
+            return;
         }
     }
 }
@@ -82,7 +83,7 @@ int Battle::action(int action)
     case Activity::ATTACK:
         playerAttack();
         break;
-    case Activity::DEFENSE:
+    case Activity::DEFEND:
         playerDefense();
         break;
     case Activity::CHARGE:
@@ -92,7 +93,7 @@ int Battle::action(int action)
         playerReturn();
         break;
     case Activity::QUIT:
-        gameFlag = gameLoopFlag::QUIT;
+        gameFlag = gameLoopFlag::PLAYER_QUIT;
         break;
     default:
         std::cout  << "oho ho jojo simthing went ronnn\n";

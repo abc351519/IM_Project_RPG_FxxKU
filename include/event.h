@@ -16,7 +16,7 @@
 namespace Command{
     const std::string QUIT = "quit";
     const std::string ATTACK = "attack";
-    const std::string DEFENSE = "defense";
+    const std::string DEFEND = "defend";
     const std::string CHARGE = "charge";
     const std::string RETURN = "return";
 };
@@ -28,7 +28,7 @@ enum Activity
     TO_BATTLE,
     TO_SHOP,
     ATTACK,
-    DEFENSE,
+    DEFEND,
     CHARGE,
     RETURN,
 };
