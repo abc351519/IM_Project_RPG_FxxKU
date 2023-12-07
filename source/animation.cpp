@@ -19,12 +19,12 @@ void ani::clearScreen() //清除螢幕
 //設定游標位置（"\033[y;xH"）
 void ani::setPos(short x, short y) //設定游標輸出位置
 {
-    std::cout << "\033["<< y << ';' << x << 'H';
+    std::cout << "\033[" << y << ';' << x << 'H';
     return;
 }
 void ani::setPos(const Position& pos)
 {
-    std::cout << "\033["<< pos.y << ';' << pos.x << 'H';
+    std::cout << "\033[" << pos.y << ';' << pos.x << 'H';
     return;
 }
 
