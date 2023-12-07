@@ -145,7 +145,7 @@ private:
     }
 public:
     static short gameFlag;
-    Battle(Player* player);
+    Battle(Player* player, Enemy* enemy);
     ~Battle();
     void init() override; //開啟活動
     void close() override; //關閉活動

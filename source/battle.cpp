@@ -1,8 +1,8 @@
 #include "battle.h"
 
 
-Battle::Battle(Player* player)
-    : player(player)
+Battle::Battle(Player* player, Enemy* enemy)
+    : player(player), enemy(enemy)
 {
     gameFlag = gameLoopFlag::BATTLE; //戰鬥中
     command[Command::ATTACK] = Activity::ATTACK; //攻擊
