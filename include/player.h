@@ -7,10 +7,14 @@
 class Player : public Creature
 {
 private:
-    /* data */
+    bool canAttack = false;
 public:
     Player(std::string n);
     ~Player();
+    void finishAttack();
+    void charge();
+    bool getCanAttack() const;
+
 };
 
 #endif

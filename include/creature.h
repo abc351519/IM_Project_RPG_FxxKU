@@ -17,6 +17,7 @@ private:
     bool isCharge; // charge
     short areaLevel;
     bool isAlive;
+    bool canDefend;
 public:
     Creature(); // constructor
     Creature(std::string n); // init name
@@ -26,9 +27,12 @@ public:
     void lossMp(short lossMpAmount);
     void restoreMp();
     void defend();
-    void charge();
+    virtual void charge(){};
     void returnDamage();
     //void changeArea(short areaNum);
+    void defendFail();
+    void setIsChargeTrue();
+    void setIsChargeFalse();
     std::string getName() const;
     int getNowHp() const;
     int getNowMp() const;
@@ -37,6 +41,7 @@ public:
     bool getIsCharge() const;
     short getAreaLevel() const;
     bool getIsAlive() const;
+    bool getCanDefend() const;
 };
 
 #endif
