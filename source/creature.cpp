@@ -13,6 +13,7 @@ Creature::Creature()
     def = 10;
     isCharge = false;
     areaLevel = 0;
+    isAlive = true;
 }
 
 Creature::Creature(std::string n)
@@ -27,6 +28,7 @@ Creature::Creature(std::string n)
     def = 10;
     isCharge = false;
     areaLevel = 0;
+    isAlive = true;
 }
 
 Creature::Creature(short Chp, short Cmp, short Clv, short Catt, short Cdef, bool CisCharge)
@@ -39,6 +41,7 @@ Creature::Creature(short Chp, short Cmp, short Clv, short Catt, short Cdef, bool
     att = Catt;
     def = Cdef;
     isCharge = CisCharge;
+    isAlive = true;
 }
 
 Creature::~Creature()
@@ -47,6 +50,8 @@ Creature::~Creature()
 }
 void Creature::lossHp(short lossHpAmount){
     nowHp -= lossHpAmount;
+    if(nowHp <= 0)
+        isAlive = false;
 }
 void Creature::lossMp(short lossMpAmount){
     nowMp -= lossMpAmount;
@@ -70,27 +75,42 @@ void Creature::returnDamage()
 {
 
 }
-std::string Creature::getName()
+std::string Creature::getName() const
 {
     return name;
 }
 
-int Creature::getAtt()
+int Creature::getNowHp() const
+{
+    return nowHp;
+}
+
+int Creature::getNowMp() const
+{
+    return nowMp;
+}
+
+int Creature::getAtt() const
 {
     return att;
 }
 
-int Creature::getDef()
+int Creature::getDef() const
 {
     return def;
 }
 
-bool Creature::getIsCharge()
+bool Creature::getIsCharge() const
 {
     return isCharge;
 }
 
-short Creature::getAreaLevel()
+short Creature::getAreaLevel() const
 {
     return areaLevel;
+}
+
+bool Creature::getIsAlive() const
+{
+    return isAlive;
 }

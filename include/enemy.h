@@ -13,6 +13,7 @@ public:
     Enemy(std::string n);
     Enemy(short enemyHp, short enemyMp, short enemyLv, short enemyAtt, short enemyDef, bool enemyIsCharge);
     ~Enemy();
+    void print() const;
     void attackPlayer(Player& mainPlayer);
 };
 

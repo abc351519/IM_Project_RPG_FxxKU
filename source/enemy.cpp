@@ -6,12 +6,10 @@
 
 Enemy::Enemy(std::string n) : Creature(n)
 {
-    
 }
 
 Enemy::Enemy(short enemyHp, short enemyMp, short enemyLv, short enemyAtt, short enemyDef, bool enemyIsCharge) : Creature(enemyHp, enemyMp, enemyLv, enemyAtt, enemyDef, enemyIsCharge)
 {
-    
 }
 
 void Enemy::attackPlayer(Player& mainPlayer){
@@ -21,4 +19,8 @@ void Enemy::attackPlayer(Player& mainPlayer){
 Enemy::~Enemy()
 {
     
+}
+
+void Enemy::print() const{
+    std::cout << getName() << " " << getNowHp() << " " << getAtt() << " " << getDef() << " " << getIsAlive() << std::endl;
 }

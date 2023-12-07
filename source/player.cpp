@@ -2,12 +2,8 @@
 
 Player::Player(std::string n) : Creature(n)
 {
-
-
 }
 
 Player::~Player()
 {
-
-
 }
