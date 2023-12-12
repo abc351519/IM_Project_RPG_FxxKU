@@ -1,5 +1,6 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
+
 //特殊輸出
 #define RESET   "\033[0m"
 #define CLEANWIN "\033[2J"
@@ -14,7 +15,7 @@ struct Position
 };
 
 
-enum CurserMove
+enum class CurserMove : short
 {
     MOVEUP,
     MOVEDOWN,
@@ -23,7 +24,7 @@ enum CurserMove
 };
 
 namespace ani{
-    // const
+    // constant
     const short maxHMPSize = 20;
     const int HMP_run_time = 750;
     const int WIN_LOAD_TIME = 1000;

@@ -13,7 +13,7 @@ namespace BATTLE{
     };
 };
 
-enum gameLoopFlag{
+enum class gameLoopFlag : short {
     PLAYER_LOSE,
     PLAYER_WIN,
     PLAYER_QUIT,
@@ -145,14 +145,14 @@ private:
         }
     }
 public:
-    short gameFlag;
+    gameLoopFlag gameFlag;
     Battle(Player* player, Enemy* enemy);
     ~Battle();
     void init() override; //開啟活動
     void close() override; //關閉活動
     void gameLoop() override; //遊戲循環
-    int receiveCommand() override; //輸入指令
-    int action(int action) override;
+    Activity receiveCommand() override; //輸入指令
+    int action(Activity action) override;
 };
 
 #endif

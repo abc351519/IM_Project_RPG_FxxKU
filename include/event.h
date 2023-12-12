@@ -21,7 +21,7 @@ namespace Command{
     const std::string RETURN = "return";
 };
 
-enum Activity
+enum class Activity : short
 {
     QUIT,
     TO_USER_INTERFACE,
@@ -37,15 +37,15 @@ class Event
 {
 protected:
     std::map<int,Position> interfacePosition; //每個物件的位置座標
-    std::map<const std::string,int> command; //每個指令對應的動作
+    std::map<const std::string,Activity> command; //每個指令對應的動作
 public:
     Event(){}
     ~Event(){}
     virtual void init() = 0; //開啟活動
     virtual void close() = 0;//關閉活動
     virtual void gameLoop() = 0; //該事件的遊戲循環
-    virtual int receiveCommand() = 0; //輸入指令
-    virtual int action(int action) = 0;
+    virtual Activity receiveCommand() = 0; //輸入指令
+    virtual int action(Activity action) = 0;
 };
 
 #endif

@@ -50,11 +50,11 @@ void Battle::gameLoop() //結束條件：玩家死掉、玩家退出
     }
 }
 
-int Battle::receiveCommand()
+Activity Battle::receiveCommand()
 {
     bool commandIsFound = false;
     std::string input;
-    std::map<const std::string,int>::iterator it;
+    std::map<const std::string,Activity>::iterator it;
 
     while (!commandIsFound) //還沒接收到指令
     {       
@@ -76,7 +76,7 @@ int Battle::receiveCommand()
 }
 
 
-int Battle::action(int action)
+int Battle::action(Activity action)
 {
     switch (action)
     {
