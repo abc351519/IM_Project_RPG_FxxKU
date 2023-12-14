@@ -3,6 +3,14 @@
 #include <iostream>
 #include <string>
 
+enum class Element //屬性
+{
+    FLAME, //火
+    AQUA, //水
+    VITALITY, //木
+    NONE //無屬
+};
+
 class Event;
 
 class Creature
@@ -10,22 +18,14 @@ class Creature
 private:
     std::string name; // name
     short maxHp; // health
-    short nowHp;
-    short maxMp; // magic
-    short nowMp;
+    short nowHp; 
     short lv; // level
-    short att; // attack
+    short atk; // attack
     short def; // defend
-    bool isCharge; // charge
-    short areaLevel;
-    bool isAlive;
-    bool canDefend;
 public:
-    Creature(); // constructor
-    Creature(std::string n); // init name
-    Creature(short Chp, short Cmp, short Clv, short Catt, short Cdef, bool CisCharge); // copy
-    ~Creature(); // distructor
-    friend class Event;
+    Creature(){}; // constructor
+    ~Creature(){}; // distructor
+    void lossHp(short oppoAtk); //根據對方的攻擊損失血量
 };
 
 #endif

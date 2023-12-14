@@ -5,23 +5,17 @@
 #include "creature.h"
 #include "player.h"
 
-enum EnemyAction
-{
-    ENEMY_ATTACK,
-    ENEMY_DEFEND,
-    //ENEMY_ULT,
-}; 
-
 class Enemy : public Creature
 {
 private:
-    /* data */
+    short coolDown;
+    short skillPoint;
 public:
-    Enemy(std::string n);
-    Enemy(short enemyHp, short enemyMp, short enemyLv, short enemyAtt, short enemyDef, bool enemyIsCharge);
+    Enemy(){};
     ~Enemy();
-    int startAction();
-    void print() const;
+    friend class Event;
+    virtual void skill(); //敵人的技能
+    virtual void attack(); //一般攻擊模式
 };
 
 

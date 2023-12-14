@@ -3,18 +3,19 @@
 
 #include <string>
 #include "creature.h"
+#include "rune.h"
 
 class Player : public Creature
 {
 private:
-    bool canAttack = false;
+    short lvThreshold;
+    short exp;
+    short runePoint;
 public:
     Player(std::string n);
     ~Player();
-    void finishAttack();
-    void charge();
-    bool getCanAttack() const;
-
+    friend class Event;
+    bool refreshExp(short enemyLv); //return if level up
 };
 
 #endif

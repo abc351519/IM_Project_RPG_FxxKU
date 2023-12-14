@@ -15,11 +15,6 @@
 //所有輸入的文字指令打在這裡，以這些當作判斷依據
 namespace Command{
     const std::string QUIT = "quit";
-    const std::string ATTACK = "attack";
-    const std::string DEFEND = "defend";
-    const std::string CHARGE = "charge";
-    const std::string RETURN = "return";
-    const std::string HEAL = "heal";
 };
 //所有
 enum class Activity : short
@@ -27,12 +22,6 @@ enum class Activity : short
     QUIT,
     TO_USER_INTERFACE,
     TO_BATTLE,
-    TO_SHOP,
-    ATTACK,
-    DEFEND,
-    CHARGE,
-    RETURN,
-    HEAL,
 };
 
 class Event

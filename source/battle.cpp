@@ -39,7 +39,7 @@ void Battle::gameLoop() //結束條件：玩家死掉、玩家退出
             std::cout << "fuckyou\n";
             return;
         }
-        if ( gameFlag == gameLoopFlag::PLAYER_LOSE ) {
+            if ( gameFlag == gameLoopFlag::PLAYER_LOSE ) {
             std::cout << "PLAYER LOSE\n";
             return;
         }
