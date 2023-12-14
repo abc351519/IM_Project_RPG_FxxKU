@@ -34,9 +34,9 @@ namespace ani{
     void clearScreen();
     void setPos(short x, short y);
     void setPos(const Position& pos);
-    void moveCurse(short option, short unit);
+    void moveCurse(CurserMove option, short unit);
     void curserShow(bool isON);
-    void drawLine(const Position startPoint, short length, short direction, short timePerBlock);
+    void drawLine(const Position startPoint, short length, CurserMove direction, short timePerBlock);
     void drawRectangle(const Position startPoint, short width, short height, short totalRunTime);
     void loadWindow(const char* color);
     void HMP_Loading(short maxHMP, short nowHMP, const char* color);

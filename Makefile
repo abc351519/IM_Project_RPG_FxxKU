@@ -18,7 +18,7 @@ DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 #_OBJ=main.o creature.o animation.o enemy.o player.o area.o event.o
 #OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 #原始碼，新的.cpp檔放這裡
-_SRC=main.cpp creature.cpp animation.cpp enemy.cpp player.cpp area.cpp battle.cpp 
+_SRC=main.cpp creature.cpp animation.cpp enemy.cpp player.cpp area.cpp battle.cpp game.cpp
 SRC=$(patsubst %,$(SRCDIR)/%,$(_SRC))
 
 

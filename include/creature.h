@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 
+class Event;
+
 class Creature
 {
 private:
@@ -23,25 +25,7 @@ public:
     Creature(std::string n); // init name
     Creature(short Chp, short Cmp, short Clv, short Catt, short Cdef, bool CisCharge); // copy
     ~Creature(); // distructor
-    void lossHp(short lossHpAmount);
-    void lossMp(short lossMpAmount);
-    void restoreMp();
-    void defend();
-    virtual void charge(){};
-    void returnDamage();
-    //void changeArea(short areaNum);
-    void defendFail();
-    void setIsChargeTrue();
-    void setIsChargeFalse();
-    std::string getName() const;
-    int getNowHp() const;
-    int getNowMp() const;
-    int getAtt() const;
-    int getDef() const;
-    bool getIsCharge() const;
-    short getAreaLevel() const;
-    bool getIsAlive() const;
-    bool getCanDefend() const;
+    friend class Event;
 };
 
 #endif

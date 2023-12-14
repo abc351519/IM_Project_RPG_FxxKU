@@ -2,9 +2,12 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <mutex>
 
 #include "animation.h"
 #include "def.h"
+
+std::mutex mtx;
 
 Position::Position(const short x, const short y)
     : x(x), y(y)
@@ -29,7 +32,7 @@ void ani::setPos(const Position& pos)
 }
 
 //繪畫直線
-void ani::drawLine(const Position startPoint, short length, short direction, short timePerBlock)
+void ani::drawLine(const Position startPoint, short length, CurserMove direction, short timePerBlock)
 {
     Position currentPos(startPoint);
     switch ( direction )
@@ -37,44 +40,52 @@ void ani::drawLine(const Position startPoint, short length, short direction, sho
     case CurserMove::MOVEUP:
         for ( short i = 0; i < length; i++ ) //由下到上
         {   
+            mtx.lock();
             ani::setPos(currentPos);
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
             currentPos.y--; //向上移動1
             fflush(stdout); 
+            mtx.unlock();
             std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
         }
         break;
     case CurserMove::MOVEDOWN:
         for ( short i = 0; i < length; i++ ) //從上到下
         {   
+            mtx.lock();
             ani::setPos(currentPos);
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
             currentPos.y++; //向下移動1
             fflush(stdout); 
+            mtx.unlock();
             std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
         }
         break;
     case CurserMove::MOVERIGHT: //向右畫線
         for ( short i = 0; i < length; i++ )
         {   
+            mtx.lock();
             ani::setPos(currentPos);
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
             currentPos.x += blockWidth; //向右移動2
             fflush(stdout);
+            mtx.unlock();
             std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
         }
         break;
     case CurserMove::MOVELEFT:
         for ( short i = 0; i < length; i++ ) //從右到左
         {   
+            mtx.lock();
             currentPos.x -= blockWidth; //先向左移動2
             ani::setPos(currentPos);
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
             fflush(stdout); 
+            mtx.unlock();
             std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
         }
         break;
@@ -107,7 +118,7 @@ void ani::drawRectangle(const Position startPoint, short width, short height, sh
     return;
 }
 //移動游標
-void ani::moveCurse(short option, short unit)
+void ani::moveCurse(CurserMove option, short unit)
 {
     std::cout << "\033[" << unit;
     switch ( option )
