@@ -1,7 +1,10 @@
 #include "rune.h"
+#include "def.h"
+
 #include <random>
 
-static short firstChosenType;
+
+short firstChosenType;
 
 short randomRune() //隨機生成一個符文
 {
@@ -18,6 +21,7 @@ short randomRune() //隨機生成一個符文
 
 RuneBag::RuneBag()
 {
+    runes.clear();
     for ( int i = 0; i < INIT_RUNE_COUNT; i++ )
     {
         runes.push_back(randomRune());
@@ -30,6 +34,7 @@ void RuneBag::runeGet() //每回合拿到符文
     {
         runes.push_back(randomRune()); //隨機分配一個符文
     }
+    return;
 }
 
 bool RuneBag::runeSelectToUse(short index)
@@ -43,7 +48,7 @@ bool RuneBag::runeSelectToUse(short index)
     if ( isSelected[index-1] ) { //已經被選取
         for ( int i = 0 ; i < selectedRunes.size(); i++ )
         {
-            if ( selectedRunes[i].index = index-1 ) {
+            if ( selectedRunes[i].index == index-1 ) {
                 selectedRunes.erase(selectedRunes.begin()+i); //刪除掉此元素
                 break;
             }
@@ -52,7 +57,7 @@ bool RuneBag::runeSelectToUse(short index)
         return true;
     } 
     if ( selectedRunes.empty() ) { //如果是第一次選
-        Pair chosenRune{index-1,runes[index-1]};
+        Pair chosenRune = {s_cat<short>(index-1),runes[index-1]};
         selectedRunes.push_back(chosenRune); //加入選取
         isSelected[index-1] = true; //紀錄已經選取
         firstChosenType = runes[index-1]; //紀錄第一個選取的類型
@@ -62,9 +67,9 @@ bool RuneBag::runeSelectToUse(short index)
     if ( runes[index-1] >= 4 && runes[index-1] <= 6 ) { //選到的符文是功能牌
         if ( firstChosenType >= 4 && firstChosenType <= 6 ) { //你不能選兩個功能牌
             return false;
-        }
         if ( selectedRunes.size() == 1 )  { //如果先前選取了元素牌而且只選一張
-            Pair chosenRune{index-1,runes[index-1]};
+        }
+            Pair chosenRune = {s_cat<short>(index-1),runes[index-1]};
             selectedRunes.push_back(chosenRune);
             isSelected[index-1] = true;
             return true;
@@ -73,7 +78,7 @@ bool RuneBag::runeSelectToUse(short index)
     }
     //選到一般牌
     if ( runes[index-1] == firstChosenType && selectedRunes.size() < 3  ) { //選到類型一樣
-        Pair chosenRune{index-1,runes[index-1]};
+        Pair chosenRune = {s_cat<short>(index-1),runes[index-1]};
         selectedRunes.push_back(chosenRune);
         isSelected[index-1] = true;
         return true;
@@ -92,6 +97,10 @@ void RuneBag::use()
     //更新符文數量
     return;
 }
+
+bool RuneBag::runeSelectToSell(short index){}
+
+void RuneBag::sell(){}
 
 bool RuneBag::buyRune(short& runePoint)
 {

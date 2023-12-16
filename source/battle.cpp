@@ -5,11 +5,7 @@ Battle::Battle(Player* player, Enemy* enemy)
     : player(player), enemy(enemy)
 {
     gameFlag = gameLoopFlag::PLAYER_BATTLE; //戰鬥中
-    command[Command::ATTACK] = Activity::ATTACK; //攻擊
-    command[Command::QUIT] = Activity::QUIT; //退出
-    command[Command::DEFEND] = Activity::DEFEND; //防禦
-    command[Command::CHARGE] = Activity::CHARGE; //充能
-    command[Command::RETURN] = Activity::RETURN; //反彈
+    
 }
 
 Battle::~Battle()
@@ -78,26 +74,6 @@ Activity Battle::receiveCommand()
 
 int Battle::action(Activity action)
 {
-    switch (action)
-    {
-    case Activity::ATTACK:
-        playerAttack();
-        break;
-    case Activity::DEFEND:
-        playerDefense();
-        break;
-    case Activity::CHARGE:
-        playerCharge();
-        break;
-    case Activity::RETURN:
-        playerReturn();
-        break;
-    case Activity::QUIT:
-        gameFlag = gameLoopFlag::PLAYER_QUIT;
-        break;
-    default:
-        std::cout  << "oho ho jojo simthing went ronnn\n";
-        break;
-    }
+
     return 0;
 }

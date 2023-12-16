@@ -13,6 +13,25 @@ Position::Position(const short x, const short y)
     : x(x), y(y)
 {}
 
+Picture::Picture(short width, short height)
+    : char_width(width), char_height(height)
+{
+    graph = new Pixel*[char_width];
+    for ( int i = 0; i < char_width; i++ )
+        graph[i] = new Pixel[char_height];
+}
+
+Picture::~Picture()
+{
+    for ( int i = 0; i < char_width; i++ )
+    {    
+        delete[] graph[i];
+        graph[i] = nullptr;
+    }
+    delete[] graph;
+    graph = nullptr;
+}
+
 
 void ani::clearScreen() //清除螢幕
 {
@@ -150,7 +169,7 @@ void ani::curserShow(bool isON)
         std::cout << HIDE_CURSER;
     return;
 }
-void ani::loadWindow(const char* color)
+void ani::loadWindow(std::string color)
 {
     Position startPoint(Global::Screen::winStartPosX,Global::Screen::winStartPosY);
     ani::clearScreen(); //清除螢幕
@@ -162,7 +181,7 @@ void ani::loadWindow(const char* color)
     return;
 }
 
-void ani::HMP_Loading(const short maxHMP, const short nowHMP, const char* color)
+void ani::HMP_Loading(const short maxHMP, const short nowHMP, std::string color)
 {
     short amountPerChar = maxHMP/ani::maxHMPSize;
     short howManyChar = nowHMP/amountPerChar;

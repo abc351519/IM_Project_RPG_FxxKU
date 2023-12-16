@@ -3,12 +3,13 @@
 
 #include <vector>
 
-struct Pair
+typedef struct Pair
 {
     short index;
     short runeType;
-};
+} Pair;
 
+short randomRune();
 
 const short MAX_RUNE_COUNT = 8; //最多持有的符文數量
 const short INIT_RUNE_COUNT = 4; //一開始給的符文數
@@ -30,7 +31,7 @@ namespace odds
     const short DEBUFF = 75;
     const short BUFF = 85;
     const short HEAL = 100; 
-} 
+};
 
 namespace mpConsume
 {
@@ -38,7 +39,7 @@ namespace mpConsume
     const short FUNCTION_RUNE = 6; //使用功能符文
     const short MAKE_UP_LV_TWO = 6; //合成兩個符文
     const short MAKE_UP_LV_THREE = 10; //合成三個符文
-}
+};
 
 enum class Rune : short
 {
@@ -51,7 +52,6 @@ enum class Rune : short
     BUFF
 };
 
-short randomRune();
 class RuneBag
 {
 private:

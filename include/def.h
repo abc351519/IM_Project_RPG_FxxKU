@@ -1,5 +1,8 @@
 #ifndef DEF_H
 #define DEF_H
+
+#define s_cat static_cast
+
 // #define MOVEUP  \033[nA //光标上移n行
 // #define MOVEDOWN    \033[nB //光标下移n行
 // #define MOVERIGHT    \033[nC //光标右移n行
