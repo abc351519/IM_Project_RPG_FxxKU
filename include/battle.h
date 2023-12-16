@@ -18,13 +18,10 @@ namespace BATTLE{
         const std::string WRONG_COMMAND = "u r typing the wrong command.";
     };
     namespace ICON{
-        Picture RUNE_ICON(3,3);
+        extern Picture RUNE_ICON;
     };
 
 };
-//定義畫圖圖形
-Pixel pixel
-BATTLE::ICON::RUNE_ICON.graph[0][0] = ;
 
 enum class gameLoopFlag : short {
     PLAYER_LOSE,

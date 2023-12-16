@@ -13,6 +13,44 @@ Position::Position(const short x, const short y)
     : x(x), y(y)
 {}
 
+void Pixel::change(std::string letter, std::string backgroundColor, std::string fontColor)
+{
+    this->letter = letter;
+    this->backgroundColor = backgroundColor;
+    this->fontColor = fontColor;
+    return;
+}
+
+void Pixel::change(std::string letter)
+{
+    this->letter = letter;
+    return;
+}
+
+void Pixel::changeBackColor(std::string backgroundColor)
+{
+    this->backgroundColor = backgroundColor;
+    return;
+}
+
+void Pixel::changeFontColor(std::string fontColor)
+{
+    this->fontColor = fontColor;
+    return;
+}
+
+void Pixel::operator=(Pixel pixel)
+{
+    backgroundColor = pixel.backgroundColor;
+    fontColor = pixel.fontColor;
+    letter = pixel.letter;
+}
+
+void Pixel::render()
+{
+    std::cout << backgroundColor << fontColor << letter;
+}
+
 Picture::Picture(short width, short height)
     : char_width(width), char_height(height)
 {
@@ -204,5 +242,23 @@ void ani::HMP_Loading(const short maxHMP, const short nowHMP, std::string color)
     std::string numStr = std::to_string(nowHMP);
     ani::moveCurse(CurserMove::MOVERIGHT,ani::HP_CHAR_WIDTH - numStr.length());
     std::cout << nowHMP << '/' << maxHMP;
+    return;
+}
+
+void ani::renderGrapgh(Position startPoint, Picture& graph)
+{
+    Position currentPos(startPoint);
+    for ( int i = 0; i < graph.char_height; i++ )
+    {
+        for ( int j = 0; j < graph.char_width; j++ )
+        {
+            ani::setPos(currentPos);
+            graph.graph[j][i].render();
+            currentPos.x++;
+        }
+        currentPos.x -= graph.char_width;
+        currentPos.y++;
+    }
+    std::cout << RESET;
     return;
 }

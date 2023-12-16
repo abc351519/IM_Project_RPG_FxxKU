@@ -5,7 +5,7 @@ Battle::Battle(Player* player, Enemy* enemy)
     : player(player), enemy(enemy)
 {
     gameFlag = gameLoopFlag::PLAYER_BATTLE; //戰鬥中
-    
+
 }
 
 Battle::~Battle()
