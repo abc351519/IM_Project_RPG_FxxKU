@@ -11,8 +11,10 @@ private:
     short coolDown;
     short skillPoint;
 public:
-    Enemy(){};
-    ~Enemy();
+    Enemy(std::string n)
+        : Creature(n)
+    {};
+    ~Enemy(){};
     friend class Event;
     virtual void skill() = 0; //敵人的技能
     virtual void attack() = 0; //一般攻擊模式

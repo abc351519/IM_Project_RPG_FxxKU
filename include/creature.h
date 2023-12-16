@@ -15,7 +15,7 @@ class Event;
 
 class Creature
 {
-private:
+protected:
     std::string name; // name
     short maxHp; // health
     short nowHp; 

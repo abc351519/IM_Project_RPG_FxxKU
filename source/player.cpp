@@ -3,7 +3,15 @@
 Player::Player(std::string n) : Creature(n)
 {
     myRunes = new RuneBag();
-    lvThreshold[9] = {100, 150, 200, 275, 350, 425, 550, 675, 800};
+    lvThreshold[0] = 100;
+    lvThreshold[1] = 150;
+    lvThreshold[2] = 200;
+    lvThreshold[3] = 275;
+    lvThreshold[4] = 350;
+    lvThreshold[5] = 425;
+    lvThreshold[6] = 550;
+    lvThreshold[7] = 675;
+    lvThreshold[8] = 800;
 }
 
 Player::~Player()
