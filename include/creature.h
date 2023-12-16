@@ -23,7 +23,7 @@ private:
     short atk; // attack
     short def; // defend
 public:
-    Creature(){}; // constructor
+    Creature(std::string n) : name(n){}; // constructor
     ~Creature(){}; // distructor
     void lossHp(short oppoAtk); //根據對方的攻擊損失血量
 };

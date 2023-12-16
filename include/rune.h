@@ -18,7 +18,8 @@ const short MAX_RUNEPOINT = 15;
 const short RUNEPOINT_GET_ROUNDLY = 3;
 //可議再商量
 const short RUNE_PER_COST = 4; 
-const short RUNE_SOLD_EARN = 4;
+const short RUNE_SOLD_NORMAL_EARN = 4;
+const short RUNE_SOLD_FUNCTION_EARN = 5;
 
 namespace odds
 {
@@ -41,7 +42,7 @@ namespace mpConsume
     const short MAKE_UP_LV_THREE = 10; //合成三個符文
 };
 
-enum class Rune : short
+enum Rune : short
 {
     FLAME = 1,
     AQUA,
@@ -66,7 +67,7 @@ public:
     bool runeSelectToSell(short index);
     bool buyRune(short& runePoint);
     void use();
-    void sell();
+    short sell();
     void selectReset();
 };
 

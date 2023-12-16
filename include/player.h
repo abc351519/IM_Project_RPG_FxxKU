@@ -9,14 +9,19 @@ class Player : public Creature
 {
 private:
     RuneBag* myRunes;
-    short lvThreshold;
+    short lvThreshold[9];
     short exp;
     short runePoint;
 public:
     Player(std::string n);
     ~Player();
     friend class Event;
+    void startGameValueSet(){
+        runePoint = INIT_RUNE_COUNT;
+        nowHp = maxHp;
+    }
     bool refreshExp(short enemyLv); //return if level up
+    void sellToGetRunePoints(short gainPoints){ runePoint += gainPoints; }
 };
 
 #endif
