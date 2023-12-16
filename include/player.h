@@ -8,6 +8,7 @@
 class Player : public Creature
 {
 private:
+    RuneBag* myRunes;
     short lvThreshold;
     short exp;
     short runePoint;

@@ -15,6 +15,9 @@ const short INIT_RUNE_COUNT = 4; //一開始給的符文數
 const short RUNE_GET_ROUNDLY = 2; //每回合給的
 const short MAX_RUNEPOINT = 15;
 const short RUNEPOINT_GET_ROUNDLY = 3;
+//可議再商量
+const short RUNE_PER_COST = 4; 
+const short RUNE_SOLD_EARN = 4;
 
 namespace odds
 {
@@ -48,19 +51,23 @@ enum class Rune : short
     BUFF
 };
 
+short randomRune();
 class RuneBag
 {
 private:
     std::vector<short> runes;
     std::vector<Pair> selectedRunes;
-    short runesCNT;
     bool isSelected[MAX_RUNE_COUNT]{false};
 public:
     RuneBag(); //init 
     ~RuneBag(){};
     void runeGet(); //每回合隨機給予符文
-    bool runeSelect(short index); //回傳選取是否有效
+    bool runeSelectToUse(short index); //回傳選取是否有效
+    bool runeSelectToSell(short index);
+    bool buyRune(short& runePoint);
     void use();
+    void sell();
+    void selectReset();
 };
 
 #endif

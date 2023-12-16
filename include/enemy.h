@@ -14,8 +14,8 @@ public:
     Enemy(){};
     ~Enemy();
     friend class Event;
-    virtual void skill(); //敵人的技能
-    virtual void attack(); //一般攻擊模式
+    virtual void skill() = 0; //敵人的技能
+    virtual void attack() = 0; //一般攻擊模式
 };
 
 
