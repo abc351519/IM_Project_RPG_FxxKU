@@ -2,25 +2,24 @@
 
 Player::Player(std::string n) : Creature(n)
 {
+    myRunes = new RuneBag();
+    lvThreshold[9] = {100, 150, 200, 275, 350, 425, 550, 675, 800};
 }
 
 Player::~Player()
 {
+    delete myRunes;
 }
 
-void Player::charge()
-{
-    canAttack = true;
-    this->setIsChargeFalse();
-}
-
-void Player::finishAttack()
-{
-    canAttack = false;
-    this->setIsChargeTrue();
-}
-
-bool Player::getCanAttack() const
-{
-    return canAttack;
+bool Player::refreshExp(short enemyLv){
+    if(lv == 10)
+        return false;
+    short rate = 20;
+    exp += enemyLv * rate;
+    if(exp >= lvThreshold[lv - 1]){
+        exp -= lvThreshold[lv - 1];
+        lv++;
+        return true; // level up
+    }
+    return false;
 }

@@ -98,9 +98,52 @@ void RuneBag::use()
     return;
 }
 
-bool RuneBag::runeSelectToSell(short index){}
+bool RuneBag::runeSelectToSell(short index){
+    if ( index < 1 || index > 8 ) //選取要合理
+        return false;
+    if ( index > runes.size() ) {
+        return false; //不合理，選曲超過數量
+    }
+    
+    if ( isSelected[index-1] ) { //已經被選取
+        for ( int i = 0 ; i < selectedRunes.size(); i++ )
+        {
+            if ( selectedRunes[i].index == index-1 ) {
+                selectedRunes.erase(selectedRunes.begin()+i); //刪除掉此元素
+                break;
+            }
+        }
+        isSelected[index-1] = false; //取消選取
+        return true;
+    }
 
-void RuneBag::sell(){}
+    Pair chosenRune = {s_cat<short>(index-1),runes[index-1]};
+    selectedRunes.push_back(chosenRune); //加入選取
+    isSelected[index-1] = true; //紀錄已經選取
+    return true;
+        
+    return false;
+}
+
+short RuneBag::sell(){
+    short sellPoints = 0;
+    for ( int i = runes.size() - 1; i >= 0; i-- )
+        if ( isSelected[i] ){
+            if(runes[i] >= 1 && runes[i] <= 3){
+                sellPoints += RUNE_SOLD_NORMAL_EARN;
+                runes.erase( runes.begin()+i );
+            }
+            else if(runes[i] >= 4 && runes[i] <= 6){
+                sellPoints += RUNE_SOLD_FUNCTION_EARN;
+                runes.erase( runes.begin()+i );
+            }
+        }
+            
+    for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
+        isSelected[i] = false;
+    
+    return sellPoints;
+}
 
 bool RuneBag::buyRune(short& runePoint)
 {
