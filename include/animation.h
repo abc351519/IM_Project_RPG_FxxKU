@@ -49,9 +49,11 @@ namespace ansi_color
     namespace font{
         //"\033[38;2;;;m"
         const std::string RUNE_AQUA_STONE = "\033[38;2;41;148;255m";
+        const std::string RUNE_AQUA_STONE_DARK = "\033[38;2;30;115;200";
         const std::string RUNE_AQUA_SYMBOL = "\033[38;2;0;0;148m";
 
         const std::string RUNE_FLAME_STONE = "\033[38;2;255;71;15m";
+        const std::string RUNE_FLAME_STONE_DARK = "\033[38;2;166;40;17m";
         const std::string RUNE_FLAME_SYMBOL = "\033[38;2;158;0;0m";
 
         const std::string RUNEBAG_FRAME = "\033[38;2;255;244;194m";
@@ -61,7 +63,9 @@ namespace ansi_color
         //"\033[48;2;;;m";
         const std::string RUNEBAG_BACKGROUND = "\033[48;2;38;38;38m";
         const std::string RUNE_AQUA_STONE = "\033[48;2;41;148;255m";
+        const std::string RUNE_AQUA_STONE_DARK = "\033[48;2;30;115;200";
         const std::string RUNE_FLAME_STONE = "\033[48;2;255;71;15m";
+        const std::string RUNE_FLAME_STONE_DARK = "\033[48;2;166;40;17m";
     };
 };
 
