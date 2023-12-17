@@ -18,7 +18,9 @@ namespace BATTLE{
         const std::string WRONG_COMMAND = "u r typing the wrong command.";
     };
     namespace ICON{
-        extern Picture RUNE_ICON;
+        extern Picture RUNE_AQUA_ICON;
+        extern Picture RUNE_FLAME_ICON;
+        extern Picture RUNE_VITALITY_ICON;
     };
 
 };

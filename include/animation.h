@@ -13,8 +13,21 @@ namespace unicode{
     const std::string FULL_PIXEL = "█";
     const std::string UP_PIXEL = "▀";
     const std::string DOWN_PIXEL = "▄";
-    //▓▒░■
+    const std::string CORNER_PIXEL_NOLD = "▜";
+    const std::string CORNER_PIXEL_NORD = "▛";
+    const std::string CORNER_PIXEL_NOLU = "▟";
+    const std::string CORNER_PIXEL_NORU = "▙";
+    const std::string CORNER_PIXEL_LD = "▖";
+    const std::string CORNER_PIXEL_RD = "▗";
+    const std::string CORNER_PIXEL_LU = "▘";
+    const std::string CORNER_PIXEL_RU = "▝";
+    const std::string HAHF_PIXEL_L = "▌";
+    const std::string HAHF_PIXEL_R = "▐";
+    const std::string HAHF_PIXEL_M = "";
+    const std::string DOWN_PIXEL_2_8 = "▂";
+    //▓▒░■ ▃▄▅▆▇█▁   ▚▞ 
     const std::string RUNE_AQUA_SYMBOL = "𝓐";
+    const std::string RUNE_FLAME_SYMBOL = "𝕴";
 };
 
 namespace ansi_color
@@ -23,6 +36,10 @@ namespace ansi_color
         //"\033[38;2;;;m"
         const std::string RUNE_AQUA_STONE = "\033[38;2;41;148;255m";
         const std::string RUNE_AQUA_SYMBOL = "\033[38;2;0;0;148m";
+
+        const std::string RUNE_FLAME_STONE = "\033[38;2;255;71;15m";
+        const std::string RUNE_FLAME_SYMBOL = "\033[38;2;158;0;0m";
+
         const std::string RUNEBAG_FRAME = "\033[38;2;255;244;194m";
         const std::string RUNEBAG_BACKGROUND = "\033[38;2;38;38;38m";
     };
@@ -30,6 +47,7 @@ namespace ansi_color
         //"\033[48;2;;;m";
         const std::string RUNEBAG_BACKGROUND = "\033[48;2;38;38;38m";
         const std::string RUNE_AQUA_STONE = "\033[48;2;41;148;255m";
+        const std::string RUNE_FLAME_STONE = "\033[48;2;255;71;15m";
     };
 };
 
