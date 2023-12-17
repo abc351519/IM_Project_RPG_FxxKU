@@ -43,20 +43,21 @@ void graph::init()
     BATTLE::ICON::RUNE_FLAME_ICON.graph[2][2] = pixel;
     BATTLE::ICON::RUNE_FLAME_ICON.graph[3][2] = pixel;
     
-    pixel.change(unicode::UP_PIXEL);
-    BATTLE::ICON::RUNE_FLAME_ICON.graph[0][2] = pixel;    
-    BATTLE::ICON::RUNE_FLAME_ICON.graph[4][2] = pixel;
-    
     pixel.change(unicode::CORNER_PIXEL_NOLU);
     BATTLE::ICON::RUNE_FLAME_ICON.graph[0][0] = pixel;
     
     pixel.change(unicode::CORNER_PIXEL_NORU);
     BATTLE::ICON::RUNE_FLAME_ICON.graph[4][0] = pixel;
     
-    pixel.change(unicode::DOWN_PIXEL_2_8);
+    pixel.change(unicode::L_PIXEL_1_8);
     BATTLE::ICON::RUNE_FLAME_ICON.graph[1][0] = pixel;
+    pixel.change(unicode::L_PIXEL_7_8,ansi_color::background::RUNE_FLAME_STONE,ansi_color::font::RUNEBAG_BACKGROUND);
     BATTLE::ICON::RUNE_FLAME_ICON.graph[3][0] = pixel;
     
+    pixel.change(unicode::DOWN_PIXEL_3_8);
+    BATTLE::ICON::RUNE_FLAME_ICON.graph[0][2] = pixel;    
+    BATTLE::ICON::RUNE_FLAME_ICON.graph[4][2] = pixel;
+
     pixel.change(unicode::RUNE_FLAME_SYMBOL,ansi_color::background::RUNE_FLAME_STONE,ansi_color::font::RUNE_FLAME_SYMBOL);
     BATTLE::ICON::RUNE_FLAME_ICON.graph[2][1] = pixel;
     

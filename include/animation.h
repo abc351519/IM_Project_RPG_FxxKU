@@ -24,9 +24,23 @@ namespace unicode{
     const std::string HAHF_PIXEL_L = "▌";
     const std::string HAHF_PIXEL_R = "▐";
     const std::string HAHF_PIXEL_M = "";
+    const std::string DOWN_PIXEL_1_8 = "▁";
     const std::string DOWN_PIXEL_2_8 = "▂";
-    //▓▒░■ ▃▄▅▆▇█▁   ▚▞ 
-    const std::string RUNE_AQUA_SYMBOL = "𝓐";
+    const std::string DOWN_PIXEL_3_8 = "▃";
+    const std::string DOWN_PIXEL_4_8 = "▄";
+    const std::string DOWN_PIXEL_5_8 = "▅";
+    const std::string DOWN_PIXEL_6_8 = "▆";
+    const std::string DOWN_PIXEL_7_8 = "▇";
+
+    const std::string L_PIXEL_1_8 = "▏";
+    const std::string L_PIXEL_2_8 = "▎";
+    const std::string L_PIXEL_3_8 = "▍";
+    const std::string L_PIXEL_4_8 = "▌";
+    const std::string L_PIXEL_5_8 = "▋";
+    const std::string L_PIXEL_6_8 = "▊";
+    const std::string L_PIXEL_7_8 = "▉";
+    //▓▒░■ █   ▚▞ 
+    const std::string RUNE_AQUA_SYMBOL = "𝕬";//𝓐";
     const std::string RUNE_FLAME_SYMBOL = "𝕴";
 };
 
