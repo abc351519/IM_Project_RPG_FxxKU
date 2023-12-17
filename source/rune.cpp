@@ -21,6 +21,9 @@ short randomRune() //隨機生成一個符文
 
 RuneBag::RuneBag()
 {
+    isFunction = false;
+    selectedType = 0;
+    selectedNum = 0;
     runes.clear();
     for ( int i = 0; i < INIT_RUNE_COUNT; i++ )
     {
@@ -41,48 +44,70 @@ bool RuneBag::runeSelectToUse(short index)
 {
     if ( index < 1 || index > 8 ) //選取要合理
         return false;
+
     if ( index > runes.size() ) {
         return false; //不合理，選曲超過數量
     }
     
     if ( isSelected[index-1] ) { //已經被選取
-        for ( int i = 0 ; i < selectedRunes.size(); i++ )
-        {
-            if ( selectedRunes[i].index == index-1 ) {
-                selectedRunes.erase(selectedRunes.begin()+i); //刪除掉此元素
-                break;
-            }
-        }
-        isSelected[index-1] = false; //取消選取
-        return true;
-    } 
-    if ( selectedRunes.empty() ) { //如果是第一次選
-        Pair chosenRune = {s_cat<short>(index-1),runes[index-1]};
-        selectedRunes.push_back(chosenRune); //加入選取
-        isSelected[index-1] = true; //紀錄已經選取
-        firstChosenType = runes[index-1]; //紀錄第一個選取的類型
-        return true;
-    }
-    
-    if ( runes[index-1] >= 4 && runes[index-1] <= 6 ) { //選到的符文是功能牌
-        if ( firstChosenType >= 4 && firstChosenType <= 6 ) { //你不能選兩個功能牌
-            return false;
-        if ( selectedRunes.size() == 1 )  { //如果先前選取了元素牌而且只選一張
-        }
-            Pair chosenRune = {s_cat<short>(index-1),runes[index-1]};
-            selectedRunes.push_back(chosenRune);
-            isSelected[index-1] = true;
+        if(runes[index-1] >= 4 && runes[index-1] <= 6){
+            isFunction = false;
+            selectedNum--;
+            isSelected[index-1] = false;
             return true;
         }
-        return false; 
+
+        if( (runes[index-1] >= 1 && runes[index-1] <= 3) && selectedNum == 1 ){
+            selectedNum--;
+            isSelected[index-1] = false;
+            selectedType = 0;
+            return true;
+        }
+
+        if( (runes[index-1] >= 1 && runes[index-1] <= 3) && selectedNum > 1 ){
+            selectedNum--;
+            isSelected[index-1] = false;
+            return true;
+        }
+    } 
+    
+    if( runes[index-1] >= 4 && runes[index-1] <= 6 ){ // 選擇功能牌
+        if(isFunction) // 重複選擇功能牌
+            return false;
+    
+        if( !isFunction && selectedNum <= 1 ){ // 選擇功能牌，轉為功能
+            isFunction == true;
+            isSelected[index - 1] = true;
+            selectedNum++;
+            return true;
+        }
+        return false; // 選擇功能牌時在第三張
     }
-    //選到一般牌
-    if ( runes[index-1] == firstChosenType && selectedRunes.size() < 3  ) { //選到類型一樣
-        Pair chosenRune = {s_cat<short>(index-1),runes[index-1]};
-        selectedRunes.push_back(chosenRune);
-        isSelected[index-1] = true;
-        return true;
+    
+    if( runes[index-1] >= 1 && runes[index-1] <= 3 ){ // 選擇一般牌
+        if(isFunction && selectedNum == 1){ // 選完功能牌後選擇一般牌
+            isSelected[index-1] == true;
+            selectedNum++;
+            return true;
+        }
+
+        if( !isFunction ){ // 尚未選擇功能牌
+            if(selectedNum == 0){ // 第一張一般牌
+                isSelected[index-1] = true;
+                selectedNum++;
+                selectedType == runes[index-1];
+                return true;
+            }
+
+            if(runes[index-1] == selectedType && selectedNum <= 2){ // 多張一般牌
+                isSelected[index-1] = true;
+                selectedNum++;
+                return true;
+            }
+        }
+        return false;
     }
+
     return false;
 }
 
@@ -95,6 +120,7 @@ void RuneBag::use()
         isSelected[i] = false;
     //do st for selected
     //更新符文數量
+    selectedNum = 0;
     return;
 }
 
@@ -102,38 +128,31 @@ bool RuneBag::runeSelectToSell(short index){
     if ( index < 1 || index > 8 ) //選取要合理
         return false;
     if ( index > runes.size() ) {
-        return false; //不合理，選曲超過數量
+        return false; //不合理，選取超過數量
     }
     
     if ( isSelected[index-1] ) { //已經被選取
-        for ( int i = 0 ; i < selectedRunes.size(); i++ )
-        {
-            if ( selectedRunes[i].index == index-1 ) {
-                selectedRunes.erase(selectedRunes.begin()+i); //刪除掉此元素
-                break;
-            }
-        }
         isSelected[index-1] = false; //取消選取
         return true;
     }
 
-    Pair chosenRune = {s_cat<short>(index-1),runes[index-1]};
-    selectedRunes.push_back(chosenRune); //加入選取
-    isSelected[index-1] = true; //紀錄已經選取
-    return true;
-        
+    if( !isSelected[index-1] ){
+        isSelected[index-1] = true; //紀錄已經選取
+        return true;
+    }
+    
     return false;
 }
 
-short RuneBag::sell(){
+bool RuneBag::sell(short& runePoints){
     short sellPoints = 0;
     for ( int i = runes.size() - 1; i >= 0; i-- )
         if ( isSelected[i] ){
-            if(runes[i] >= 1 && runes[i] <= 3){
+            if( runes[i] >= 1 && runes[i] <= 3 ){
                 sellPoints += RUNE_SOLD_NORMAL_EARN;
                 runes.erase( runes.begin()+i );
             }
-            else if(runes[i] >= 4 && runes[i] <= 6){
+            else if( runes[i] >= 4 && runes[i] <= 6 ){
                 sellPoints += RUNE_SOLD_FUNCTION_EARN;
                 runes.erase( runes.begin()+i );
             }
@@ -142,7 +161,8 @@ short RuneBag::sell(){
     for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
         isSelected[i] = false;
     
-    return sellPoints;
+    runePoints += sellPoints;
+    return true;
 }
 
 bool RuneBag::buyRune(short& runePoint)
@@ -159,8 +179,8 @@ bool RuneBag::buyRune(short& runePoint)
 //選取重置，所有取消選取
 void RuneBag::selectReset()
 {
+    selectedNum = 0;
     for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
         isSelected[i] = false;  //將所有的符文標記為未選取
-    selectedRunes.clear();      //清除選取的符文
     return;
 }

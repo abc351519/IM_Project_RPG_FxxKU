@@ -56,8 +56,10 @@ enum Rune : short
 class RuneBag
 {
 private:
+    bool isFunction;
+    short selectedType;
+    short selectedNum;
     std::vector<short> runes;
-    std::vector<Pair> selectedRunes;
     bool isSelected[MAX_RUNE_COUNT]{false};
 public:
     RuneBag(); //init 
@@ -67,7 +69,7 @@ public:
     bool runeSelectToSell(short index);
     bool buyRune(short& runePoint);
     void use();
-    short sell();
+    bool sell(short& runePoints);
     void selectReset();
 };
 
