@@ -16,12 +16,10 @@ public:
     Player(std::string n);
     ~Player();
     friend class Event;
-    void startGameValueSet(){
-        runePoint = INIT_RUNE_COUNT;
-        nowHp = maxHp;
-    }
+    void startGameValueSet();
     bool refreshExp(short enemyLv); //return if level up
-    void sellToGetRunePoints(short gainPoints){ runePoint += gainPoints; }
+    void sellToGetRunePoints(short gainPoints);
+    void endBattle();
 };
 
 #endif

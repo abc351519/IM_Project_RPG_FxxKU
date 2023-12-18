@@ -2,7 +2,7 @@
 
 Player::Player(std::string n) : Creature(n)
 {
-    myRunes = new RuneBag();
+    myRunes = nullptr;
     lvThreshold[0] = 100;
     lvThreshold[1] = 150;
     lvThreshold[2] = 200;
@@ -16,7 +16,12 @@ Player::Player(std::string n) : Creature(n)
 
 Player::~Player()
 {
-    delete myRunes;
+}
+
+void Player::startGameValueSet(){
+    runePoint = INIT_RUNE_COUNT;
+    nowHp = maxHp;
+    myRunes = new RuneBag();
 }
 
 bool Player::refreshExp(short enemyLv){
@@ -30,4 +35,11 @@ bool Player::refreshExp(short enemyLv){
         return true; // level up
     }
     return false;
+}
+
+void Player::sellToGetRunePoints(short gainPoints){ runePoint += gainPoints; }
+
+void Player::endBattle(){
+    delete myRunes;
+    myRunes = nullptr;
 }

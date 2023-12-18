@@ -25,7 +25,8 @@ protected:
 public:
     Creature(std::string n) : name(n){}; // constructor
     ~Creature(){}; // distructor
-    void lossHp(short oppoAtk); //根據對方的攻擊損失血量
+    void normalAttackDamage(short damage); //根據對方的攻擊損失血量
+    
 };
 
 #endif

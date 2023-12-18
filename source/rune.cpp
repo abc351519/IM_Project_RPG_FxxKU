@@ -1,18 +1,16 @@
 #include "rune.h"
 #include "def.h"
 
-void random(short rn[], int len)
+short randomRune()
 {
-    srand(time(nullptr));
-    for(int i = 0; i < len; i++){
-        short random_num = rand() % 300 + 1;
-        if(random_num <= odd::APPEAR_NORMAL_RUNE*3){
-            rn[i] = random_num%3 + 1; 
-        }
-        else{
-            rn[i] = random_num%3 + 4;
-        }
+    short random_num = rand() % 300 + 1;
+    if(random_num <= odd::APPEAR_NORMAL_RUNE*3){
+        return random_num%3 + 1; 
     }
+    else{
+        return random_num%3 + 4;
+    }
+    
 }
 
 RuneBag::RuneBag()
@@ -26,19 +24,17 @@ RuneBag::RuneBag()
     runes.clear();
     for(int i = 0; i < 4; i++)
         randomRunes[i] = 0;
-    random(randomRunes, INIT_RUNE_COUNT);
     for ( int i = 0; i < INIT_RUNE_COUNT; i++ )
     {
-        runes.push_back(randomRunes[i]);
+        runes.push_back(randomRune());
     }
 }
 
 void RuneBag::runeGet() //每回合拿到符文
 {
-    random(randomRunes, RUNE_GET_ROUNDLY);
     for ( int i = 0; i < RUNE_GET_ROUNDLY; i++ )
     {
-        runes.push_back(randomRunes[i]); //隨機分配一個符文
+        runes.push_back(randomRune()); //隨機分配一個符文
     }
     return;
 }
@@ -175,11 +171,11 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
                 case FLAME:
                     if(selectedNum == 1){
                         attackRate = 1;
-                        effect = NONE;
+                        effect = FLAMENORMAL;
                     }
                     else if(selectedNum == 2){
                         attackRate = 1.6;
-                        effect = NONE;
+                        effect = FLAMENORMAL;
                     }
                     else if(selectedNum == 3){
                         attackRate = 2.5;
@@ -189,11 +185,11 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
                 case AQUA:
                     if(selectedNum == 1){
                         attackRate = 1;
-                        effect = NONE;
+                        effect = AQUANORMAL;
                     }
                     else if(selectedNum == 2){
                         attackRate = 1.6;
-                        effect = NONE;
+                        effect = AQUANORMAL;
                     }
                     else if(selectedNum == 3){
                         attackRate = 2.5;
@@ -203,11 +199,11 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
                 case VITALITY:
                     if(selectedNum == 1){
                         attackRate = 1;
-                        effect = NONE;
+                        effect = VITALITYNORMAL;
                     }
                     else if(selectedNum == 2){
                         attackRate = 1.6;
-                        effect = NONE;
+                        effect = VITALITYNORMAL;
                     }
                     else if(selectedNum == 3){
                         attackRate = 2.5;
@@ -281,8 +277,7 @@ bool RuneBag::buyRune(short& runePoint)
     if ( runePoint < RUNE_PER_COST )//如果點數不夠
         return false;
     runePoint -= RUNE_PER_COST;    //減掉符文點數
-    random(randomRunes, 1);
-    runes.push_back(randomRunes[0]);  //隨機購入一個符文
+    runes.push_back(randomRune());  //隨機購入一個符文
     return true;
 }
 

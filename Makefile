@@ -11,14 +11,14 @@ SRCDIR=source
 CFLAGS=-I$(IDIR) $(CVER) 
 LIBS=-lm 
 #有新的標頭檔放這裡
-_DEPS=def.h creature.h animation.h enemy.h player.h area.h event.h battle.h rune.h graph.h
+_DEPS=def.h creature.h animation.h enemy.h player.h area.h event.h battle.h rune.h graph.h error.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 #.o file output
 #有新的.o檔打在後面
 #_OBJ=main.o creature.o animation.o enemy.o player.o area.o event.o
 #OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 #原始碼，新的.cpp檔放這裡
-_SRC=main.cpp animation.cpp enemy.cpp player.cpp area.cpp battle.cpp game.cpp rune.cpp graph.cpp
+_SRC=main.cpp creature.cpp animation.cpp enemy.cpp player.cpp area.cpp event.cpp battle.cpp game.cpp rune.cpp graph.cpp
 SRC=$(patsubst %,$(SRCDIR)/%,$(_SRC))
 
 
