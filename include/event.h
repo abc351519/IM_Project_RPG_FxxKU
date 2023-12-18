@@ -12,10 +12,9 @@
 #define MAX_CLEAN_CHAR 100
 #define IN_THE_EVENT -1
 
-//所有輸入的文字指令打在這裡，以這些當作判斷依據
-namespace Command{
-    const std::string QUIT = "quit";
-};
+short strToShort(std::string str);
+std::string toSmall(std::string str);
+
 //所有
 enum class Activity : short
 {
@@ -35,8 +34,7 @@ public:
     virtual void init() = 0; //開啟活動
     virtual void close() = 0;//關閉活動
     virtual void gameLoop() = 0; //該事件的遊戲循環
-    virtual Activity receiveCommand() = 0; //輸入指令
-    virtual int action(Activity action) = 0;
+    virtual std::string receiveCommand() = 0; //輸入指令
 };
 
 #endif

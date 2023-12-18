@@ -9,6 +9,9 @@
 #define HIDE_CURSER "\033[?25l" 
 #define SHOW_CURSER "\033[?25h"
 
+#define SLEEP(time) std::this_thread::sleep_for(std::chrono::milliseconds(time))
+#define FLUSH fflush(stdout)
+
 #if defined(WIN32) || defined(WIN32) || defined(_WIN64) || defined(__CYGWIN) || defined(WIN32) || defined(_WIN32) || defined(MINGW32) || defined(WINNT) || defined(WINNT) || defined(__WINNT) || defined(X86) || defined(i386) || defined(__i386)
 typedef std::wstring spSymbol; //window下用wchar_t
 
@@ -140,6 +143,7 @@ namespace ani{
     const short maxHMPSize = 20;
     const int HMP_run_time = 750;
     const int WIN_LOAD_TIME = 1000;
+    const int MESSAGE_PER_CHAR_LOAD_TIME = 1000/30;
     const short HP_CHAR_WIDTH = 4;
     const short blockWidth = 2; //一格方塊的字元寬度
 
@@ -148,11 +152,14 @@ namespace ani{
     void setPos(const Position& pos);
     void moveCurse(CurserMove option, short unit);
     void curserShow(bool isON);
-    void drawLine(const Position startPoint, short length, CurserMove direction, short timePerBlock);
-    void drawRectangle(const Position startPoint, short width, short height, short totalRunTime);
+    void drawLine(const Position& startPoint, short length, CurserMove direction, short timePerBlock);
+    void drawRectangle(const Position& startPoint, short width, short height, short totalRunTime);
     void loadWindow(std::string color);
-    void HMP_Loading(short maxHMP, short nowHMP, std::string color);
-    void renderGrapgh(Position startPoint,Picture& graph);
+    void dimishWindow();
+    void HPLoading(const Position& ,short maxHMP, const std::string& color);
+    void renderGrapgh(const Position& startPoint,const Picture& graph);
+    void runMessage(const Position& startPoint,const std::string& message,std::string color);
+
 }
 
 #endif

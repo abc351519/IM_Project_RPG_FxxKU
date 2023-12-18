@@ -12,6 +12,7 @@ enum class Element //屬性
 };
 
 class Event;
+class Battle;
 
 class Creature
 {

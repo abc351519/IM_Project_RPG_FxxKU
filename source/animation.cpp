@@ -107,7 +107,7 @@ void ani::setPos(const Position& pos)
 }
 
 //繪畫直線
-void ani::drawLine(const Position startPoint, short length, CurserMove direction, short timePerBlock)
+void ani::drawLine(const Position& startPoint, short length, CurserMove direction, short timePerBlock)
 {
     Position currentPos(startPoint);
     switch ( direction )
@@ -120,9 +120,9 @@ void ani::drawLine(const Position startPoint, short length, CurserMove direction
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
             currentPos.y--; //向上移動1
-            fflush(stdout); 
+            FLUSH; 
             mtx.unlock();
-            std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
+            SLEEP(timePerBlock);
         }
         break;
     case CurserMove::MOVEDOWN:
@@ -133,9 +133,9 @@ void ani::drawLine(const Position startPoint, short length, CurserMove direction
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
             currentPos.y++; //向下移動1
-            fflush(stdout); 
+            FLUSH; 
             mtx.unlock();
-            std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
+            SLEEP(timePerBlock);
         }
         break;
     case CurserMove::MOVERIGHT: //向右畫線
@@ -146,9 +146,9 @@ void ani::drawLine(const Position startPoint, short length, CurserMove direction
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
             currentPos.x += blockWidth; //向右移動2
-            fflush(stdout);
+            FLUSH;
             mtx.unlock();
-            std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
+            SLEEP(timePerBlock);
         }
         break;
     case CurserMove::MOVELEFT:
@@ -159,9 +159,9 @@ void ani::drawLine(const Position startPoint, short length, CurserMove direction
             ani::setPos(currentPos);
             for ( short j = 0; j < ani::blockWidth; j++ ) 
                 std::cout << ' ';
-            fflush(stdout); 
+            FLUSH; 
             mtx.unlock();
-            std::this_thread::sleep_for(std::chrono::milliseconds(timePerBlock));
+            SLEEP(timePerBlock);
         }
         break;
     default:
@@ -170,7 +170,7 @@ void ani::drawLine(const Position startPoint, short length, CurserMove direction
     }
     return;
 }
-void ani::drawRectangle(const Position startPoint, short width, short height, short totalRunTime)
+void ani::drawRectangle(const Position& startPoint, short width, short height, short totalRunTime)
 {
     
     short totalBlockCNT =  2 * (height + width);
@@ -231,39 +231,47 @@ void ani::loadWindow(std::string color)
     ani::clearScreen(); //清除螢幕
     std::cout << color; //設定顏色
     ani::drawRectangle(startPoint,Global::Screen::winWith/ani::blockWidth,Global::Screen::winHeight,ani::WIN_LOAD_TIME);
+    return;
+}
+
+void ani::dimishWindow()
+{
+    Position startPoint(Global::Screen::winStartPosX,Global::Screen::winStartPosY);
     //清除輸出，重複
     std::cout << RESET; 
     ani::drawRectangle(startPoint,Global::Screen::winWith/ani::blockWidth,Global::Screen::winHeight,ani::WIN_LOAD_TIME);
     return;
 }
 
-void ani::HMP_Loading(const short maxHMP, const short nowHMP, std::string color)
+void ani::HPLoading(const Position& startPoint, const short maxHMP, const std::string& color)
 {
-    short amountPerChar = maxHMP/ani::maxHMPSize;
-    short howManyChar = nowHMP/amountPerChar;
-
+    Position currentPos(startPoint);
     short BlockLoadTime = ani::HMP_run_time/ani::maxHMPSize;
-
-    if ( !howManyChar && nowHMP ) //如果為零則至少顯示一格血，且血量不為零
-        howManyChar++;
-    for ( short i = 0; i < howManyChar; i++ )
+    mtx.lock();
+    ani::setPos(currentPos);
+    std::cout <<RESET;
+    std::cout << "HP"; //輸出HP字串
+    mtx.unlock();
+    //跑血條
+    currentPos.x += 2;
+    for ( int i = 0; i < maxHMPSize; i++ )
     {
-        std::cout << color  << ' ';
-        fflush(stdout); //刷新紀錄
-        std::this_thread::sleep_for(std::chrono::milliseconds(BlockLoadTime));
+        mtx.lock();
+        ani::setPos(currentPos);
+        std::cout << color;
+        std::cout << unicode::FULL_PIXEL;
+        FLUSH;
+        currentPos.x++;
+        mtx.unlock();
+        SLEEP(BlockLoadTime);
     }
-    std::cout << RESET; //回復原廠設定
-    for ( short i = 0; i < ani::maxHMPSize - howManyChar; i++ ){
-        std::cout << ' ';
-        std::this_thread::sleep_for(std::chrono::milliseconds(BlockLoadTime));
-    }
-    std::string numStr = std::to_string(nowHMP);
-    ani::moveCurse(CurserMove::MOVERIGHT,ani::HP_CHAR_WIDTH - numStr.length());
-    std::cout << nowHMP << '/' << maxHMP;
+
+        
+
     return;
 }
 
-void ani::renderGrapgh(Position startPoint, Picture& graph)
+void ani::renderGrapgh(const Position& startPoint, const Picture& graph)
 {
     Position currentPos(startPoint);
     for ( int i = 0; i < graph.char_height; i++ )
@@ -278,5 +286,25 @@ void ani::renderGrapgh(Position startPoint, Picture& graph)
         currentPos.y++;
     }
     std::cout << RESET;
+    return;
+}
+
+
+void ani::runMessage(const Position& startPoint,const std::string& message,std::string color)
+{
+    Position currentPos(startPoint);
+    for ( auto strc : message )
+    {
+        mtx.lock();
+        ani::setPos(currentPos); //設定位置
+        
+        std::cout << color; //設定顏色
+        std::cout << strc; //輸出
+        FLUSH; 
+        
+        currentPos.x++; //向右移動1
+        mtx.unlock();
+        SLEEP(MESSAGE_PER_CHAR_LOAD_TIME);
+    }
     return;
 }

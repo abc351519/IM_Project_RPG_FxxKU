@@ -5,6 +5,7 @@
 #include "creature.h"
 #include "player.h"
 
+
 class Enemy : public Creature
 {
 private:
@@ -15,7 +16,7 @@ public:
         : Creature(n)
     {};
     ~Enemy(){};
-    friend class Event;
+    friend class Battle;
     virtual void skill() = 0; //敵人的技能
     virtual void attack() = 0; //一般攻擊模式
 };

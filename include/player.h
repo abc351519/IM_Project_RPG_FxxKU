@@ -15,7 +15,7 @@ private:
 public:
     Player(std::string n);
     ~Player();
-    friend class Event;
+    friend class Battle;
     void startGameValueSet();
     bool refreshExp(short enemyLv); //return if level up
     void sellToGetRunePoints(short gainPoints);
