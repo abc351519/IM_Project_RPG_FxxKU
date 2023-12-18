@@ -25,7 +25,8 @@ RuneBag::RuneBag()
     for( int i = 0; i < MAX_RUNE_COUNT; i++)
         isSelected[i] = false;
     runes.clear();
-    randomRunes = new short[4];
+    for(int i = 0; i < 4; i++)
+        randomRunes[i] = 0;
     random(randomRunes, INIT_RUNE_COUNT);
     for ( int i = 0; i < INIT_RUNE_COUNT; i++ )
     {
@@ -115,13 +116,21 @@ bool RuneBag::runeSelectToUse(short index)
 }
 
 void RuneBag::use()
-{
+{   
+    if(isFunction && selectedNum = 2){
+        
+    }
+
+
+
+
     for ( int i = runes.size() - 1; i >= 0; i-- )
         if ( isSelected[i] )
             runes.erase( runes.begin()+i );
     for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
         isSelected[i] = false;
-    //do st for selected
+    
+
     //更新符文數量
     selectedNum = 0;
     return;

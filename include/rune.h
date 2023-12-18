@@ -61,7 +61,7 @@ private:
     short selectedNum;
     std::vector<short> runes;
     bool isSelected[MAX_RUNE_COUNT];
-    short* randomRunes;
+    short randomRunes[4];
 public:
     RuneBag(); //init 
     ~RuneBag(){};
