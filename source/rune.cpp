@@ -1,6 +1,6 @@
 #include "rune.h"
 #include "def.h"
-
+#include <vector>
 short randomRune()
 {
     short random_num = rand() % 300 + 1;

@@ -9,7 +9,6 @@ typedef struct Pair
     short runeType;
 } Pair;
 
-void randomRune();
 
 const short MAX_RUNE_COUNT = 8; //最多持有的符文數量
 const short INIT_RUNE_COUNT = 4; //一開始給的符文數
@@ -47,7 +46,7 @@ enum class RuneEffect
 {
     USELESS,
 
-    FlAMENORMAL,
+    FLAMENORMAL,
     AQUANORMAL,
     VITALITYNORMAL,
 
@@ -57,11 +56,11 @@ enum class RuneEffect
 
     FLAMEBUFF,
     AQUABUFF,
-    VITALITYBIFF,
+    VITALITYBUFF,
 
     FLAMEDEBUFF,
     AQUADEBUFF,
-    VITALITYBUFF,
+    VITALITYDEBUFF,
 
     FLAMEATTACK,
     AQUAATTACK,
