@@ -166,6 +166,9 @@ namespace ani{
     const int MESSAGE_PER_CHAR_LOAD_TIME = 1000/30;
     const short HP_CHAR_WIDTH = 4;
     const short blockWidth = 2; //一格方塊的字元寬度
+    const short RUNEBAG_RUN_TIME = 80;
+    const short RUNE_SHOW_TIME = 150;
+
 
     void clearScreen();
     void setPos(short x, short y);
@@ -179,7 +182,7 @@ namespace ani{
     void HPLoading(const Position& ,short maxHMP, const std::string& color);
     void renderGrapgh(const Position& startPoint,const Picture& graph);
     void runMessage(const Position& startPoint,const std::string& message,std::string color);
-    void renderRuneFrame(const Position& startPoint,const Picture& graph,short amount);
+    void renderRuneFrame(const Position& startPoint,const Picture& graph,short amount, short time);
 }
 
 #endif

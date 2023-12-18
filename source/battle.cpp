@@ -37,8 +37,8 @@ void Battle::init()
     pHp.join();
     eHp.join();
 
-    ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT);
-    updateRune();
+    ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
+    updateRune(ani::RUNE_SHOW_TIME);
     return;
 }
 
@@ -86,7 +86,8 @@ void Battle::playerTime()
         //提示輸入模式
         //清除message
         //ani::runMessage(,,);
-        //符文重設
+        ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
+        updateRune(ani::RUNE_SHOW_TIME);
         //choosing session 更新現在模式
         //設定使用者Command
         std::string input = receiveCommand(); //接收指令
@@ -202,7 +203,7 @@ void Battle::sellMode()
     return;
 }
 
-void Battle::updateRune()
+void Battle::updateRune(short time)
 {
     Position currentPos = BATTLE::POS::RUNEBAG;
     currentPos.x++;
@@ -240,7 +241,7 @@ void Battle::updateRune()
         FLUSH;
         mtx.unlock();
         currentPos.x += 7;
-        SLEEP(150);
+        SLEEP(time);
     }
 
     return;

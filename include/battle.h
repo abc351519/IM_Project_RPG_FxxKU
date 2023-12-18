@@ -75,7 +75,7 @@ public:
     void enemyTime();
     bool useMode(double& atkRate,RuneEffect& effect);
     void sellMode();
-    void updateRune();
+    void updateRune(short time);
 }; 
 
 #endif

@@ -334,7 +334,7 @@ void ani::runMessage(const Position& startPoint,const std::string& message,std::
     return;
 }
 
-void ani::renderRuneFrame(const Position& startPoint, const Picture& graph, short amount)
+void ani::renderRuneFrame(const Position& startPoint, const Picture& graph, short amount, short time)
 {
     Position currentPos = startPoint;
     for ( int i = 0; i < amount; i++ )
@@ -347,7 +347,7 @@ void ani::renderRuneFrame(const Position& startPoint, const Picture& graph, shor
         std::cout << ansi_color::background::RUNEBAG_INDEX << ansi_color::font::RUNEBAG_INDEX << i+1;
         FLUSH;
         mtx.unlock();
-        SLEEP(80);
+        SLEEP(time);
         currentPos.y -= 4;
         currentPos.x += 7;
     }

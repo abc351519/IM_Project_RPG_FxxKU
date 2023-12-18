@@ -8,43 +8,30 @@
 #include <thread>
 #include <chrono>
 
+namespace dick{
+    void init()
+    {
+        graph::init();
+        srand(time(nullptr));
+    }
+};
+
 int main()
 {   
-    // Player player1("noob");
-    // Enemy mob("goblin");
-    // Battle begin(&player1, &mob);
-    // begin.gameLoop();
+    dick::init();
     
-    // Position a(7,4);
-    // Position b(5,8);
-
-    // std::thread t1(ani::loadWindow,ansi_color::background::RUNE_AQUA_STONE);
-    // std::thread t2(ani::drawLine,a,10,CurserMove::MOVERIGHT,50);
-    
+    ani::curserShow(false);
     ani::clearScreen();
     
-    // std::thread t3(ani::drawRectangle,b,10,6,1000);
+    Player p("uwhefuhehfugo");
+    FirstEnemy e("aihsfhif");
+    Battle b(&p,&e);
+    
+    b.init();
+    FLUSH;
+ //   ani::loadWindow(ansi_color::background::RUNE_AQUA_STONE_DARK);
 
-    // t1.join();
-    // t2.join();
-    // t3.join();
+    SLEEP(1000000);
 
-    //std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-    // while (t1.joinable() || t2.joinable()) {
-    //     std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    // }
-    
-    Position c(40,15);
-    graph::init();   
-    ani::setPos(c);
-    
-    ani::renderGrapgh(c,BATTLE::ICON::RUNE_AQUA_ICON);
-
-    c.x += 6;
-    ani::renderGrapgh(c,BATTLE::ICON::RUNE_FLAME_ICON);
-    
-    
-    
-    //std::this_thread::sleep_for(std::chrono::milliseconds(10000000000));
     return 0;
 }
