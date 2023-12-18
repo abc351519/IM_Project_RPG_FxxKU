@@ -9,7 +9,7 @@ typedef struct Pair
     short runeType;
 } Pair;
 
-void random(short rn[], int len);
+void randomRune();
 
 const short MAX_RUNE_COUNT = 8; //最多持有的符文數量
 const short INIT_RUNE_COUNT = 4; //一開始給的符文數
