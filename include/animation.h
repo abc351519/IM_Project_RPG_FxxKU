@@ -1,7 +1,10 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+#include <mutex>
 #include <string>
+
+extern std::mutex mtx;
 
 //特殊輸出
 #define RESET   "\033[0m"
@@ -78,23 +81,36 @@ namespace ansi_color
         const std::string HP = "\033[38;5;160m";
 
         const std::string RUNE_AQUA_STONE = "\033[38;2;41;148;255m";
-        const std::string RUNE_AQUA_STONE_DARK = "\033[38;2;30;115;200";
+        const std::string RUNE_AQUA_STONE_DARK = "\033[38;2;30;115;200m";
         const std::string RUNE_AQUA_SYMBOL = "\033[38;2;0;0;148m";
 
         const std::string RUNE_FLAME_STONE = "\033[38;2;255;71;15m";
         const std::string RUNE_FLAME_STONE_DARK = "\033[38;2;166;40;17m";
         const std::string RUNE_FLAME_SYMBOL = "\033[38;2;158;0;0m";
 
-        const std::string RUNEBAG_FRAME = "\033[38;2;255;244;194m";
+        const std::string RUNEBAG_FRAME = "\033[38;2;235;235;255m";
+        const std::string RUNEBAG_FRAME_DARK = "\033[38;2;129;129;193m";
         const std::string RUNEBAG_BACKGROUND = "\033[38;2;38;38;38m";
+        const std::string RUNEBAG_INDEX = "\033[38;2;40;0;77m";
+
     };
     namespace background{
         //"\033[48;2;;;m";
+        const std::string BATTLE_COLOR = "\033[48;2;108;51;101m";
+
+        const std::string RUNEBAG_FRAME = "\033[48;2;235;235;255m";
+        const std::string RUNEBAG_FRAME_DARK = "\033[48;2;129;129;193m";
         const std::string RUNEBAG_BACKGROUND = "\033[48;2;38;38;38m";
+        const std::string RUNEBAG_INDEX = "\033[48;2;235;235;255m";
+
         const std::string RUNE_AQUA_STONE = "\033[48;2;41;148;255m";
-        const std::string RUNE_AQUA_STONE_DARK = "\033[48;2;30;115;200";
+        const std::string RUNE_AQUA_STONE_DARK = "\033[48;2;30;115;200m";
+        
         const std::string RUNE_FLAME_STONE = "\033[48;2;255;71;15m";
         const std::string RUNE_FLAME_STONE_DARK = "\033[48;2;166;40;17m";
+
+
+
     };
 };
 
@@ -163,7 +179,7 @@ namespace ani{
     void HPLoading(const Position& ,short maxHMP, const std::string& color);
     void renderGrapgh(const Position& startPoint,const Picture& graph);
     void runMessage(const Position& startPoint,const std::string& message,std::string color);
-
+    void renderRuneFrame(const Position& startPoint,const Picture& graph,short amount);
 }
 
 #endif

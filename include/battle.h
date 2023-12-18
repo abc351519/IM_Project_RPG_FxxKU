@@ -20,7 +20,7 @@ namespace BATTLE{
         const Position COMMAND_LINE = {0,0};
         const Position PROMPT_LINE = {0,0}; 
         const Position PLAYER_NAME = {5,5};
-        const Position ENEMY_NAME = {77,5};
+        const Position ENEMY_NAME = {46,5};
         const Position PLAYER_HP = {5,7};
         const Position ENEMY_HP = {46,7};
         const Position PLAYER_LV = {5,9};
@@ -28,7 +28,7 @@ namespace BATTLE{
         const Position PLAYER_STATE = {5,11};
         const Position ENEMY_STATE = {77,11};
         const Position ENEMY_CD = {77,13};
-        const Position RUNEBAG = {5,13};
+        const Position RUNEBAG = {13,16};
         const Position RUNE_POINT = {64,16};
     };
     namespace MESSAGE{
@@ -36,6 +36,8 @@ namespace BATTLE{
         const std::string WRONG_COMMAND = "u r typing the wrong command.";
     };
     namespace ICON{
+        extern Picture RUNE_FRAME;
+        extern Picture RUNE_FRAME_SELECTED;
         extern Picture RUNE_AQUA_ICON;
         extern Picture RUNE_FLAME_ICON;
         extern Picture RUNE_VITALITY_ICON;
@@ -73,6 +75,7 @@ public:
     void enemyTime();
     bool useMode(double& atkRate,RuneEffect& effect);
     void sellMode();
+    void updateRune();
 }; 
 
 #endif
