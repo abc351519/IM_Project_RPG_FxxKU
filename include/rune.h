@@ -9,7 +9,7 @@ typedef struct Pair
     short runeType;
 } Pair;
 
-short randomRune();
+short random();
 
 const short MAX_RUNE_COUNT = 8; //最多持有的符文數量
 const short INIT_RUNE_COUNT = 4; //一開始給的符文數
@@ -60,7 +60,8 @@ private:
     short selectedType;
     short selectedNum;
     std::vector<short> runes;
-    bool isSelected[MAX_RUNE_COUNT]{false};
+    bool isSelected[MAX_RUNE_COUNT];
+    short* randomRunes;
 public:
     RuneBag(); //init 
     ~RuneBag(){};
