@@ -99,7 +99,7 @@ public:
     bool runeSelectToUse(short index); //回傳選取是否有效
     bool runeSelectToSell(short index);
     bool buyRune(short& runePoint);
-    void use(double& attackRate, RuneEffect& effect);
+    bool use(double& attackRate, RuneEffect& effect);
     bool sell(short& runePoints);
     void selectReset();
 };

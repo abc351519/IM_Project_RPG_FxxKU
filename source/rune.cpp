@@ -117,116 +117,120 @@ bool RuneBag::runeSelectToUse(short index)
     return false;
 }
 
-void RuneBag::use(double& attackRate, RuneEffect& effect)
+bool RuneBag::use(double& attackRate, RuneEffect& effect)
 {   
-    if(isFunction && selectedNum == 2){
-        switch(functionType)
-        {
-            case HEAL:
-                if(attackType == 1){
-                    attackRate = 0;
-                    effect = FLAMEHEAL;
+    if((isFunction && selectedNum == 1) || (selectedNum == 0))
+        return false;
+    else{
+        if(isFunction && selectedNum == 2){
+            switch(functionType)
+            {
+                case HEAL:
+                    if(attackType == 1){
+                        attackRate = 0;
+                        effect = FLAMEHEAL;
+                    }
+                    else if(attackType == 2){
+                        attackRate = 0;
+                        effect = AQUAHEAL;
+                    }
+                    else if(attackType == 3){
+                        attackRate = 0;
+                        effect = VITALITYHEAL;
+                    }
+                    break;
+                case BUFF:
+                    if(attackType == 1){
+                        attackRate = 0;
+                        effect = FLAMEBUFF;
+                    }
+                    else if(attackType == 2){
+                        attackRate = 0;
+                        effect = AQUABUFF;
+                    }
+                    else if(attackType == 3){
+                        attackRate = 0;
+                        effect = VITALITYBUFF;
+                    }
+                    break;
+                case DEBUFF:
+                    if(attackType == 1){
+                        attackRate = 0;
+                        effect = FLAMEDEBUFF;
+                    }
+                    else if(attackType == 2){
+                        attackRate = 0;
+                        effect = AQUADEBUFF;
+                    }
+                    else if(attackType == 3){
+                        attackRate = 0;
+                        effect = VITALITYDEBUFF;
+                    }
+                    break;
                 }
-                else if(attackType == 2){
-                    attackRate = 0;
-                    effect = AQUAHEAL;
                 }
-                else if(attackType == 3){
-                    attackRate = 0;
-                    effect = VITALITYHEAL;
-                }
-                break;
-            case BUFF:
-                if(attackType == 1){
-                    attackRate = 0;
-                    effect = FLAMEBUFF;
-                }
-                else if(attackType == 2){
-                    attackRate = 0;
-                    effect = AQUABUFF;
-                }
-                else if(attackType == 3){
-                    attackRate = 0;
-                    effect = VITALITYBUFF;
-                }
-                break;
-            case DEBUFF:
-                if(attackType == 1){
-                    attackRate = 0;
-                    effect = FLAMEDEBUFF;
-                }
-                else if(attackType == 2){
-                    attackRate = 0;
-                    effect = AQUADEBUFF;
-                }
-                else if(attackType == 3){
-                    attackRate = 0;
-                    effect = VITALITYDEBUFF;
-                }
-                break;
+        else if (!isFunction && selectedNum >= 1){
+            switch (attackType)
+            {
+                case FLAME:
+                    if(selectedNum == 1){
+                        attackRate = 1;
+                        effect = NONE;
+                    }
+                    else if(selectedNum == 2){
+                        attackRate = 1.6;
+                        effect = NONE;
+                    }
+                    else if(selectedNum == 3){
+                        attackRate = 2.5;
+                        effect = FLAMEATTACK;
+                    }
+                    break;
+                case AQUA:
+                    if(selectedNum == 1){
+                        attackRate = 1;
+                        effect = NONE;
+                    }
+                    else if(selectedNum == 2){
+                        attackRate = 1.6;
+                        effect = NONE;
+                    }
+                    else if(selectedNum == 3){
+                        attackRate = 2.5;
+                        effect = AQUAATTACK;
+                    }
+                    break;
+                case VITALITY:
+                    if(selectedNum == 1){
+                        attackRate = 1;
+                        effect = NONE;
+                    }
+                    else if(selectedNum == 2){
+                        attackRate = 1.6;
+                        effect = NONE;
+                    }
+                    else if(selectedNum == 3){
+                        attackRate = 2.5;
+                        effect = VITALITYATTACK;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
+        for ( int i = runes.size() - 1; i >= 0; i-- )
+            if ( isSelected[i] ){
+                runes.erase( runes.begin()+i );
+            }
+        
+        for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
+            isSelected[i] = false;
+        
+        attackType = 0;
+        functionType = 0;
+        selectedNum = 0;
+        return true;
     }
-    else if (!isFunction && selectedNum >= 1){
-        switch (attackType)
-        {
-            case FLAME:
-                if(selectedNum == 1){
-                    attackRate = 1;
-                    effect = NONE;
-                }
-                else if(selectedNum == 2){
-                    attackRate = 1.6;
-                    effect = NONE;
-                }
-                else if(selectedNum == 3){
-                    attackRate = 2.5;
-                    effect = FLAMEATTACK;
-                }
-                break;
-            case AQUA:
-                if(selectedNum == 1){
-                    attackRate = 1;
-                    effect = NONE;
-                }
-                else if(selectedNum == 2){
-                    attackRate = 1.6;
-                    effect = NONE;
-                }
-                else if(selectedNum == 3){
-                    attackRate = 2.5;
-                    effect = AQUAATTACK;
-                }
-                break;
-            case VITALITY:
-                if(selectedNum == 1){
-                    attackRate = 1;
-                    effect = NONE;
-                }
-                else if(selectedNum == 2){
-                    attackRate = 1.6;
-                    effect = NONE;
-                }
-                else if(selectedNum == 3){
-                    attackRate = 2.5;
-                    effect = VITALITYATTACK;
-                }
-                break;
-            default:
-                break;
-        }
-    }
-    for ( int i = runes.size() - 1; i >= 0; i-- )
-        if ( isSelected[i] ){
-            runes.erase( runes.begin()+i );
-        }
-    
-    for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
-        isSelected[i] = false;
-    
-    attackType = 0;
-    functionType = 0;
-    selectedNum = 0;
-    return;
 }
 
 bool RuneBag::runeSelectToSell(short index){
