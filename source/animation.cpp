@@ -7,6 +7,19 @@
 #include "animation.h"
 #include "def.h"
 
+#if defined(WIN32) || defined(WIN32) || defined(_WIN64) || defined(__CYGWIN) || defined(WIN32) || defined(_WIN32) || defined(MINGW32) || defined(WINNT) || defined(WINNT) || defined(__WINNT) || defined(X86) || defined(i386) || defined(__i386)
+void winapi::write( wchar_t const* const s, int const n )
+{
+    DWORD n_written;
+    WriteConsole( winapi::std_output, s, n, &n_written, 0 );
+}
+
+void winapi::write( std::wstring const& s )
+{
+    winapi::write( s.c_str(), s.length() );
+}
+#endif
+
 std::mutex mtx;
 
 Position::Position(const short x, const short y)
@@ -50,7 +63,7 @@ void Pixel::render()
 {
     std::cout << backgroundColor << fontColor;
 #if defined(WIN32) || defined(WIN32) || defined(_WIN64) || defined(__CYGWIN) || defined(WIN32) || defined(_WIN32) || defined(MINGW32) || defined(WINNT) || defined(WINNT) || defined(__WINNT) || defined(X86) || defined(i386) || defined(__i386)    
-    std::cout << "saihf";
+    winapi::write(letter);
 #elif defined(__APPLE__) || defined(__MACH__)
     std::cout << letter;
 #endif

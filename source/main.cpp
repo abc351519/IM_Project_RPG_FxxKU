@@ -20,6 +20,7 @@ int main()
 
     // std::thread t1(ani::loadWindow,ansi_color::background::RUNE_AQUA_STONE);
     // std::thread t2(ani::drawLine,a,10,CurserMove::MOVERIGHT,50);
+    
     ani::clearScreen();
     
     // std::thread t3(ani::drawRectangle,b,10,6,1000);
@@ -32,6 +33,7 @@ int main()
     // while (t1.joinable() || t2.joinable()) {
     //     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     // }
+    
     Position c(40,15);
     graph::init();   
     ani::setPos(c);
@@ -40,7 +42,9 @@ int main()
 
     c.x += 6;
     ani::renderGrapgh(c,BATTLE::ICON::RUNE_FLAME_ICON);
-
+    
+    
+    
     //std::this_thread::sleep_for(std::chrono::milliseconds(10000000000));
     return 0;
 }

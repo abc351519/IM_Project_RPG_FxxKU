@@ -10,7 +10,20 @@
 #define SHOW_CURSER "\033[?25h"
 
 #if defined(WIN32) || defined(WIN32) || defined(_WIN64) || defined(__CYGWIN) || defined(WIN32) || defined(_WIN32) || defined(MINGW32) || defined(WINNT) || defined(WINNT) || defined(__WINNT) || defined(X86) || defined(i386) || defined(__i386)
-typedef wchar_t spSymbol; //window下用wchar_t
+typedef std::wstring spSymbol; //window下用wchar_t
+
+#define UNICODE
+//#define NOMINMAX
+#define STRICT
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+namespace winapi {
+    HANDLE const std_output = GetStdHandle( STD_OUTPUT_HANDLE );
+    void write( wchar_t const* const s, int const n );
+    void write( std::wstring const& s );
+}
+
 #define SET_CONST_SPSYMBOL(name, value) const spSymbol name = L##value
 #elif defined(__APPLE__) || defined(__MACH__)
 typedef std::string spSymbol; //mac下用c++string
