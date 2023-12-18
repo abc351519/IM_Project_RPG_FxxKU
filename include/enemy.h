@@ -8,7 +8,7 @@
 
 class Enemy : public Creature
 {
-private:
+protected:
     short coolDown;
     short skillPoint;
 public:
@@ -21,5 +21,16 @@ public:
     virtual void attack() = 0; //一般攻擊模式
 };
 
-
+class firstEnemy : public Enemy
+{
+    private:
+    public:
+    Enemy(std::string n)
+        : Creature(n)
+    {};
+    ~Enemy(){};
+    friend class Battle; 
+    void skill(){};
+    void attack(){};  
+}
 #endif
