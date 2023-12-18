@@ -1,5 +1,6 @@
 #include "creature.h"
-Creature(std::string n){
+
+Creature::Creature(std::string n){
     name = n; // name
     maxHp = 100; // health
     nowHp = 100; 

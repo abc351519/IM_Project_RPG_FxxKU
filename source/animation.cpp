@@ -7,6 +7,15 @@
 #include "animation.h"
 #include "def.h"
 
+void printNiceLy(short number, short unit)
+{
+    std::string s = std::to_string(number);
+    for ( int i = 0; i < unit - s.size(); i++ )
+        std::cout << ' '; 
+    std::cout << number;
+    return;
+}
+
 #if defined(WIN32) || defined(WIN32) || defined(_WIN64) || defined(__CYGWIN) || defined(WIN32) || defined(_WIN32) || defined(MINGW32) || defined(WINNT) || defined(WINNT) || defined(__WINNT) || defined(X86) || defined(i386) || defined(__i386)
 void winapi::write( wchar_t const* const s, int const n )
 {
@@ -246,6 +255,7 @@ void ani::dimishWindow()
 void ani::HPLoading(const Position& startPoint, const short maxHMP, const std::string& color)
 {
     Position currentPos(startPoint);
+    short numberRunTime = ani::HMP_run_time/maxHMP;
     short BlockLoadTime = ani::HMP_run_time/ani::maxHMPSize;
     mtx.lock();
     ani::setPos(currentPos);
@@ -265,9 +275,23 @@ void ani::HPLoading(const Position& startPoint, const short maxHMP, const std::s
         mtx.unlock();
         SLEEP(BlockLoadTime);
     }
-
-        
-
+    mtx.lock();
+    currentPos.x += 4;
+    ani::setPos(currentPos);
+    std::cout << RESET;
+    std::cout << '/' << maxHMP;
+    mtx.unlock();
+    currentPos.x -= 4;
+    for ( int i = 0; i <= maxHMP; i++ )
+    {
+        mtx.lock();
+        ani::setPos(currentPos);
+        std::cout << RESET;
+        printNiceLy(i,4);
+        FLUSH;
+        mtx.unlock();
+        SLEEP(numberRunTime);
+    }
     return;
 }
 
@@ -308,3 +332,4 @@ void ani::runMessage(const Position& startPoint,const std::string& message,std::
     }
     return;
 }
+
