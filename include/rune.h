@@ -3,13 +3,6 @@
 
 #include <vector>
 
-typedef struct Pair
-{
-    short index;
-    short runeType;
-} Pair;
-
-
 const short MAX_RUNE_COUNT = 8; //最多持有的符文數量
 const short INIT_RUNE_COUNT = 4; //一開始給的符文數
 const short RUNE_GET_ROUNDLY = 2; //每回合給的
@@ -87,7 +80,6 @@ private:
     short selectedNum; // 選擇張數
     std::vector<short> runes;
     bool isSelected[MAX_RUNE_COUNT];
-    short randomRunes[4];
 public:
     RuneBag(); //init 
     ~RuneBag(){};
@@ -98,6 +90,8 @@ public:
     bool use(double& attackRate, RuneEffect& effect);
     bool sell(short& runePoints);
     void selectReset();
+    short getRuneCount();
+    short getRune(short index);
 };
 
 #endif

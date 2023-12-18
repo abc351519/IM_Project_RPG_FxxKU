@@ -62,8 +62,6 @@ RuneBag::RuneBag()
     for( int i = 0; i < MAX_RUNE_COUNT; i++)
         isSelected[i] = false;
     runes.clear();
-    for(int i = 0; i < 4; i++)
-        randomRunes[i] = 0;
     for ( int i = 0; i < INIT_RUNE_COUNT; i++ )
     {
         runes.push_back(randomRune());
@@ -400,4 +398,16 @@ void RuneBag::selectReset()
     for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
         isSelected[i] = false;  //將所有的符文標記為未選取
     return;
+}
+
+short RuneBag::getRuneCount()
+{   
+    return runes.size();
+}
+
+short RuneBag::getRune(short index)
+{
+    if ( index < runes.size() && index >=0 )
+        return runes[index];
+    return -69;
 }

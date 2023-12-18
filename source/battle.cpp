@@ -16,9 +16,17 @@ Battle::~Battle()
 
 void Battle::init()
 {
+    ani::loadWindow(ansi_color::background::BATTLE_COLOR);
     player->startGameValueSet(); //玩家的點數血量
-    std::thread t1(ani::HPLoading,BATTLE::POS::ENEMY_HP,enemy->maxHp,ansi_color::font::HP);
-    std::thread t2(ani::HPLoading,BATTLE::POS::PLAYER_HP,player->maxHp,ansi_color::font::HP);    
+    std::thread pName(ani::runMessage,BATTLE::POS::PLAYER_NAME,player->name,RESET);
+    std::thread eName(ani::runMessage,BATTLE::POS::ENEMY_NAME,enemy->name,RESET);
+    //ani::runMessage(BATTLE::POS::PLAYER_NAME,player->name);
+    std::thread eHp(ani::HPLoading,BATTLE::POS::ENEMY_HP,enemy->maxHp,ansi_color::font::HP);
+    std::thread pHp(ani::HPLoading,BATTLE::POS::PLAYER_HP,player->maxHp,ansi_color::font::HP);    
+    pName.join();
+    eName.join();
+
+//    SLEEP(200);
     
     //std::cout << player->maxHp << ' ' << enemy ->maxHp;
     //使用者介面，畫圖
@@ -26,8 +34,11 @@ void Battle::init()
     //玩家
     
 
-    t1.join();
-    t2.join();
+    pHp.join();
+    eHp.join();
+
+    ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
+    updateRune(ani::RUNE_SHOW_TIME);
     return;
 }
 
@@ -75,7 +86,8 @@ void Battle::playerTime()
         //提示輸入模式
         //清除message
         //ani::runMessage(,,);
-        //符文重設
+        ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
+        updateRune(ani::RUNE_SHOW_TIME);
         //choosing session 更新現在模式
         //設定使用者Command
         std::string input = receiveCommand(); //接收指令
@@ -188,5 +200,49 @@ void Battle::sellMode()
             continue;
         }
     }
+    return;
+}
+
+void Battle::updateRune(short time)
+{
+    Position currentPos = BATTLE::POS::RUNEBAG;
+    currentPos.x++;
+    currentPos.y++;
+    for ( int i = 0; i < player->myRunes->getRuneCount(); i++ )
+    {
+        mtx.lock();
+        Picture* graph;
+        
+        switch ( player->myRunes->getRune(i) )
+        {
+        case 1:
+            graph = &BATTLE::ICON::RUNE_FLAME_ICON;
+            break;
+        case 2:
+            graph = &BATTLE::ICON::RUNE_AQUA_ICON;
+            break;
+        case 3:
+            graph = &BATTLE::ICON::RUNE_VITALITY_ICON;
+            break;
+        // case 4:
+        //     graph = &;
+        //     break;
+        // case 5:
+        //     graph = &;
+        //     break;
+        // case 6:
+        //     graph = &;
+        //     break;
+        default:
+            ////錯誤
+            break;
+        }
+        ani::renderGrapgh(currentPos,*graph);
+        FLUSH;
+        mtx.unlock();
+        currentPos.x += 7;
+        SLEEP(time);
+    }
+
     return;
 }

@@ -2,10 +2,12 @@
 #include <string>
 #include <thread>
 #include <chrono>
-#include <mutex>
 
+#include "graph.h"
 #include "animation.h"
 #include "def.h"
+
+std::mutex mtx;
 
 void printNiceLy(short number, short unit)
 {
@@ -28,8 +30,6 @@ void winapi::write( std::wstring const& s )
     winapi::write( s.c_str(), s.length() );
 }
 #endif
-
-std::mutex mtx;
 
 Position::Position(const short x, const short y)
     : x(x), y(y)
@@ -310,6 +310,7 @@ void ani::renderGrapgh(const Position& startPoint, const Picture& graph)
         currentPos.y++;
     }
     std::cout << RESET;
+    FLUSH;
     return;
 }
 
@@ -330,6 +331,27 @@ void ani::runMessage(const Position& startPoint,const std::string& message,std::
         mtx.unlock();
         SLEEP(MESSAGE_PER_CHAR_LOAD_TIME);
     }
+    return;
+}
+
+void ani::renderRuneFrame(const Position& startPoint, const Picture& graph, short amount, short time)
+{
+    Position currentPos = startPoint;
+    for ( int i = 0; i < amount; i++ )
+    {
+        mtx.lock();
+        ani::setPos(currentPos);
+        ani::renderGrapgh(currentPos,graph);
+        currentPos.y += 4;
+        ani::setPos(currentPos);
+        std::cout << ansi_color::background::RUNEBAG_INDEX << ansi_color::font::RUNEBAG_INDEX << i+1;
+        FLUSH;
+        mtx.unlock();
+        SLEEP(time);
+        currentPos.y -= 4;
+        currentPos.x += 7;
+    }
+    std::cout << RESET;
     return;
 }
 
