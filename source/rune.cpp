@@ -1,21 +1,19 @@
 #include "rune.h"
 #include "def.h"
 
-#include <random>
-
-
 short firstChosenType;
 
-short randomRune() //隨機生成一個符文
+void random(short rn[], int len)
 {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<short> dist(1,300);
-    short random_num = dist(gen);   
-    if ( random_num <= odds::APPEAR_NORMAL_RUNE*3 ) {
-        return random_num%3+1; //1-3 ：一般符文
-    } else {
-        return random_num%3+4; //4-6 ：功能符文
+    srand(time(nullptr));
+    for(int i = 0; i < len; i++){
+        short random_num = rand() % 300 + 1;
+        if(random_num <= odd::APPEAR_NORMAL_RUNE*3){
+            rn[i] = random_num%3 + 1; 
+        }
+        else{
+            rn[i] = random_num%3 + 4;
+        }
     }
 }
 
@@ -24,18 +22,23 @@ RuneBag::RuneBag()
     isFunction = false;
     selectedType = 0;
     selectedNum = 0;
+    for( int i = 0; i < MAX_RUNE_COUNT; i++)
+        isSelected[i] = false;
     runes.clear();
+    randomRunes = new short[4];
+    random(randomRunes, INIT_RUNE_COUNT);
     for ( int i = 0; i < INIT_RUNE_COUNT; i++ )
     {
-        runes.push_back(randomRune());
+        runes.push_back(randomRunes[i]);
     }
 }
 
 void RuneBag::runeGet() //每回合拿到符文
 {
+    random(randomRunes, RUNE_GET_ROUNDLY);
     for ( int i = 0; i < RUNE_GET_ROUNDLY; i++ )
     {
-        runes.push_back(randomRune()); //隨機分配一個符文
+        runes.push_back(randomRunes[i]); //隨機分配一個符文
     }
     return;
 }
@@ -76,7 +79,7 @@ bool RuneBag::runeSelectToUse(short index)
             return false;
     
         if( !isFunction && selectedNum <= 1 ){ // 選擇功能牌，轉為功能
-            isFunction == true;
+            isFunction = true;
             isSelected[index - 1] = true;
             selectedNum++;
             return true;
@@ -86,7 +89,7 @@ bool RuneBag::runeSelectToUse(short index)
     
     if( runes[index-1] >= 1 && runes[index-1] <= 3 ){ // 選擇一般牌
         if(isFunction && selectedNum == 1){ // 選完功能牌後選擇一般牌
-            isSelected[index-1] == true;
+            isSelected[index-1] = true;
             selectedNum++;
             return true;
         }
@@ -95,7 +98,7 @@ bool RuneBag::runeSelectToUse(short index)
             if(selectedNum == 0){ // 第一張一般牌
                 isSelected[index-1] = true;
                 selectedNum++;
-                selectedType == runes[index-1];
+                selectedType = runes[index-1];
                 return true;
             }
 
@@ -171,8 +174,9 @@ bool RuneBag::buyRune(short& runePoint)
         return false;
     if ( runePoint < RUNE_PER_COST )//如果點數不夠
         return false;
-    runePoint -= RUNE_PER_COST;     //減掉符文點數
-    runes.push_back(randomRune());  //隨機購入一個符文
+    runePoint -= RUNE_PER_COST;    //減掉符文點數
+    random(randomRunes, 1);
+    runes.push_back(randomRunes[0]);  //隨機購入一個符文
     return true;
 }
 
