@@ -21,16 +21,16 @@ public:
     virtual void attack() = 0; //一般攻擊模式
 };
 
-class firstEnemy : public Enemy
+class FirstEnemy : public Enemy
 {
     private:
     public:
-    Enemy(std::string n)
-        : Creature(n)
+    FirstEnemy(std::string n)
+        : Enemy(n)
     {};
-    ~Enemy(){};
+    ~FirstEnemy(){};
     friend class Battle; 
     void skill(){};
     void attack(){};  
-}
+};
 #endif
