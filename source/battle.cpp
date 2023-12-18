@@ -1,5 +1,5 @@
 #include "battle.h"
-
+#include "thread"
 
 Battle::Battle(Player* player, Enemy* enemy)
     : player(player), enemy(enemy)
@@ -17,15 +17,18 @@ Battle::~Battle()
 void Battle::init()
 {
     player->startGameValueSet(); //玩家的點數血量
-    player->; //玩家符文初始化
-    //使用者介面，畫圖
+    std::thread t1(ani::HPLoading,BATTLE::POS::ENEMY_HP,enemy->maxHp,ansi_color::font::HP);
+    std::thread t2(ani::HPLoading,BATTLE::POS::PLAYER_HP,player->maxHp,ansi_color::font::HP);    
     
+    //std::cout << player->maxHp << ' ' << enemy ->maxHp;
+    //使用者介面，畫圖
+
     //玩家
     
 
-
-
-
+    t1.join();
+    t2.join();
+    return;
 }
 
 void Battle::close()
@@ -66,7 +69,7 @@ std::string Battle::receiveCommand()
 void Battle::playerTime()
 {
     double atkRate = 1.0;
-    RuneEffect effect = RuneEffect::NONE;
+    RuneEffect effect = RuneEffect::USELESS;
     while ( true )
     {
         //提示輸入模式
@@ -105,7 +108,7 @@ void Battle::playerTime()
     }
     switch ( effect )
     {
-    case RuneEffect:: :
+    //case RuneEffect:: :
         /* code */
         break;
     

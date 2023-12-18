@@ -24,7 +24,7 @@ protected:
     short atk; // attack
     short def; // defend
 public:
-    Creature(std::string n) : name(n){}; // constructor
+    Creature(std::string n); // constructor
     ~Creature(){}; // distructor
     void normalAttackDamage(short damage); //根據對方的攻擊損失血量
     

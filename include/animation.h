@@ -33,6 +33,8 @@ typedef std::string spSymbol; //mac下用c++string
 #define SET_CONST_SPSYMBOL(name, value) const spSymbol name = value
 #endif
 
+void printNiceLy(short number, short unit);
+
 namespace unicode{
     SET_CONST_SPSYMBOL(FULL_PIXEL,"█");
     SET_CONST_SPSYMBOL(UP_PIXEL,"▀");
@@ -73,6 +75,8 @@ namespace ansi_color
 {
     namespace font{
         //"\033[38;2;;;m"
+        const std::string HP = "\033[38;5;160m";
+
         const std::string RUNE_AQUA_STONE = "\033[38;2;41;148;255m";
         const std::string RUNE_AQUA_STONE_DARK = "\033[38;2;30;115;200";
         const std::string RUNE_AQUA_SYMBOL = "\033[38;2;0;0;148m";
