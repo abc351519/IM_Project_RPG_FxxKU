@@ -13,7 +13,7 @@ Position::Position(const short x, const short y)
     : x(x), y(y)
 {}
 
-void Pixel::change(std::string letter, std::string backgroundColor, std::string fontColor)
+void Pixel::change(spSymbol letter, std::string backgroundColor, std::string fontColor)
 {
     this->letter = letter;
     this->backgroundColor = backgroundColor;
@@ -21,7 +21,7 @@ void Pixel::change(std::string letter, std::string backgroundColor, std::string 
     return;
 }
 
-void Pixel::change(std::string letter)
+void Pixel::change(spSymbol letter)
 {
     this->letter = letter;
     return;
@@ -48,7 +48,12 @@ void Pixel::operator=(Pixel pixel)
 
 void Pixel::render()
 {
-    std::cout << backgroundColor << fontColor << letter;
+    std::cout << backgroundColor << fontColor;
+#if defined(WIN32) || defined(WIN32) || defined(_WIN64) || defined(__CYGWIN) || defined(WIN32) || defined(_WIN32) || defined(MINGW32) || defined(WINNT) || defined(WINNT) || defined(__WINNT) || defined(X86) || defined(i386) || defined(__i386)    
+    std::cout << "saihf";
+#elif defined(__APPLE__) || defined(__MACH__)
+    std::cout << letter;
+#endif
 }
 
 Picture::Picture(short width, short height)

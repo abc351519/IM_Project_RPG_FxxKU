@@ -9,39 +9,48 @@
 #define HIDE_CURSER "\033[?25l" 
 #define SHOW_CURSER "\033[?25h"
 
-namespace unicode{
-    const std::string FULL_PIXEL = "█";
-    const std::string UP_PIXEL = "▀";
-    const std::string DOWN_PIXEL = "▄";
-    const std::string CORNER_PIXEL_NOLD = "▜";
-    const std::string CORNER_PIXEL_NORD = "▛";
-    const std::string CORNER_PIXEL_NOLU = "▟";
-    const std::string CORNER_PIXEL_NORU = "▙";
-    const std::string CORNER_PIXEL_LD = "▖";
-    const std::string CORNER_PIXEL_RD = "▗";
-    const std::string CORNER_PIXEL_LU = "▘";
-    const std::string CORNER_PIXEL_RU = "▝";
-    const std::string HAHF_PIXEL_L = "▌";
-    const std::string HAHF_PIXEL_R = "▐";
-    const std::string HAHF_PIXEL_M = "";
-    const std::string DOWN_PIXEL_1_8 = "▁";
-    const std::string DOWN_PIXEL_2_8 = "▂";
-    const std::string DOWN_PIXEL_3_8 = "▃";
-    const std::string DOWN_PIXEL_4_8 = "▄";
-    const std::string DOWN_PIXEL_5_8 = "▅";
-    const std::string DOWN_PIXEL_6_8 = "▆";
-    const std::string DOWN_PIXEL_7_8 = "▇";
+#if defined(WIN32) || defined(WIN32) || defined(_WIN64) || defined(__CYGWIN) || defined(WIN32) || defined(_WIN32) || defined(MINGW32) || defined(WINNT) || defined(WINNT) || defined(__WINNT) || defined(X86) || defined(i386) || defined(__i386)
+typedef wchar_t spSymbol; //window下用wchar_t
+#define SET_CONST_SPSYMBOL(name, value) const spSymbol name = L##value
+#elif defined(__APPLE__) || defined(__MACH__)
+typedef std::string spSymbol; //mac下用c++string
+#define SET_CONST_SPSYMBOL(name, value) const spSymbol name = value
+#endif
 
-    const std::string L_PIXEL_1_8 = "▏";
-    const std::string L_PIXEL_2_8 = "▎";
-    const std::string L_PIXEL_3_8 = "▍";
-    const std::string L_PIXEL_4_8 = "▌";
-    const std::string L_PIXEL_5_8 = "▋";
-    const std::string L_PIXEL_6_8 = "▊";
-    const std::string L_PIXEL_7_8 = "▉";
+namespace unicode{
+    SET_CONST_SPSYMBOL(FULL_PIXEL,"█");
+    SET_CONST_SPSYMBOL(UP_PIXEL,"▀");
+    SET_CONST_SPSYMBOL(DOWN_PIXEL,"▄");
+    SET_CONST_SPSYMBOL(CORNER_PIXEL_NOLD,"▜");
+    SET_CONST_SPSYMBOL(CORNER_PIXEL_NORD,"▛");
+    SET_CONST_SPSYMBOL(CORNER_PIXEL_NOLU,"▟");
+    SET_CONST_SPSYMBOL(CORNER_PIXEL_NORU,"▙");
+    SET_CONST_SPSYMBOL(CORNER_PIXEL_LD,"▖");
+    SET_CONST_SPSYMBOL(CORNER_PIXEL_RD,"▗");
+    SET_CONST_SPSYMBOL(CORNER_PIXEL_LU,"▘");
+    SET_CONST_SPSYMBOL(CORNER_PIXEL_RU,"▝");
+    SET_CONST_SPSYMBOL(HAHF_PIXEL_L,"▌");
+    SET_CONST_SPSYMBOL(HAHF_PIXEL_R,"▐");
+    SET_CONST_SPSYMBOL(HAHF_PIXEL_M,"");
+    SET_CONST_SPSYMBOL(DOWN_PIXEL_1_8,"▁");
+    SET_CONST_SPSYMBOL(DOWN_PIXEL_2_8,"▂");
+    SET_CONST_SPSYMBOL(DOWN_PIXEL_3_8,"▃");
+    SET_CONST_SPSYMBOL(DOWN_PIXEL_4_8,"▄");
+    SET_CONST_SPSYMBOL(DOWN_PIXEL_5_8,"▅");
+    SET_CONST_SPSYMBOL(DOWN_PIXEL_6_8,"▆");
+    SET_CONST_SPSYMBOL(DOWN_PIXEL_7_8,"▇");
+
+    SET_CONST_SPSYMBOL(L_PIXEL_1_8,"▏");
+    SET_CONST_SPSYMBOL(L_PIXEL_2_8,"▎");
+    SET_CONST_SPSYMBOL(L_PIXEL_3_8,"▍");
+    SET_CONST_SPSYMBOL(L_PIXEL_4_8,"▌");
+    SET_CONST_SPSYMBOL(L_PIXEL_5_8,"▋");
+    SET_CONST_SPSYMBOL(L_PIXEL_6_8,"▊");
+    SET_CONST_SPSYMBOL(L_PIXEL_7_8,"▉");
     //▓▒░■ █   ▚▞ 
-    const std::string RUNE_AQUA_SYMBOL = "𝕬";//𝓐";
-    const std::string RUNE_FLAME_SYMBOL = "𝕴";
+    SET_CONST_SPSYMBOL(RUNE_AQUA_SYMBOL,"𝕬");//𝓐");
+    SET_CONST_SPSYMBOL(RUNE_FLAME_SYMBOL,"𝕴");
+    
 };
 
 namespace ansi_color
@@ -79,16 +88,16 @@ struct Position
 
 struct Pixel
 {
-    std::string letter;
+    spSymbol letter;
     std::string backgroundColor;
     std::string fontColor;
     Pixel(){}
-    Pixel(std::string letter, std::string backgroundColor, std::string fontColor)
+    Pixel(spSymbol letter, std::string backgroundColor, std::string fontColor)
         : letter(letter), backgroundColor(backgroundColor), fontColor(fontColor)
     {}
     ~Pixel(){};
-    void change(std::string letter, std::string backgroundColor, std::string fontColor);
-    void change(std::string letter);
+    void change(spSymbol letter, std::string backgroundColor, std::string fontColor);
+    void change(spSymbol letter);
     void changeBackColor(std::string backgroundColor);
     void changeFontColor(std::string fontColor);
     void operator=(Pixel pixel);
