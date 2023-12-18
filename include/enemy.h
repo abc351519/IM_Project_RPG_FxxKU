@@ -32,5 +32,5 @@ class FirstEnemy : public Enemy
     friend class Battle; 
     void skill(){};
     void attack(){};  
-};
+}
 #endif
