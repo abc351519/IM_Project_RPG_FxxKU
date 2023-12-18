@@ -42,6 +42,15 @@ namespace mpConsume
     const short MAKE_UP_LV_THREE = 10; //合成三個符文
 };
 
+enum class AttackElement
+{
+    ATTACK_FAIL,
+    FLAME,
+    AQUA,
+    VITALITY,
+
+};
+
 enum Rune : short
 {
     FLAME = 1,

@@ -118,9 +118,20 @@ bool RuneBag::runeSelectToUse(short index)
 void RuneBag::use()
 {   
     if(isFunction && selectedNum = 2){
-        
-    }
 
+    }
+    else if (!isFunction && selectedNum >= 1)
+    {
+        switch (selectedType)
+        {
+        case FLAME:
+            
+            break;        
+        default:
+            break;
+        }
+    }
+    
 
 
 
@@ -130,8 +141,6 @@ void RuneBag::use()
     for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
         isSelected[i] = false;
     
-
-    //更新符文數量
     selectedNum = 0;
     return;
 }
