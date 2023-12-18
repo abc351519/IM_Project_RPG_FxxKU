@@ -9,7 +9,7 @@ typedef struct Pair
     short runeType;
 } Pair;
 
-short random();
+void random(short rn[], int len);
 
 const short MAX_RUNE_COUNT = 8; //最多持有的符文數量
 const short INIT_RUNE_COUNT = 4; //一開始給的符文數
@@ -48,7 +48,27 @@ enum class AttackElement
     FLAME,
     AQUA,
     VITALITY,
+};
 
+enum class RuneEffect
+{
+    NONE,
+
+    FLAMEHEAL,
+    AQUAHEAL,
+    VITALITYHEAL,
+
+    FLAMEBUFF,
+    AQUABUFF,
+    VITALITYBIFF,
+
+    FLAMEDEBUFF,
+    AQUADEBUFF,
+    VITALITYBUFF,
+
+    FLAMEATTACK,
+    AQUAATTACK,
+    VITALITYATTACK
 };
 
 enum Rune : short
@@ -65,9 +85,10 @@ enum Rune : short
 class RuneBag
 {
 private:
-    bool isFunction;
-    short selectedType;
-    short selectedNum;
+    bool isFunction; //選擇卡組是否為功能
+    short attackType; // 1:flame 2:aqua 3:vitality
+    short functionType; // 4:heal 5:buff 6:debuff
+    short selectedNum; // 選擇張數
     std::vector<short> runes;
     bool isSelected[MAX_RUNE_COUNT];
     short randomRunes[4];
@@ -78,7 +99,7 @@ public:
     bool runeSelectToUse(short index); //回傳選取是否有效
     bool runeSelectToSell(short index);
     bool buyRune(short& runePoint);
-    void use();
+    void use(double& attackRate, RuneEffect& effect);
     bool sell(short& runePoints);
     void selectReset();
 };

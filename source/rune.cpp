@@ -1,8 +1,6 @@
 #include "rune.h"
 #include "def.h"
 
-short firstChosenType;
-
 void random(short rn[], int len)
 {
     srand(time(nullptr));
@@ -20,7 +18,8 @@ void random(short rn[], int len)
 RuneBag::RuneBag()
 {
     isFunction = false;
-    selectedType = 0;
+    attackType = 0;
+    functionType = 0;
     selectedNum = 0;
     for( int i = 0; i < MAX_RUNE_COUNT; i++)
         isSelected[i] = false;
@@ -56,6 +55,7 @@ bool RuneBag::runeSelectToUse(short index)
     if ( isSelected[index-1] ) { //已經被選取
         if(runes[index-1] >= 4 && runes[index-1] <= 6){
             isFunction = false;
+            functionType = 0;
             selectedNum--;
             isSelected[index-1] = false;
             return true;
@@ -64,7 +64,7 @@ bool RuneBag::runeSelectToUse(short index)
         if( (runes[index-1] >= 1 && runes[index-1] <= 3) && selectedNum == 1 ){
             selectedNum--;
             isSelected[index-1] = false;
-            selectedType = 0;
+            attackType = 0;
             return true;
         }
 
@@ -81,6 +81,7 @@ bool RuneBag::runeSelectToUse(short index)
     
         if( !isFunction && selectedNum <= 1 ){ // 選擇功能牌，轉為功能
             isFunction = true;
+            functionType = runes[index-1];
             isSelected[index - 1] = true;
             selectedNum++;
             return true;
@@ -91,6 +92,7 @@ bool RuneBag::runeSelectToUse(short index)
     if( runes[index-1] >= 1 && runes[index-1] <= 3 ){ // 選擇一般牌
         if(isFunction && selectedNum == 1){ // 選完功能牌後選擇一般牌
             isSelected[index-1] = true;
+            attackType = runes[index-1];
             selectedNum++;
             return true;
         }
@@ -99,11 +101,11 @@ bool RuneBag::runeSelectToUse(short index)
             if(selectedNum == 0){ // 第一張一般牌
                 isSelected[index-1] = true;
                 selectedNum++;
-                selectedType = runes[index-1];
+                attackType = runes[index-1];
                 return true;
             }
 
-            if(runes[index-1] == selectedType && selectedNum <= 2){ // 多張一般牌
+            if(runes[index-1] == attackType && selectedNum <= 2){ // 多張一般牌
                 isSelected[index-1] = true;
                 selectedNum++;
                 return true;
@@ -115,32 +117,114 @@ bool RuneBag::runeSelectToUse(short index)
     return false;
 }
 
-void RuneBag::use()
+void RuneBag::use(double& attackRate, RuneEffect& effect)
 {   
-    if(isFunction && selectedNum = 2){
-
-    }
-    else if (!isFunction && selectedNum >= 1)
-    {
-        switch (selectedType)
+    if(isFunction && selectedNum == 2){
+        switch(functionType)
         {
-        case FLAME:
-            
-            break;        
-        default:
-            break;
+            case HEAL:
+                if(attackType == 1){
+                    attackRate = 0;
+                    effect = FLAMEHEAL;
+                }
+                else if(attackType == 2){
+                    attackRate = 0;
+                    effect = AQUAHEAL;
+                }
+                else if(attackType == 3){
+                    attackRate = 0;
+                    effect = VITALITYHEAL;
+                }
+                break;
+            case BUFF:
+                if(attackType == 1){
+                    attackRate = 0;
+                    effect = FLAMEBUFF;
+                }
+                else if(attackType == 2){
+                    attackRate = 0;
+                    effect = AQUABUFF;
+                }
+                else if(attackType == 3){
+                    attackRate = 0;
+                    effect = VITALITYBUFF;
+                }
+                break;
+            case DEBUFF:
+                if(attackType == 1){
+                    attackRate = 0;
+                    effect = FLAMEDEBUFF;
+                }
+                else if(attackType == 2){
+                    attackRate = 0;
+                    effect = AQUADEBUFF;
+                }
+                else if(attackType == 3){
+                    attackRate = 0;
+                    effect = VITALITYDEBUFF;
+                }
+                break;
         }
     }
-    
-
-
-
+    else if (!isFunction && selectedNum >= 1){
+        switch (attackType)
+        {
+            case FLAME:
+                if(selectedNum == 1){
+                    attackRate = 1;
+                    effect = NONE;
+                }
+                else if(selectedNum == 2){
+                    attackRate = 1.6;
+                    effect = NONE;
+                }
+                else if(selectedNum == 3){
+                    attackRate = 2.5;
+                    effect = FLAMEATTACK;
+                }
+                break;
+            case AQUA:
+                if(selectedNum == 1){
+                    attackRate = 1;
+                    effect = NONE;
+                }
+                else if(selectedNum == 2){
+                    attackRate = 1.6;
+                    effect = NONE;
+                }
+                else if(selectedNum == 3){
+                    attackRate = 2.5;
+                    effect = AQUAATTACK;
+                }
+                break;
+            case VITALITY:
+                if(selectedNum == 1){
+                    attackRate = 1;
+                    effect = NONE;
+                }
+                else if(selectedNum == 2){
+                    attackRate = 1.6;
+                    effect = NONE;
+                }
+                else if(selectedNum == 3){
+                    attackRate = 2.5;
+                    effect = VITALITYATTACK;
+                }
+                break;
+            default:
+                break;
+        }
+    }
     for ( int i = runes.size() - 1; i >= 0; i-- )
-        if ( isSelected[i] )
+        if ( isSelected[i] ){
             runes.erase( runes.begin()+i );
+        }
+    
     for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
         isSelected[i] = false;
     
+    attackType = 0;
+    functionType = 0;
     selectedNum = 0;
     return;
 }
