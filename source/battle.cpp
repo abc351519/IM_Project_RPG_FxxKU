@@ -292,9 +292,9 @@ void Battle::updateRune(short time)
         case 3:
             graph = &BATTLE::ICON::RUNE_VITALITY_ICON;
             break;
-        // case 4:
-        //     graph = &;
-        //     break;
+        case 4:
+            graph = &BATTLE::ICON::RUNE_HEAL_ICON;
+            break;
         // case 5:
         //     graph = &;
         //     break;

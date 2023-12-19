@@ -42,6 +42,9 @@ namespace BATTLE{
         extern Picture RUNE_AQUA_ICON;
         extern Picture RUNE_FLAME_ICON;
         extern Picture RUNE_VITALITY_ICON;
+        extern Picture RUNE_HEAL_ICON;
+        extern Picture RUNE_BUFF_ICON;
+        extern Picture RUNE_DEBUFF_ICON;
         
     };
     namespace atkRateCounter{

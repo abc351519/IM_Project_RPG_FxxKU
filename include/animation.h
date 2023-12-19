@@ -73,7 +73,10 @@ namespace unicode{
     //▓▒░■ █   ▚▞ 
     SET_CONST_SPSYMBOL(RUNE_AQUA_SYMBOL,"𝕬");//𝓐");
     SET_CONST_SPSYMBOL(RUNE_FLAME_SYMBOL,"𝕴");
-    
+    SET_CONST_SPSYMBOL(RUNE_VITALITY_SYMBOL,"𝖁");
+    SET_CONST_SPSYMBOL(RUNE_HEAL_SYMBOL,"𝕳");
+    SET_CONST_SPSYMBOL(RUNE_BUFF_SYMBOL,"𝕭");
+    SET_CONST_SPSYMBOL(RUNE_DEBUFF_SYMBOL,"𝕯");
 
 
 };
@@ -91,6 +94,22 @@ namespace ansi_color
         const std::string RUNE_FLAME_STONE = "\033[38;2;255;71;15m";
         const std::string RUNE_FLAME_STONE_DARK = "\033[38;2;166;40;17m";
         const std::string RUNE_FLAME_SYMBOL = "\033[38;2;158;0;0m";
+
+        const std::string RUNE_VITALITY_STONE = "\033[38;2;0;238;0m";
+        const std::string RUNE_VITALITY_STONE_DARK = "\033[38;2;0;205;0m";
+        const std::string RUNE_VITALITY_SYMBOL = "\033[38;2;0;139;0m";
+
+        const std::string RUNE_HEAL_STONE = "\033[38;2;255;71;15";
+        const std::string RUNE_HEAL_WHITE = "\033[38;2;255;255;255";
+        const std::string RUNE_HEAL_SYMBOL = "\033[38;2;158;0;0m";
+
+        const std::string RUNE_BUFF_STONE = "\033[38;2;255;250;205m";
+        const std::string RUNE_BUFF_STONE_DARK = "\033[38;2;255;228;181m";
+        const std::string RUNE_BUFF_SYMBOL = "\033[38;2;218;165;32m";
+
+        const std::string RUNE_DEBUFF_STONE = "\033[38;2;186;85;211m";
+        const std::string RUNE_DEBUFF_STONE_DARK = "\033[38;2;153;50;204m";
+        const std::string RUNE_DEBUFF_SYMBOL = "\033[38;2;85;26;139m";
 
         const std::string RUNEBAG_FRAME = "\033[38;2;235;235;255m";
         const std::string RUNEBAG_FRAME_DARK = "\033[38;2;129;129;193m";
