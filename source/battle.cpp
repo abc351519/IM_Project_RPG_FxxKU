@@ -45,7 +45,6 @@ void Battle::init()
     ani::setPos(BATTLE::POS::RUNE_POINT);
     std::cout << "Rune Point:";
     changeRunePoint(0,ani::RUNE_POINT_RUN_TIME);
-    Event::loadPromptFrame(RESET);
     return;
 }
 
@@ -79,6 +78,7 @@ void Battle::playerTime()
     RuneEffect effect = RuneEffect::USELESS;
     while ( true )
     {
+        Event::loadPromptFrame(RESET);
         //提示輸入模式
 
         //清除message

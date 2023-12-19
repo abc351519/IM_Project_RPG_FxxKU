@@ -13,4 +13,8 @@ namespace Global {
     }
 }
 
+namespace odds{
+    short rand();
+}
+
 #endif

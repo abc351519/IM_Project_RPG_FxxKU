@@ -28,16 +28,17 @@ public:
     virtual void attack() = 0; //一般攻擊模式
 };
 
-class FirstEnemy : public Enemy
+class Goblin : public Enemy
 {
     private:
     public:
-    FirstEnemy(std::string n)
+    Goblin(std::string n)
         : Enemy(n)
     {
-        element = EnemyElement::AQUA;
+        element = EnemyElement::VITALITY;
+        
     };
-    ~FirstEnemy(){};
+    ~Goblin(){};
     friend class Battle; 
     void skill(){};
     void attack(){};  

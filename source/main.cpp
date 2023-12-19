@@ -21,7 +21,7 @@ int main()
     ani::clearScreen();
     
     Player p("uwhefuhehfugo");
-    FirstEnemy e("aihsfhif");
+    Goblin e("aihsfhif");
     Battle b(&p,&e);
     
     b.gameLoop();
