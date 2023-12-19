@@ -132,7 +132,7 @@ namespace ansi_color
     };
     namespace background{
         //"\033[48;2;;;m";
-        const std::string BATTLE_COLOR = "\033[48;2;108;51;101m";
+        const std::string BATTLE_COLOR = "\033[48;2;129;129;193m";
 
         const std::string RUNEBAG_FRAME = "\033[48;2;235;235;255m";
         const std::string RUNEBAG_FRAME_DARK = "\033[48;2;129;129;193m";
@@ -150,15 +150,15 @@ namespace ansi_color
 
         const std::string RUNE_VITALITY_STONE = "\033[48;2;154;205;50m";
         const std::string RUNE_VITALITY_STONE_DARK = "\033[48;2;0;205;0m";
-        
+
         const std::string RUNE_HEAL_STONE = "\033[48;2;255;71;15m";
         const std::string RUNE_HEAL_WHITE = "\033[48;2;255;255;255m";
 
-        const std::string RUNE_BUFF_STONE = "\033[38;2;255;250;205m";
-        const std::string RUNE_BUFF_STONE_DARK = "\033[38;2;255;228;181m";
+        const std::string RUNE_BUFF_STONE = "\033[48;2;255;250;205m";
+        const std::string RUNE_BUFF_STONE_DARK = "\033[48;2;255;228;181m";
 
-        const std::string RUNE_DEBUFF_STONE = "\033[38;2;186;85;211m";
-        const std::string RUNE_DEBUFF_STONE_DARK = "\033[38;2;153;50;204m";
+        const std::string RUNE_DEBUFF_STONE = "\033[48;2;186;85;211m";
+        const std::string RUNE_DEBUFF_STONE_DARK = "\033[48;2;153;50;204m";
         
     };
 };

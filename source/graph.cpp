@@ -143,23 +143,46 @@ void graph::init()
     BATTLE::ICON::RUNE_BUFF_ICON.graph[2][0] = pixel;
     BATTLE::ICON::RUNE_BUFF_ICON.graph[0][1] = pixel;
     BATTLE::ICON::RUNE_BUFF_ICON.graph[1][1] = pixel;
-    BATTLE::ICON::RUNE_BUFF_ICON.graph[2][1] = pixel;
     BATTLE::ICON::RUNE_BUFF_ICON.graph[3][1] = pixel;
     BATTLE::ICON::RUNE_BUFF_ICON.graph[4][1] = pixel;
+    BATTLE::ICON::RUNE_BUFF_ICON.graph[2][2] = pixel;
 
-    pixel.change(unicode::CORNER_PIXEL_LD);
-    BATTLE::ICON::RUNE_BUFF_ICON.graph[3][0] = pixel;
-    pixel.change(unicode::CORNER_PIXEL_RD);
+
+    pixel.change(unicode::DOWN_PIXEL);
     BATTLE::ICON::RUNE_BUFF_ICON.graph[1][0] = pixel;
-    pixel.change(unicode::CORNER_PIXEL_RU);
+    BATTLE::ICON::RUNE_BUFF_ICON.graph[3][0] = pixel;
+    pixel.change(unicode::UP_PIXEL);
     BATTLE::ICON::RUNE_BUFF_ICON.graph[1][2] = pixel;
-    pixel.change(unicode::CORNER_PIXEL_LU);
     BATTLE::ICON::RUNE_BUFF_ICON.graph[3][2] = pixel;
     
     pixel.change(unicode::RUNE_BUFF_SYMBOL,ansi_color::background::RUNE_BUFF_STONE,ansi_color::font::RUNE_BUFF_SYMBOL);
     BATTLE::ICON::RUNE_BUFF_ICON.graph[2][1] = pixel;
     ///////////////////////DEBUFF RUNE圖形（無人機形）////////////////////
+    pixel.change(unicode::FULL_PIXEL,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_DEBUFF_STONE);
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[0][0] = pixel;
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[4][0] = pixel;
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[1][1] = pixel;
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[2][1] = pixel;
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[3][1] = pixel;
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[0][2] = pixel;
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[4][2] = pixel;
 
+    pixel.change(unicode::CORNER_PIXEL_NORU);
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[1][0] = pixel;
+    pixel.change(unicode::CORNER_PIXEL_NOLU);
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[3][0] = pixel;
+    pixel.change(unicode::CORNER_PIXEL_NORD);
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[1][2] = pixel;
+    pixel.change(unicode::CORNER_PIXEL_NOLD);
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[3][2] = pixel;
+
+    pixel.change(unicode::DOWN_PIXEL);
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[2][0] = pixel;
+    pixel.change(unicode::UP_PIXEL);
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[2][2] = pixel;
+    
+    pixel.change(unicode::RUNE_DEBUFF_SYMBOL,ansi_color::background::RUNE_DEBUFF_STONE,ansi_color::font::RUNE_DEBUFF_SYMBOL);
+    BATTLE::ICON::RUNE_DEBUFF_ICON.graph[2][1] = pixel;
     ///////////////////////////RUNE FRAME 圖形（框）/////////////////////////
     pixel.change(unicode::CORNER_PIXEL_NORD,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNEBAG_FRAME);
     BATTLE::ICON::RUNE_FRAME.graph[0][0] = pixel;
