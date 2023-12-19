@@ -1,16 +1,19 @@
 #include "rune.h"
 #include "def.h"
+
 #include <vector>
 #include <iostream>
+#include <thread>
 #include <chrono>
-#include <random>
 #include <limits>
+#include <random>
+#include <cmath>
 
 short odds::rand()
 {
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::mt19937 generator (seed); 
-    return static_cast<short>(generator()%std::numeric_limits<short>::max());
+    return abs(static_cast<short>(generator()/std::numeric_limits<short>::max()));
 }
 
 short randomRune()
@@ -18,10 +21,10 @@ short randomRune()
     
     short random_num = odds::rand() % 300 + 1;
     if(random_num <= odds::APPEAR_NORMAL_RUNE*3){
-        return random_num%3 + 1; 
+        return random_num%3 + 1; //1 - 3
     }
     else{
-        return random_num%3 + 4;
+        return random_num%3 + 4; //4 - 6
     }
     
 }
@@ -72,7 +75,7 @@ RuneBag::RuneBag()
     attackType = 0;
     functionType = 0;
     selectedNum = 0;
-    for( int i = 0; i < MAX_RUNE_COUNT; i++)
+    for( int i = 0; i < MAX_RUNE_COUNT; i++ )
         isSelected[i] = false;
     runes.clear();
     for ( int i = 0; i < INIT_RUNE_COUNT; i++ )
@@ -418,12 +421,12 @@ void RuneBag::selectReset()
 
 short RuneBag::getRuneCount()
 {   
-    return runes.size();
+    return static_cast<short>(runes.size());
 }
 
 short RuneBag::getRune(short index)
 {
-    if ( index < runes.size() && index >=0 )
+    if ( index < static_cast<short>(runes.size()) && index >=0 )
         return runes[index];
     return -69;
 }

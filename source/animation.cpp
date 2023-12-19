@@ -14,7 +14,6 @@ void printNiceLy(short number, short unit)
     std::string s = std::to_string(number);
     for ( int i = 0; i < unit - s.size(); i++ )
         std::cout << ' '; 
-    std::cout << RESET;
     std::cout << number;
     return;
 }
@@ -296,7 +295,7 @@ void ani::HPLoading(const Position& startPoint, const short maxHMP, const std::s
     std::cout << '/' << maxHMP;
     mtx.unlock();
     currentPos.x -= 4;
-    numberChange(currentPos,0,maxHMP,numberRunTime,4);
+    numberChange(currentPos,0,maxHMP,numberRunTime,4,RESET);
     return;
 }
 
@@ -332,8 +331,9 @@ void ani::runMessage(const Position& startPoint,const std::string& message,std::
         std::cout << strc; //輸出
         FLUSH; 
         
-        currentPos.x++; //向右移動1
         mtx.unlock();
+        
+        currentPos.x++; //向右移動1
         SLEEP(MESSAGE_PER_CHAR_LOAD_TIME);
     }
     return;
@@ -360,7 +360,7 @@ void ani::renderRuneFrame(const Position& startPoint, const Picture& graph, shor
     return;
 }
 
-void ani::numberChange(const Position& startPoint, const int start, const int end, short time, short unit)
+void ani::numberChange(const Position& startPoint, const int start, const int end, short time, short unit,const std::string& color)
 {
     if ( start < end ) { //遞增
         for ( int i = start; i !=(end+1); i++ )
@@ -377,6 +377,7 @@ void ani::numberChange(const Position& startPoint, const int start, const int en
         {   
             mtx.lock();
             ani::setPos(startPoint);
+            std::cout << color;
             printNiceLy(i,unit);
             mtx.unlock();
             FLUSH;

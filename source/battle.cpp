@@ -6,7 +6,6 @@ Battle::Battle(Player* player, Enemy* enemy)
     : player(player), enemy(enemy)
 {
     gameFlag = gameLoopFlag::PLAYER_BATTLE; //戰鬥中
-
 }
 
 Battle::~Battle()
@@ -280,11 +279,13 @@ void Battle::updateRune(short time)
     Position currentPos = BATTLE::POS::RUNEBAG;
     currentPos.x++;
     currentPos.y++;
-    for ( int i = 0; i < player->myRunes->getRuneCount(); i++ )
+    short runeCNT = player->myRunes->getRuneCount();
+
+    for ( short i = 0; i < runeCNT; i++ )
     {
         mtx.lock();
-        Picture* graph;
-        
+        Picture* graph = nullptr;
+        bool toPrint = true;
         switch ( player->myRunes->getRune(i) )
         {
         case 1:
@@ -299,23 +300,25 @@ void Battle::updateRune(short time)
         case 4:
             graph = &BATTLE::ICON::RUNE_HEAL_ICON;
             break;
-        // case 5:
-        //     graph = &;
-        //     break;
-        // case 6:
-        //     graph = &;
-        //     break;
+        case 5:
+            graph = &BATTLE::ICON::RUNE_BUFF_ICON;
+            break;
+        case 6:
+            graph = &BATTLE::ICON::RUNE_DEBUFF_ICON;
+            break;
         default:
-            ////錯誤
+            graph = nullptr;
+            toPrint = false;
+            std::cerr << "回傳-69" << player->myRunes->getRune(i) << ' ' << player->myRunes->getRuneCount();
             break;
         }
-        ani::renderGrapgh(currentPos,*graph);
+        if ( toPrint )
+            ani::renderGrapgh(currentPos,*graph);
         FLUSH;
         mtx.unlock();
         currentPos.x += 7;
         SLEEP(time);
     }
-
     return;
 }
 
@@ -325,7 +328,7 @@ void Battle::changeRunePoint(short originalCNT,short time)
     Position pos(BATTLE::POS::RUNE_POINT);
     short gap = abs(originalCNT-player->runePoint);
     pos.x += 11;
-    ani::numberChange(pos,originalCNT,player->runePoint,time/gap,2);
+    ani::numberChange(pos,originalCNT,player->runePoint,time/gap,2,ansi_color::font::RUNE_POINT_COLOR);
     return;
 }
 

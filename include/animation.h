@@ -119,7 +119,7 @@ namespace ansi_color
         const std::string RUNEBAG_INDEX = "\033[38;2;40;0;77m";
         const std::string RUNEBAG_SELECTED_INDEX = "\033[38;2;96;47;47m";
 
-        const std::string RUNE_POINT_COLOR = "\033[38;2;40;0;77m";
+        const std::string RUNE_POINT_COLOR = "\033[38;2;0;255;255m";
 
     };
     namespace background{
@@ -217,7 +217,7 @@ namespace ani{
     void renderGrapgh(const Position& startPoint,const Picture& graph);
     void runMessage(const Position& startPoint,const std::string& message,std::string color);
     void renderRuneFrame(const Position& startPoint,const Picture& graph,short amount, short time);
-    void numberChange(const Position& startPoint, const int start, const int end, short time, short unit);
+    void numberChange(const Position& startPoint, const int start, const int end, short time, short unit,const std::string& color);
 }
 
 #endif

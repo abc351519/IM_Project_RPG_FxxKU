@@ -19,7 +19,7 @@ Player::~Player()
 }
 
 void Player::startGameValueSet(){
-    runePoint = INIT_RUNE_COUNT;
+    runePoint = INIT_RUNEPOINTS;
     nowHp = maxHp;
     myRunes = new RuneBag();
 }
