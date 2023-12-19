@@ -41,6 +41,8 @@ namespace BATTLE{
         const std::string PLAYER_WIN = "Congrates, you'v win the battle! ! !";
         const std::string PLAYER_LOSE = "Wasted. You are dead.";
         const std::string RUNE_POINT_NOT_ENOUGH = "Your runePoints are not enough to use!";
+        const std::string USE_SUCCESS = "Use successfully!";
+        const std::string USE_FAILED = "Use failed!";
 
             
     };
