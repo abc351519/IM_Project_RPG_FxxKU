@@ -95,12 +95,12 @@ namespace ansi_color
         const std::string RUNE_FLAME_STONE_DARK = "\033[38;2;166;40;17m";
         const std::string RUNE_FLAME_SYMBOL = "\033[38;2;158;0;0m";
 
-        const std::string RUNE_VITALITY_STONE = "\033[38;2;0;238;0m";
+        const std::string RUNE_VITALITY_STONE = "\033[38;2;154;205;50m";
         const std::string RUNE_VITALITY_STONE_DARK = "\033[38;2;0;205;0m";
         const std::string RUNE_VITALITY_SYMBOL = "\033[38;2;0;139;0m";
 
-        const std::string RUNE_HEAL_STONE = "\033[38;2;255;71;15";
-        const std::string RUNE_HEAL_WHITE = "\033[38;2;255;255;255";
+        const std::string RUNE_HEAL_STONE = "\033[38;2;255;71;15m";
+        const std::string RUNE_HEAL_WHITE = "\033[38;2;255;255;255m";
         const std::string RUNE_HEAL_SYMBOL = "\033[38;2;158;0;0m";
 
         const std::string RUNE_BUFF_STONE = "\033[38;2;255;250;205m";
@@ -138,8 +138,11 @@ namespace ansi_color
         const std::string RUNE_FLAME_STONE = "\033[48;2;255;71;15m";
         const std::string RUNE_FLAME_STONE_DARK = "\033[48;2;166;40;17m";
 
+        const std::string RUNE_HEAL_STONE = "\033[48;2;255;71;15m";
+        const std::string RUNE_HEAL_WHITE = "\033[48;2;255;255;255m";
 
-
+        const std::string RUNE_VITALITY_STONE = "\033[48;2;154;205;50m";
+        const std::string RUNE_VITALITY_STONE_DARK = "\033[48;2;0;205;0m";
     };
 };
 
@@ -211,7 +214,7 @@ namespace ani{
     void loadWindow(std::string color);
     void dimishWindow();
     void HPLoading(const Position& ,short maxHMP, const std::string& color);
-    void renderGrapgh(const Position& startPoint,const Picture& graph);
+    void renderGraph(const Position& startPoint,const Picture& graph);
     void runMessage(const Position& startPoint,const std::string& message,std::string color);
     void renderRuneFrame(const Position& startPoint,const Picture& graph,short amount, short time);
     void numberChange(const Position& startPoint, const int start, const int end, short time, short unit);
