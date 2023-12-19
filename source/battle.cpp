@@ -299,10 +299,11 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
             }
         }
         short index = player->myRunes->runeSelectToUse(strToShort(input)); //選擇符文
-        if ( index ) { //成功選取
+        if ( index ) { // 成功選取
             showRuneSelected(index-1);
-        } else { //為成功選取
-            //輸出錯誤
+            loadPromptMessage(BATTLE::MESSAGE::SELECT_SUCCESS);
+        } else { // 未成功選取
+            loadPromptMessage(BATTLE::MESSAGE::SELECT_FAIL);
         }
     }
     return false;
