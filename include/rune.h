@@ -35,6 +35,13 @@ namespace mpConsume
     const short MAKE_UP_LV_THREE = 10; //合成三個符文
 };
 
+enum class RuneCondition{
+    RuneNotEnough,
+    cancelSucceed
+
+};
+
+
 enum class RuneEffect
 {
     USELESS,
@@ -74,6 +81,7 @@ enum Rune : short
 class RuneBag
 {
 private:
+    RuneCondition conditionType;
     bool isFunction; //選擇卡組是否為功能
     short attackType; // 1:flame 2:aqua 3:vitality
     short functionType; // 4:heal 5:buff 6:debuff
@@ -93,6 +101,7 @@ public:
     short getRuneCount();
     short getRune(short index);
     bool isRuneSelected(short index);
+    RuneCondition getConditionType();
 };
 
 #endif

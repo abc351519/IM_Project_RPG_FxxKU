@@ -283,7 +283,16 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
                 return true;
             } else {
                 //回報錯誤
-                player->myRunes->selectReset();
+                switch (player->myRunes->getConditionType())
+                {
+                case RuneCondition::RuneNotEnough:
+                    player->myRunes->selectReset();
+                    break;
+                
+                default:
+                    break;
+                }
+                
                 return false;
             }
         }

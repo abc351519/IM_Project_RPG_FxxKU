@@ -162,6 +162,10 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
         return false;
     else{
         if(isFunction && selectedNum == 2){
+            if(runePoint < 7){
+                conditionType = RuneCondition::RuneNotEnough;
+                return false;
+            }
             switch(functionType)
             {
                 case HEAL:
@@ -169,7 +173,6 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
                         attackRate = 0;
                         effect = RuneEffect::FLAMEHEAL;
                         runePoint -= mpConsume::FUNCTION_RUNE;
-                        
                     }
                     else if(attackType == 2){
                         attackRate = 0;
@@ -454,4 +457,8 @@ short RuneBag::getRune(short index)
 bool RuneBag::isRuneSelected(short index)
 {
     return isSelected[index];
+}
+
+RuneCondition RuneBag::getConditionType(){
+    return conditionType;
 }
