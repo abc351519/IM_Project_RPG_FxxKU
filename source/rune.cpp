@@ -2,9 +2,14 @@
 #include "def.h"
 #include <stdlib.h>
 #include <vector>
+#include <iostream>
+#include <chrono>
+#include <random>
 short randomRune()
 {
-    short random_num = rand() % 300 + 1;
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::mt19937 generator (seed); 
+    short random_num = generator() % 300 + 1;
     if(random_num <= odds::APPEAR_NORMAL_RUNE*3){
         return random_num%3 + 1; 
     }

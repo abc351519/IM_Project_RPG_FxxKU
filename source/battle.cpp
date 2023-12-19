@@ -16,7 +16,7 @@ Battle::~Battle()
 
 void Battle::init()
 {
-    ani::loadWindow(ansi_color::background::BATTLE_COLOR);
+    //ani::loadWindow(ansi_color::background::BATTLE_COLOR);
     player->startGameValueSet(); //玩家的點數血量
     std::thread pName(ani::runMessage,BATTLE::POS::PLAYER_NAME,player->name,RESET);
     std::thread eName(ani::runMessage,BATTLE::POS::ENEMY_NAME,enemy->name,RESET);
@@ -46,7 +46,7 @@ void Battle::init()
     ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
     ani::setPos(BATTLE::POS::RUNE_POINT);
     std::cout << "Rune Point:";
-    changeRunePoint(0,300);
+    changeRunePoint(0,10);
     return;
 }
 
