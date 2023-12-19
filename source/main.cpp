@@ -1,6 +1,4 @@
 #include "animation.h"
-//#include "enemy.h"
-//#include "player.h"
 #include "graph.h"
 #include "battle.h"
 
@@ -12,14 +10,13 @@ namespace dick{
     void init()
     {
         graph::init();
-        srand(time(nullptr));
     }
 };
 
 int main()
 {   
     dick::init();
-    
+
     ani::curserShow(false);
     ani::clearScreen();
     
