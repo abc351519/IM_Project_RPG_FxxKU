@@ -27,7 +27,7 @@ int main()
     FirstEnemy e("aihsfhif");
     Battle b(&p,&e);
     
-    b.init();
+    b.gameLoop();
     FLUSH;
  //   ani::loadWindow(ansi_color::background::RUNE_AQUA_STONE_DARK);
 

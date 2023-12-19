@@ -14,6 +14,7 @@ void printNiceLy(short number, short unit)
     std::string s = std::to_string(number);
     for ( int i = 0; i < unit - s.size(); i++ )
         std::cout << ' '; 
+    std::cout << RESET;
     std::cout << number;
     return;
 }
@@ -35,6 +36,19 @@ Position::Position(const short x, const short y)
     : x(x), y(y)
 {}
 
+Position Position::operator+(unsigned short dx) const
+{
+    Position pos(*this);
+    pos.x += dx;
+    return pos;
+}
+
+Position Position::operator-(unsigned short dx) const
+{
+    Position pos(*this);
+    pos.x -= dx;
+    return pos;
+}
 void Pixel::change(spSymbol letter, std::string backgroundColor, std::string fontColor)
 {
     this->letter = letter;
@@ -282,16 +296,7 @@ void ani::HPLoading(const Position& startPoint, const short maxHMP, const std::s
     std::cout << '/' << maxHMP;
     mtx.unlock();
     currentPos.x -= 4;
-    for ( int i = 0; i <= maxHMP; i++ )
-    {
-        mtx.lock();
-        ani::setPos(currentPos);
-        std::cout << RESET;
-        printNiceLy(i,4);
-        FLUSH;
-        mtx.unlock();
-        SLEEP(numberRunTime);
-    }
+    numberChange(currentPos,0,maxHMP,numberRunTime,4);
     return;
 }
 
@@ -355,3 +360,28 @@ void ani::renderRuneFrame(const Position& startPoint, const Picture& graph, shor
     return;
 }
 
+void ani::numberChange(const Position& startPoint, const int start, const int end, short time, short unit)
+{
+    if ( start < end ) { //遞增
+        for ( int i = start; i !=(end+1); i++ )
+        {   
+            mtx.lock();
+            ani::setPos(startPoint);
+            printNiceLy(i,unit);
+            mtx.unlock();
+            FLUSH;
+            SLEEP(time);
+        }
+    } else { //遞減
+        for ( int i = start; i != (end-1); i-- )
+        {   
+            mtx.lock();
+            ani::setPos(startPoint);
+            printNiceLy(i,unit);
+            mtx.unlock();
+            FLUSH;
+            SLEEP(time);
+        }
+    }    
+    return;
+}

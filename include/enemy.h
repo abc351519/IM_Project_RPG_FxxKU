@@ -6,11 +6,18 @@
 #include "player.h"
 
 
+enum class EnemyElement{
+    AQUA,
+    FLAME,
+    VITALITY
+};
+
 class Enemy : public Creature
 {
 protected:
     short coolDown;
     short skillPoint;
+    EnemyElement element;
 public:
     Enemy(std::string n)
         : Creature(n)
@@ -27,7 +34,9 @@ class FirstEnemy : public Enemy
     public:
     FirstEnemy(std::string n)
         : Enemy(n)
-    {};
+    {
+        element = EnemyElement::AQUA;
+    };
     ~FirstEnemy(){};
     friend class Battle; 
     void skill(){};
