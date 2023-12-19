@@ -121,6 +121,8 @@ namespace ansi_color
 
         const std::string RUNE_POINT_COLOR = "\033[38;2;0;255;255m";
 
+        const std::string COMMAND_LINE_COLOR = "\033[38;2;2;247;141m";
+
     };
     namespace background{
         //"\033[48;2;;;m";

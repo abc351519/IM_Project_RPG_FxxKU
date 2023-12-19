@@ -78,10 +78,13 @@ std::string Battle::receiveCommand()
     mtx.lock();
     std::string input;
     ani::setPos(BATTLE::POS::COMMAND_LINE); //設定輸入位置
-    std::cout << RESET;
+    std::cout << ansi_color::font::COMMAND_LINE_COLOR << "Type command here: ";
     ani::curserShow(true); //開啟游標
 
     std::getline(std::cin,input);
+    
+    std::cout << RESET;
+    FLUSH;
 
     ani::curserShow(false); //關閉游標
     mtx.unlock();
