@@ -13,7 +13,9 @@ enum class EnemyElement{
 };
 
 enum class Skill{
-
+    NORMAL,
+    DOUBLE_CRITICAL,
+    TRUE_DAMAGE,
 };
 
 class Enemy : public Creature
@@ -30,8 +32,8 @@ public:
     ~Enemy(){};
     friend class Battle;
     std::string getSkillName();
-    virtual short skill() = 0; //敵人的技能
-    virtual short attack() = 0; //一般攻擊模式
+    virtual short skill(Skill& skill) = 0; //敵人的技能
+    virtual short attack(Skill& skill) = 0; //一般攻擊模式
 };
 
 class Goblin : public Enemy
@@ -41,7 +43,7 @@ class Goblin : public Enemy
     Goblin(std::string n);
     ~Goblin();
     friend class Battle; 
-    short skill() override;
-    short attack() override;
+    short skill(Skill& skill) override;
+    short attack(Skill& skill) override;
 };
 #endif

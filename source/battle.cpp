@@ -50,7 +50,6 @@ void Battle::init()
     player->startGameValueSet(); //玩家的點數血量
     std::thread pName(ani::runMessage,BATTLE::POS::PLAYER_NAME,player->name,RESET);
     std::thread eName(ani::runMessage,BATTLE::POS::ENEMY_NAME,enemy->name,RESET);
-    ani::runMessage(BATTLE::POS::PLAYER_NAME,player->name,RESET);
     std::thread eHp(ani::HPLoading,BATTLE::POS::ENEMY_HP,enemy->maxHp,ansi_color::font::HP);
     std::thread pHp(ani::HPLoading,BATTLE::POS::PLAYER_HP,player->maxHp,ansi_color::font::HP);    
     pName.join();
@@ -235,6 +234,23 @@ void Battle::playerTime()
 
 void Battle::enemyTime()
 {
+    //enemy攻擊
+    Skill attackFlag;
+    short damage = enemy->attack(attackFlag);
+    short originalHp = player->nowHp; //原本的血量
+    bool playerIsDead = player->normalAttackDamageIsDead(damage);
+    short hpGap = originalHp - player->nowHp;
+    if ( attackFlag == Skill::NORMAL ) {
+        loadPromptMessage(enemy->name+" has cause "+std::to_string(hpGap)+" damage on "+player->name+".");
+    } else if( attackFlag == Skill::DOUBLE_CRITICAL ) {
+        loadPromptMessage(enemy->name+" use skill, \"DOUBLE CRITICAL\", cause "+std::to_string(hpGap)+" damage on "+player->name+"!!?");
+    } else {
+        std::cerr << "SOMTHIN WENT WRONG.";
+    }
+    ani::numberChange(BATTLE::POS::PLAYER_HP+22,originalHp,player->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
+    if ( playerIsDead ) {
+        gameFlag = gameLoopFlag::PLAYER_LOSE;
+    }
     return;
 }
 

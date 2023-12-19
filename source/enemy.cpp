@@ -1,3 +1,4 @@
+#include "def.h"
 #include "enemy.h"
 #include <iostream>
 
@@ -21,18 +22,29 @@ Goblin::Goblin(std::string n)
 
 Goblin::~Goblin(){}
 
-short Goblin::skill()
+short Goblin::skill(Skill& skill)
 {
+    skill = Skill::DOUBLE_CRITICAL;
     skillPoint = 0;
     return 2*atk;
 }
 
 
-short Goblin::attack()
+short Goblin::attack(Skill& skil)
 {
     if ( skillPoint >= coolDown ) {
-        return skill();
+        return skill(skil);
     }
+    skil = Skill::NORMAL;
     skillPoint++;
-    return atk;
+    short odd = odds::rand()%100;
+    double rate = 1.0;
+    if ( odd < 75 && odd >= 60 ) {
+        rate = 1.2;
+    } else if ( odd >= 75 && odd < 90 ) {
+        rate = 0.8;
+    } else if ( odd >=90 ) {
+        rate = 1.4;
+    }
+    return static_cast<short>(static_cast<double>(atk)*rate);
 }
