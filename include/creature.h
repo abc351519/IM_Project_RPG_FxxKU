@@ -13,7 +13,7 @@ enum class Element //屬性
 
 namespace creature{
     const short creatureHpByLv[11] = {0,100,200,330,500,700,900,1120,1400,1710,2000};
-    const short creatureAtkByLv[11] = {0,50,100,150,200,250,300,350,400,450,500};
+    const short creatureAtkByLv[11] = {0,25,50,75,100,125,150,175,200,225,250};
     const short creatureDefByLv[11] = {0,10,12,15,20,25,30,40,50,60,75};
 };
 
@@ -30,6 +30,7 @@ protected:
     short atk; // attack
     short def; // defend
 public:
+    Creature(){};
     Creature(std::string n); // constructor
     ~Creature(){}; // distructor
     bool normalAttackDamageIsDead(short damage); //根據對方的攻擊損失血量  

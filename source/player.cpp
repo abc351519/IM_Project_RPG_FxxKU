@@ -1,27 +1,29 @@
 #include "player.h"
 
-Player::Player(std::string n) : Creature(n)
+Player::Player(std::string n)
 {
+    name = n;
+    lv = 1;
+    atk = creature::creatureAtkByLv[lv];
+    def = creature::creatureDefByLv[lv];
+    maxHp = creature::creatureHpByLv[lv];
     myRunes = nullptr;
-    lvThreshold[0] = 100;
-    lvThreshold[1] = 150;
-    lvThreshold[2] = 200;
-    lvThreshold[3] = 275;
-    lvThreshold[4] = 350;
-    lvThreshold[5] = 425;
-    lvThreshold[6] = 550;
-    lvThreshold[7] = 675;
-    lvThreshold[8] = 800;
 }
 
 Player::~Player()
-{
-}
+{}
 
 void Player::startGameValueSet(){
     runePoint = INIT_RUNEPOINTS;
     nowHp = maxHp;
     myRunes = new RuneBag();
+}
+
+void Player::refreshRoundly()
+{
+    myRunes->runeGet(); //增加符文
+    runePoint += RUNEPOINT_GET_ROUNDLY; //增加點數
+    return;
 }
 
 bool Player::refreshExp(short enemyLv){

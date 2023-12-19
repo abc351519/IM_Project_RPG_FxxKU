@@ -3,7 +3,7 @@
 
 #include <cctype>
 
-
+///string 轉數字
 short strToShort(std::string str)
 {
     short number = 0;
@@ -35,6 +35,7 @@ std::string toSmall(std::string str)
     return retStr;
 }
 
+// 指示區邊框渲染
 void Event::loadPromptFrame(const std::string& color)
 {
     mtx.lock();
@@ -70,7 +71,7 @@ void Event::loadPromptFrame(const std::string& color)
     return;
 }
 
-
+//接收指令區與輸入
 std::string Event::receiveCommand()
 {
     mtx.lock();
@@ -99,6 +100,7 @@ void Event::loadPromptMessage(const std::string& message, const std::string& fra
     mtx.unlock();
     loadPromptFrame(frameColor);
     ani::runMessage(EVENT::POS::PROMPT_LINE,message,messageColor);
+    std::cout << RESET;
     return;
 }
 

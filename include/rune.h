@@ -20,8 +20,8 @@ namespace odds
     const short APPEAR_FUNCTION_RUNE = 15;
     const short APPEAR_NORMAL_RUNE = 85;
     //等級合成機率
-    const short MAKE_UP_LV_TWO = 80;
-    const short MAKE_UP_LV_THREE = 60;
+    const short MAKE_UP_LV_TWO = 70;
+    const short MAKE_UP_LV_THREE = 40;
     const short DEBUFF = 75;
     const short BUFF = 85;
     const short HEAL = 100; 
@@ -54,6 +54,7 @@ enum class RuneEffect
     FLAMEDEBUFF,
     AQUADEBUFF,
     VITALITYDEBUFF,
+    
     FLAMEATTACK,
     AQUAATTACK,
     VITALITYATTACK

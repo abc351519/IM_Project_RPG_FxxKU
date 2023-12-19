@@ -20,8 +20,8 @@ int main()
     ani::curserShow(false);
     ani::clearScreen();
     
-    Player p("uwhefuhehfugo");
-    Goblin e("aihsfhif");
+    Player p("HSIANG");
+    Goblin e("Dick GOBU");
     Battle b(&p,&e);
     
     b.gameLoop();
