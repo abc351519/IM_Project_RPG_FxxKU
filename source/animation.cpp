@@ -299,7 +299,7 @@ void ani::HPLoading(const Position& startPoint, const short maxHMP, const std::s
     return;
 }
 
-void ani::renderGrapgh(const Position& startPoint, const Picture& graph)
+void ani::renderGraph(const Position& startPoint, const Picture& graph)
 {
     Position currentPos(startPoint);
     for ( int i = 0; i < graph.char_height; i++ )
@@ -346,7 +346,7 @@ void ani::renderRuneFrame(const Position& startPoint, const Picture& graph, shor
     {
         mtx.lock();
         ani::setPos(currentPos);
-        ani::renderGrapgh(currentPos,graph);
+        ani::renderGraph(currentPos,graph);
         currentPos.y += 4;
         ani::setPos(currentPos);
         std::cout << ansi_color::background::RUNEBAG_INDEX << ansi_color::font::RUNEBAG_INDEX << i+1;

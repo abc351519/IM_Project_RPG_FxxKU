@@ -76,33 +76,70 @@ void graph::init()
     BATTLE::ICON::RUNE_FLAME_ICON.graph[1][2] = pixel;
 
     ///////////////////////VITALITY RUNE圖形（火焰形）////////////////////
-    ///////////////////////HEAL RUNE圖形（）////////////////////
+    pixel.change(unicode::FULL_PIXEL,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_VITALITY_STONE);
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[2][0] = pixel;
+
+    pixel.change(unicode::DOWN_PIXEL);
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[1][0] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[3][0] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[1][1] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[3][1] = pixel;
+
+    pixel.change(unicode::CORNER_PIXEL_NOLU);
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[4][0] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[4][1] = pixel;
+
+    pixel.change(unicode::UP_PIXEL);
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[3][2] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[1][2] = pixel;
+
+    pixel.change(unicode::RUNE_VITALITY_SYMBOL,ansi_color::background::RUNE_VITALITY_STONE,ansi_color::font::RUNE_VITALITY_SYMBOL);
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[2][1] = pixel;
+
+    pixel.change(unicode::CORNER_PIXEL_NORU,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_VITALITY_STONE_DARK);
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[0][0] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[0][1] = pixel;
+    pixel.change(unicode::UP_PIXEL);
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[3][2] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[1][2] = pixel;
+    pixel.change(unicode::DOWN_PIXEL,ansi_color::background::RUNE_VITALITY_STONE,ansi_color::font::RUNE_VITALITY_STONE_DARK);
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[2][2] = pixel;
+    ///////////////////////HEAL RUNE圖形（圓形）////////////////////
     pixel.change(unicode::FULL_PIXEL,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_HEAL_WHITE);
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[1][0] = pixel;
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[3][0] = pixel;
     BATTLE::ICON::RUNE_HEAL_ICON.graph[0][1] = pixel;
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[0][3] = pixel;
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[4][1] = pixel;
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[1][2] = pixel;
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[3][2] = pixel;
+
+    pixel.changeFontColor(ansi_color::font::RUNE_HEAL_STONE);
+    
     BATTLE::ICON::RUNE_HEAL_ICON.graph[1][1] = pixel;
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[1][4] = pixel;
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[2][1] = pixel;
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[2][3] = pixel;
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[3][1] = pixel;
+    
+    pixel.change(unicode::DOWN_PIXEL,ansi_color::background::RUNE_HEAL_WHITE,ansi_color::font::RUNE_HEAL_STONE);
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[2][0] = pixel;
+    pixel.change(unicode::UP_PIXEL,ansi_color::background::RUNE_HEAL_WHITE,ansi_color::font::RUNE_HEAL_STONE);
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[2][2] = pixel;
 
     pixel.change(unicode::CORNER_PIXEL_NOLU,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_HEAL_WHITE);
     BATTLE::ICON::RUNE_HEAL_ICON.graph[0][0] = pixel;
-    pixel.change(unicode::CORNER_PIXEL_NOLD,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_HEAL_WHITE);
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[2][0] = pixel;
-    pixel.change(unicode::CORNER_PIXEL_NORD,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_HEAL_WHITE);
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[2][4] = pixel;
-    pixel.change(unicode::CORNER_PIXEL_NORU,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_HEAL_WHITE);
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[0][4] = pixel;
-
-    pixel.change(unicode::FULL_PIXEL,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_HEAL_STONE);
+    pixel.change(unicode::CORNER_PIXEL_NOLD);
     BATTLE::ICON::RUNE_HEAL_ICON.graph[0][2] = pixel;
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[1][1] = pixel;
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[1][2] = pixel;
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[1][3] = pixel;
-    BATTLE::ICON::RUNE_HEAL_ICON.graph[2][2] = pixel;
+    pixel.change(unicode::CORNER_PIXEL_NORD);
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[4][2] = pixel;
+    pixel.change(unicode::CORNER_PIXEL_NORU);
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[4][0] = pixel;
 
-    ///////////////////////BUFF RUNE圖形（火焰形）////////////////////
-    ///////////////////////DEBUFF RUNE圖形（火焰形）////////////////////
+    
+
+    pixel.change(unicode::RUNE_HEAL_SYMBOL,ansi_color::background::RUNE_HEAL_STONE,ansi_color::font::RUNE_HEAL_SYMBOL);
+    BATTLE::ICON::RUNE_HEAL_ICON.graph[2][1] = pixel;
+
+    ///////////////////////BUFF RUNE圖形（星形）////////////////////
+    
+    ///////////////////////DEBUFF RUNE圖形（無人機形）////////////////////
 
     ///////////////////////////RUNE FRAME 圖形（框）/////////////////////////
     pixel.change(unicode::CORNER_PIXEL_NORD,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNEBAG_FRAME);
