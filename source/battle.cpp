@@ -1,5 +1,6 @@
 #include "battle.h"
 #include "thread"
+#include <cmath>
 
 Battle::Battle(Player* player, Enemy* enemy)
     : player(player), enemy(enemy)
@@ -16,11 +17,11 @@ Battle::~Battle()
 
 void Battle::init()
 {
-    //ani::loadWindow(ansi_color::background::BATTLE_COLOR);
+    ani::loadWindow(ansi_color::background::BATTLE_COLOR);
     player->startGameValueSet(); //玩家的點數血量
     std::thread pName(ani::runMessage,BATTLE::POS::PLAYER_NAME,player->name,RESET);
     std::thread eName(ani::runMessage,BATTLE::POS::ENEMY_NAME,enemy->name,RESET);
-    //ani::runMessage(BATTLE::POS::PLAYER_NAME,player->name);
+    ani::runMessage(BATTLE::POS::PLAYER_NAME,player->name,RESET);
     std::thread eHp(ani::HPLoading,BATTLE::POS::ENEMY_HP,enemy->maxHp,ansi_color::font::HP);
     std::thread pHp(ani::HPLoading,BATTLE::POS::PLAYER_HP,player->maxHp,ansi_color::font::HP);    
     pName.join();
@@ -46,7 +47,7 @@ void Battle::init()
     ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
     ani::setPos(BATTLE::POS::RUNE_POINT);
     std::cout << "Rune Point:";
-    changeRunePoint(0,10);
+    changeRunePoint(0,ani::RUNE_POINT_RUN_TIME);
     return;
 }
 
@@ -96,6 +97,7 @@ void Battle::playerTime()
     while ( true )
     {
         //提示輸入模式
+
         //清除message
         //ani::runMessage(,,);
         ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,0);
@@ -126,7 +128,7 @@ void Battle::playerTime()
             sellMode();
             continue;
         }
-        ani::dimishWindow();/* else if ( input == BATTLE::Command::QUIT ) { //你不能放棄
+        else if ( input == BATTLE::Command::QUIT ) { //你不能放棄
             //清除message
             //輸出
             continue;
@@ -137,7 +139,7 @@ void Battle::playerTime()
             //清除message
             //輸出
             continue;
-        }*/
+        }
     }
     short originHp = player->nowHp;
     switch ( effect ) //結算傷害 ， 增加效果
@@ -271,6 +273,8 @@ void Battle::sellMode()
     return;
 }
 
+
+// 符文貼上
 void Battle::updateRune(short time)
 {
     Position currentPos = BATTLE::POS::RUNEBAG;
@@ -315,14 +319,17 @@ void Battle::updateRune(short time)
     return;
 }
 
+
 void Battle::changeRunePoint(short originalCNT,short time)
 {
     Position pos(BATTLE::POS::RUNE_POINT);
+    short gap = abs(originalCNT-player->runePoint);
     pos.x += 11;
-    ani::numberChange(pos,originalCNT,player->runePoint,time,2);
+    ani::numberChange(pos,originalCNT,player->runePoint,time/gap,2);
     return;
 }
 
+///顯示選取的符文
 void Battle::showRuneSelected(short index)
 {
     mtx.lock();
@@ -332,11 +339,13 @@ void Battle::showRuneSelected(short index)
     if ( player->myRunes->isRuneSelected(index) ) { //如果被選了
         ani::renderGrapgh(pos,BATTLE::ICON::RUNE_FRAME_SELECTED);
         pos.y += 4;
+        ani::setPos(pos);
         std::cout << ansi_color::background::RUNEBAG_SELECTED_INDEX << ansi_color::font::RUNEBAG_SELECTED_INDEX << index+1;
     } else
     {
         ani::renderGrapgh(pos,BATTLE::ICON::RUNE_FRAME_DISSELECTED);
         pos.y += 4;
+        ani::setPos(pos);
         std::cout << ansi_color::background::RUNEBAG_INDEX << ansi_color::font::RUNEBAG_INDEX << index+1;
     }
     FLUSH;
