@@ -70,7 +70,7 @@ namespace unicode{
     SET_CONST_SPSYMBOL(L_PIXEL_5_8,"▋");
     SET_CONST_SPSYMBOL(L_PIXEL_6_8,"▊");
     SET_CONST_SPSYMBOL(L_PIXEL_7_8,"▉");
-    //▓▒░■ █   ▚▞ 
+    //▓▒░■ █   ▚▞
     SET_CONST_SPSYMBOL(RUNE_AQUA_SYMBOL,"𝕬");//𝓐");
     SET_CONST_SPSYMBOL(RUNE_FLAME_SYMBOL,"𝕴");
     SET_CONST_SPSYMBOL(RUNE_VITALITY_SYMBOL,"𝖁");
@@ -99,8 +99,8 @@ namespace ansi_color
         const std::string RUNE_VITALITY_STONE_DARK = "\033[38;2;0;205;0m";
         const std::string RUNE_VITALITY_SYMBOL = "\033[38;2;0;139;0m";
 
-        const std::string RUNE_HEAL_STONE = "\033[38;2;255;71;15";
-        const std::string RUNE_HEAL_WHITE = "\033[38;2;255;255;255";
+        const std::string RUNE_HEAL_STONE = "\033[38;2;255;71;15m";
+        const std::string RUNE_HEAL_WHITE = "\033[38;2;255;255;255m";
         const std::string RUNE_HEAL_SYMBOL = "\033[38;2;158;0;0m";
 
         const std::string RUNE_BUFF_STONE = "\033[38;2;255;250;205m";
@@ -113,11 +113,13 @@ namespace ansi_color
 
         const std::string RUNEBAG_FRAME = "\033[38;2;235;235;255m";
         const std::string RUNEBAG_FRAME_DARK = "\033[38;2;129;129;193m";
-        const std::string RUNEBAG_FRAME_SELECTED = "\033[38;2;235;235;255m";
-        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[38;2;129;129;193m";
+        const std::string RUNEBAG_FRAME_SELECTED = "\033[38;2;217;180;180m";
+        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[38;2;174;91;91m";
         const std::string RUNEBAG_BACKGROUND = "\033[38;2;38;38;38m";
         const std::string RUNEBAG_INDEX = "\033[38;2;40;0;77m";
-        const std::string RUNEBAG_SELECTED_INDEX = "\033[38;2;40;0;77m";
+        const std::string RUNEBAG_SELECTED_INDEX = "\033[38;2;96;47;47m";
+
+        const std::string RUNE_POINT_COLOR = "\033[38;2;40;0;77m";
 
     };
     namespace background{
@@ -126,11 +128,11 @@ namespace ansi_color
 
         const std::string RUNEBAG_FRAME = "\033[48;2;235;235;255m";
         const std::string RUNEBAG_FRAME_DARK = "\033[48;2;129;129;193m";
-        const std::string RUNEBAG_FRAME_SELECTED = "\033[48;2;235;235;255m";
-        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[48;2;129;129;193m";
+        const std::string RUNEBAG_FRAME_SELECTED = "\033[48;2;217;180;180m";
+        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[48;2;174;91;91m";
         const std::string RUNEBAG_BACKGROUND = "\033[48;2;38;38;38m";
         const std::string RUNEBAG_INDEX = "\033[48;2;235;235;255m";
-        const std::string RUNEBAG_SELECTED_INDEX = "\033[48;2;40;0;77m";
+        const std::string RUNEBAG_SELECTED_INDEX = "\033[48;2;217;180;180m";
 
         const std::string RUNE_AQUA_STONE = "\033[48;2;41;148;255m";
         const std::string RUNE_AQUA_STONE_DARK = "\033[48;2;30;115;200m";
@@ -199,6 +201,7 @@ namespace ani{
     const short blockWidth = 2; //一格方塊的字元寬度
     const short RUNEBAG_RUN_TIME = 80;
     const short RUNE_SHOW_TIME = 150;
+    const short RUNE_POINT_RUN_TIME = 1000;
 
 
     void clearScreen();

@@ -41,9 +41,9 @@ clean:
 	rm ./$(TARGET_APP) ./RPG_FxxKU&&rm $(OBJ)
 
 
-main.o: $(SRCDIR)/main.cpp
+main.o: $(SRCDIR)/main.cpp $(IDIR)/animation.h $(IDIR)/graph.h $(IDIR)/battle.h
 	$(CC) $^ -o $(ODIR)/$@ $(CFLAGS) $(LIBS)
-creature.o: $(SRCDIR)/creature.cpp
+creature.o: $(SRCDIR)/creature.cpp 
 	$(CC) $^ -o $(ODIR)/$@ $(CFLAGS) $(LIBS)
 animation.o: $(SRCDIR)/animation.cpp
 	$(CC) $^ -o $(ODIR)/$@ $(CFLAGS) $(LIBS)

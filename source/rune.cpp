@@ -1,15 +1,22 @@
 #include "rune.h"
 #include "def.h"
-#include <stdlib.h>
 #include <vector>
 #include <iostream>
 #include <chrono>
 #include <random>
-short randomRune()
+#include <limits>
+
+short odds::rand()
 {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::mt19937 generator (seed); 
-    short random_num = generator() % 300 + 1;
+    return static_cast<short>(generator()%std::numeric_limits<short>::max());
+}
+
+short randomRune()
+{
+    
+    short random_num = odds::rand() % 300 + 1;
     if(random_num <= odds::APPEAR_NORMAL_RUNE*3){
         return random_num%3 + 1; 
     }
@@ -20,7 +27,7 @@ short randomRune()
 }
 
 bool makeUpLevelTwoRate(){
-    short random_num = rand() % 300 + 1;
+    short random_num = odds::rand() % 300 + 1;
     if(random_num <= odds::MAKE_UP_LV_TWO*3){
         return true; 
     }
@@ -30,7 +37,7 @@ bool makeUpLevelTwoRate(){
 }
 
 bool makeUpLevelThreeRate(){
-    short random_num = rand() % 300 + 1;
+    short random_num = odds::rand() % 300 + 1;
     if(random_num <= odds::MAKE_UP_LV_THREE*3){
         return true; 
     }
@@ -40,7 +47,7 @@ bool makeUpLevelThreeRate(){
 }
 
 bool buffRate(){
-    short random_num = rand() % 300 + 1;
+    short random_num = odds::rand() % 300 + 1;
     if(random_num <= odds::BUFF*3){
         return true; 
     }
@@ -50,7 +57,7 @@ bool buffRate(){
 }
 
 bool debuffRate(){
-    short random_num = rand() % 300 + 1;
+    short random_num = odds::rand() % 300 + 1;
     if(random_num <= odds::DEBUFF*3){
         return true; 
     }
