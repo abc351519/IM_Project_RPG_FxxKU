@@ -326,18 +326,21 @@ void ani::runMessage(const Position& startPoint,const std::string& message,std::
     for ( auto strc : message )
     {
         mtx.lock();
+        
         ani::setPos(currentPos); //設定位置
         
         std::cout << color; //設定顏色
         std::cout << strc; //輸出
         FLUSH; 
+        currentPos.x++; //向右移動1
         
         mtx.unlock();
         
-        currentPos.x++; //向右移動1
         SLEEP(ani::MESSAGE_LOAD_TIME/message.length());
     }
+    mtx.lock();
     std::cout << RESET;
+    mtx.unlock();
     SLEEP(ani::MESSAGE_STOP_TIME);
     return;
 }
@@ -372,8 +375,8 @@ void ani::numberChange(const Position& startPoint, const int start, const int en
             ani::setPos(startPoint);
             std::cout << color;
             printNiceLy(i,unit);
-            mtx.unlock();
             FLUSH;
+            mtx.unlock();
             SLEEP(time);
         }
     } else { //遞減
@@ -383,8 +386,8 @@ void ani::numberChange(const Position& startPoint, const int start, const int en
             ani::setPos(startPoint);
             std::cout << color;
             printNiceLy(i,unit);
-            mtx.unlock();
             FLUSH;
+            mtx.unlock();
             SLEEP(time);
         }
     }    

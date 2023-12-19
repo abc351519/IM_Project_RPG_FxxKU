@@ -5,12 +5,12 @@
 void Battle::loadMode(const std::string& opt)
 {
     mtx.lock();
-    std::cout << RESET;
+    std::cout << ansi_color::background::RUNEBAG_FRAME_DARK << ansi_color::font::RUNEBAG_FRAME;
     Position pos(BATTLE::POS::RUNE_POINT);
-    pos.x += 7*8;
+    pos.x += 7*8-1;
     ani::setPos(pos);
-    ani::moveCurse(CurserMove::MOVELEFT,20);
-    for ( int i = 0; i < 20; i++ )
+    ani::moveCurse(CurserMove::MOVELEFT,12);
+    for ( int i = 0; i < 13; i++ )
         std::cout << ' ';
     if ( opt == "use" ) {
         std::string use = "USE";
@@ -28,6 +28,7 @@ void Battle::loadMode(const std::string& opt)
         ani::setPos(pos);
         std::cout << battle;
     }
+    std::cout << RESET;
     mtx.unlock();
     return;
 }
@@ -67,7 +68,7 @@ void Battle::init()
 
     ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
     ani::setPos(BATTLE::POS::RUNE_POINT);
-    std::cout << ansi_color::background::RUNEBAG_FRAME_SELECTED_DARK << ansi_color::font::RUNEBAG_FRAME_SELECTED << "Rune Point:";
+    std::cout << ansi_color::background::RUNEBAG_FRAME << ansi_color::font::RUNEBAG_FRAME_DARK << " Rune Point:   ";
     std::cout <<RESET;
     changeRunePoint(0,ani::RUNE_POINT_RUN_TIME);
 
@@ -286,16 +287,7 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
                 return true;
             } else {
                 //回報錯誤
-                switch (player->myRunes->getConditionType())
-                {
-                case RuneCondition::RuneNotEnough:
-                    player->myRunes->selectReset();
-                    break;
-                
-                default:
-                    break;
-                }
-                
+                player->myRunes->selectReset();
                 return false;
             }
         }
@@ -398,8 +390,8 @@ void Battle::changeRunePoint(short originalCNT,short time)
 {
     Position pos(BATTLE::POS::RUNE_POINT);
     short gap = abs(originalCNT-player->runePoint);
-    pos.x += 11;
-    ani::numberChange(pos,originalCNT,player->runePoint,time/gap,2,ansi_color::font::RUNE_POINT_COLOR+ansi_color::background::RUNEBAG_FRAME_SELECTED_DARK);
+    pos.x += 12;
+    ani::numberChange(pos,originalCNT,player->runePoint,time/gap,2,ansi_color::font::RUNEBAG_FRAME_DARK/*RUNE_POINT_COLOR*/+ansi_color::background::RUNEBAG_FRAME);
     return;
 }
 
