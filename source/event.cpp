@@ -1,5 +1,8 @@
 #include "event.h"
+#include "def.h"
+
 #include <cctype>
+
 
 short strToShort(std::string str)
 {
@@ -31,3 +34,63 @@ std::string toSmall(std::string str)
     }
     return retStr;
 }
+
+void Event::loadPromptFrame(const std::string& color)
+{
+    mtx.lock();
+    ani::setPos(EVENT::POS::PROMPT_FRAME);
+    std::cout << color << unicode::CORNER_LINE_LU;
+    for ( int i = 0; i < Global::Screen::winWith - 3; i++ )
+    {
+        std::cout << unicode::LINE_HORIZONTAL;
+    }
+    std::cout << unicode::CORNER_LINE_RU;
+    
+    ani::setPos(EVENT::POS::PROMPT_FRAME);
+    ani::moveCurse(CurserMove::MOVEDOWN,1);
+    std::cout << unicode::LINE_VERTICAL;
+    for ( int i = 0; i < Global::Screen::winWith - 3; i++ )
+    {
+        std::cout << ' ';
+    }
+    std::cout << unicode::LINE_VERTICAL;
+
+    ani::setPos(EVENT::POS::PROMPT_FRAME);
+    ani::moveCurse(CurserMove::MOVEDOWN,2);
+    std::cout << unicode::CORNER_LINE_LD;
+    for ( int i = 0; i < Global::Screen::winWith - 3; i++ )
+    {
+        std::cout << unicode::LINE_HORIZONTAL;
+    }
+    std::cout << unicode::CORNER_LINE_RD;
+
+    std::cout << RESET;
+    mtx.unlock();
+    return;
+}
+
+
+std::string Event::receiveCommand()
+{
+    mtx.lock();
+    std::string input;
+    ani::setPos(EVENT::POS::COMMAND_LINE); //設定輸入位置
+    std::cout << ansi_color::font::COMMAND_LINE_COLOR << "Type command here: ";
+    ani::curserShow(true); //開啟游標
+
+    std::getline(std::cin,input);
+    
+    std::cout << RESET;
+    FLUSH;
+
+    ani::curserShow(false); //關閉游標
+    mtx.unlock();
+    return input;
+}
+
+// void Event::loadPromptMessage(const std::string& message)
+// {
+
+
+//     return;
+// }
