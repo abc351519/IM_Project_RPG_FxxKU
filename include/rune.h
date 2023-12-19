@@ -87,7 +87,7 @@ public:
     short runeSelectToUse(short index); //回傳選取是否有效
     short runeSelectToSell(short index);
     bool buyRune(short& runePoint);
-    bool use(double& attackRate, RuneEffect& effect);
+    bool use(double& attackRate, RuneEffect& effect, short& runePoints);
     bool sell(short& runePoints);
     void selectReset();
     short getRuneCount();

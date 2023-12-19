@@ -156,7 +156,7 @@ short RuneBag::runeSelectToUse(short index)
     return false;
 }
 
-bool RuneBag::use(double& attackRate, RuneEffect& effect)
+bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
 {   
     if((isFunction && selectedNum == 1) || (selectedNum == 0))
         return false;
@@ -168,14 +168,18 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
                     if(attackType == 1){
                         attackRate = 0;
                         effect = RuneEffect::FLAMEHEAL;
+                        runePoint -= mpConsume::FUNCTION_RUNE;
+                        
                     }
                     else if(attackType == 2){
                         attackRate = 0;
                         effect = RuneEffect::AQUAHEAL;
+                        runePoint -= mpConsume::FUNCTION_RUNE;
                     }
                     else if(attackType == 3){
                         attackRate = 0;
                         effect = RuneEffect::VITALITYHEAL;
+                        runePoint -= mpConsume::FUNCTION_RUNE;
                     }
                     break;
                 case BUFF:
@@ -183,30 +187,36 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
                         if(buffRate()){
                             attackRate = 0;
                             effect = RuneEffect::FLAMEBUFF;
+                            runePoint -= mpConsume::FUNCTION_RUNE;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::FUNCTION_RUNE/2);
                         }
                     }
                     else if(attackType == 2){
                         if(buffRate()){
                             attackRate = 0;
                             effect = RuneEffect::AQUABUFF;
+                            runePoint -= mpConsume::FUNCTION_RUNE;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::FUNCTION_RUNE/2);
                         }
                     }
                     else if(attackType == 3){
                         if(buffRate()){
                             attackRate = 0;
                             effect = RuneEffect::VITALITYBUFF;
+                            runePoint -= mpConsume::FUNCTION_RUNE;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::FUNCTION_RUNE/2);
                         }
                     }
                     break;
@@ -215,30 +225,36 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
                         if(debuffRate()){
                             attackRate = 0;
                             effect = RuneEffect::FLAMEDEBUFF;
+                            runePoint -= mpConsume::FUNCTION_RUNE;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::FUNCTION_RUNE/2);
                         }
                     }
                     else if(attackType == 2){
                         if(debuffRate()){
                             attackRate = 0;
                             effect = RuneEffect::AQUADEBUFF;
+                            runePoint -= mpConsume::FUNCTION_RUNE;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::FUNCTION_RUNE/2);
                         }
                     }
                     else if(attackType == 3){
                         if(debuffRate()){
                             attackRate = 0;
                             effect = RuneEffect::VITALITYDEBUFF;
+                            runePoint -= mpConsume::FUNCTION_RUNE;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::FUNCTION_RUNE/2);
                         }
                     }
                     break;
@@ -251,25 +267,30 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
                     if(selectedNum == 1){
                         attackRate = 1;
                         effect = RuneEffect::FLAMENORMAL;
+                        runePoint -= mpConsume::NORMAL_RUNE_ONE;
                     }
                     else if(selectedNum == 2){
                         if(makeUpLevelTwoRate()){
                             attackRate = 1.6;
                             effect = RuneEffect::FLAMENORMAL;
+                            runePoint -= mpConsume::MAKE_UP_LV_TWO;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::MAKE_UP_LV_TWO/2);
                         }
                     }
                     else if(selectedNum == 3){
                         if(makeUpLevelThreeRate()){
                             attackRate = 2.5;
                             effect = RuneEffect::FLAMEATTACK;
+                            runePoint -= mpConsume::MAKE_UP_LV_THREE;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::MAKE_UP_LV_THREE/2);
                         }
                     }
                     break;
@@ -277,25 +298,30 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
                     if(selectedNum == 1){
                         attackRate = 1;
                         effect = RuneEffect::AQUANORMAL;
+                        runePoint -= mpConsume::NORMAL_RUNE_ONE;
                     }
                     else if(selectedNum == 2){
                         if(makeUpLevelTwoRate()){
                             attackRate = 1.6;
                             effect = RuneEffect::AQUANORMAL;
+                            runePoint -= mpConsume::MAKE_UP_LV_TWO;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::MAKE_UP_LV_TWO/2);
                         }
                     }
                     else if(selectedNum == 3){
                         if(makeUpLevelThreeRate()){
                             attackRate = 2.5;
                             effect = RuneEffect::AQUAATTACK;
+                            runePoint -= mpConsume::MAKE_UP_LV_THREE;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::MAKE_UP_LV_THREE/2);
                         }
                     }
                     break;
@@ -303,25 +329,30 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
                     if(selectedNum == 1){
                         attackRate = 1;
                         effect = RuneEffect::VITALITYNORMAL;
+                        runePoint -= mpConsume::NORMAL_RUNE_ONE;
                     }
                     else if(selectedNum == 2){
                         if(makeUpLevelTwoRate()){
                             attackRate = 1.6;
                             effect = RuneEffect::VITALITYNORMAL;
+                            runePoint -= mpConsume::MAKE_UP_LV_TWO;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::MAKE_UP_LV_TWO/2);
                         }
                     }
                     else if(selectedNum == 3){
                         if(makeUpLevelThreeRate()){
                             attackRate = 2.5;
                             effect = RuneEffect::VITALITYATTACK;   
+                            runePoint -= mpConsume::MAKE_UP_LV_THREE;
                         }
                         else{
                             attackRate = 0;
                             effect = RuneEffect::USELESS;
+                            runePoint -= (mpConsume::MAKE_UP_LV_THREE/2);
                         }
                     }
                     break;

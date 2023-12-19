@@ -56,7 +56,7 @@ namespace BATTLE{
         
     };
     namespace atkRateCounter{
-        const double DOMINANT = 1.50;
+        const double DOMINANT = 1.30;
         const double COUNTERED = 0.7;
     }
 };

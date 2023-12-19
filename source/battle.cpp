@@ -254,10 +254,19 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
             return false;
         }
         if ( input == BATTLE::Command::USE ) { //玩家確定要使用符文
-            if ( player->myRunes->use(atkRate,effect) ) { 
+            short originRunePoints = player->runePoint;
+            if ( player->myRunes->use(atkRate,effect, player->runePoint) ) { 
                 //if  使用成功
+                if(effect != RuneEffect::USELESS){
+                    loadPromptMessage("use successfully!");
+                    changeRunePoint(originRunePoints, ani::RUNE_POINT_RUN_TIME);
+                }
                     //傳出訊息
                 //if 使用失敗 
+                else if(effect == RuneEffect::USELESS){
+                    loadPromptMessage("use failed!");
+                    changeRunePoint(originRunePoints, ani::RUNE_POINT_RUN_TIME);
+                }
                     //傳出訊息
                 ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
                 updateRune(ani::RUNE_SHOW_TIME); 
@@ -297,7 +306,7 @@ void Battle::sellMode()
             short originalCNT = player->runePoint;
             player->myRunes->sell(player->runePoint);
             loadPromptMessage("You have sold some runes to get " + std::to_string(player->runePoint-originalCNT) + " Rune Points successfully!!");
-            changeRunePoint(originalCNT,100); //更新符文點數
+            changeRunePoint(originalCNT,ani::RUNE_POINT_RUN_TIME); //更新符文點數
             return;
         }
         short index = player->myRunes->runeSelectToSell(strToShort(input));
