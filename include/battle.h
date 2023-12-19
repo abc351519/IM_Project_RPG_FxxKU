@@ -40,6 +40,7 @@ namespace BATTLE{
         const std::string BUY_RUNE_SUCCESS = "You purchase a rune successfully!!!";
         const std::string PLAYER_WIN = "Congrates, you'v win the battle! ! !";
         const std::string PLAYER_LOSE = "Wasted. You are dead.";
+        const std::string RUNE_POINT_NOT_ENOUGH = "Your runePoints are not enough to use!";
 
             
     };
