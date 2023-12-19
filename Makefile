@@ -15,10 +15,10 @@ _DEPS=def.h creature.h animation.h enemy.h player.h area.h event.h battle.h rune
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 #.o file output
 #有新的.o檔打在後面
-_OBJ=main.o creature.o animation.o enemy.o player.o event.o battle.o graph.o rune.o
+_OBJ=main.o creature.o animation.o enemy.o player.o event.o battle.o graph.o rune.o def.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 #原始碼，新的.cpp檔放這裡
-_SRC=main.cpp creature.cpp animation.cpp enemy.cpp player.cpp event.cpp battle.cpp game.cpp rune.cpp graph.cpp
+_SRC=main.cpp creature.cpp animation.cpp enemy.cpp player.cpp event.cpp battle.cpp game.cpp rune.cpp graph.cpp def.cpp
 SRC=$(patsubst %,$(SRCDIR)/%,$(_SRC))
 
 
@@ -60,4 +60,6 @@ game.o: $(SRCDIR)/game.cpp
 rune.o: $(SRCDIR)/rune.cpp
 	$(CC) $^ -o $(ODIR)/$@ $(CFLAGS) $(LIBS)
 graph.o: $(SRCDIR)/graph.cpp
+	$(CC) $^ -o $(ODIR)/$@ $(CFLAGS) $(LIBS)
+def.o: $(SRCDIR)/def.cpp
 	$(CC) $^ -o $(ODIR)/$@ $(CFLAGS) $(LIBS)

@@ -17,7 +17,6 @@ const short RUNE_SOLD_FUNCTION_EARN = 5;
 namespace odds
 {
     //各種符文出現機率
-    short rand();
     const short APPEAR_FUNCTION_RUNE = 50;//15;
     const short APPEAR_NORMAL_RUNE = 50;//85;
     //等級合成機率
