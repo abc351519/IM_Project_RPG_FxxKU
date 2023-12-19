@@ -39,30 +39,31 @@ void Event::loadPromptFrame(const std::string& color)
 {
     mtx.lock();
     ani::setPos(EVENT::POS::PROMPT_FRAME);
-    std::cout << color << unicode::CORNER_LINE_LU;
+    std::cout << color;
+    WRITE_UNI(unicode::CORNER_LINE_LU);
     for ( int i = 0; i < Global::Screen::winWith - 3; i++ )
     {
-        std::cout << unicode::LINE_HORIZONTAL;
+        WRITE_UNI(unicode::LINE_HORIZONTAL);
     }
-    std::cout << unicode::CORNER_LINE_RU;
+    WRITE_UNI(unicode::CORNER_LINE_RU);
     
     ani::setPos(EVENT::POS::PROMPT_FRAME);
     ani::moveCurse(CurserMove::MOVEDOWN,1);
-    std::cout << unicode::LINE_VERTICAL;
+    WRITE_UNI(unicode::LINE_VERTICAL);
     for ( int i = 0; i < Global::Screen::winWith - 3; i++ )
     {
         std::cout << ' ';
     }
-    std::cout << unicode::LINE_VERTICAL;
+    WRITE_UNI(unicode::LINE_VERTICAL);
 
     ani::setPos(EVENT::POS::PROMPT_FRAME);
     ani::moveCurse(CurserMove::MOVEDOWN,2);
-    std::cout << unicode::CORNER_LINE_LD;
+    WRITE_UNI(unicode::CORNER_LINE_LD);
     for ( int i = 0; i < Global::Screen::winWith - 3; i++ )
     {
-        std::cout << unicode::LINE_HORIZONTAL;
+        WRITE_UNI(unicode::LINE_HORIZONTAL);
     }
-    std::cout << unicode::CORNER_LINE_RD;
+    WRITE_UNI(unicode::CORNER_LINE_RD);
 
     std::cout << RESET;
     mtx.unlock();
