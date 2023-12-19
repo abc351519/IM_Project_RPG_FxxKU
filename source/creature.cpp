@@ -11,7 +11,7 @@ Creature::Creature(std::string n){
 
 bool Creature::normalAttackDamageIsDead(short damage){
     nowHp -= static_cast<short>(static_cast<double>(damage)*(100.0/static_cast<double>(100+def)));
-    if ( nowHp < 0 ) { //這是完完全全的死了
+    if ( nowHp <= 0 ) { //這是完完全全的死了
         nowHp = 0;
         return true;
     }
