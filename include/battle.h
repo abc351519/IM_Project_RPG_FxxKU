@@ -17,19 +17,19 @@ namespace BATTLE{
     };
     
     namespace POS{
-        const Position COMMAND_LINE = {0,0};
+        const Position COMMAND_LINE = {3,23};
         const Position PROMPT_LINE = {0,0}; 
         const Position PLAYER_NAME = {5,5};
         const Position ENEMY_NAME = {46,5};
         const Position PLAYER_HP = {5,7};
         const Position ENEMY_HP = {46,7};
         const Position PLAYER_LV = {5,9};
-        const Position ENEMY_LV = {77,9};
+        const Position ENEMY_LV = {70,9};
         const Position PLAYER_STATE = {5,11};
         const Position ENEMY_STATE = {77,11};
         const Position ENEMY_CD = {77,13};
         const Position RUNEBAG = {13,16};
-        const Position RUNE_POINT = {64,16};
+        const Position RUNE_POINT = {13,15};
     };
     namespace MESSAGE{
         
@@ -38,11 +38,16 @@ namespace BATTLE{
     namespace ICON{
         extern Picture RUNE_FRAME;
         extern Picture RUNE_FRAME_SELECTED;
+        extern Picture RUNE_FRAME_DISSELECTED;
         extern Picture RUNE_AQUA_ICON;
         extern Picture RUNE_FLAME_ICON;
         extern Picture RUNE_VITALITY_ICON;
+        
     };
-
+    namespace atkRateCounter{
+        const double DOMINANT = 1.50;
+        const double COUNTERED = 0.7;
+    }
 };
 
 enum class gameLoopFlag : short {
@@ -76,6 +81,9 @@ public:
     bool useMode(double& atkRate,RuneEffect& effect);
     void sellMode();
     void updateRune(short time);
+    void changeRunePoint(short originalCNT,short time);
+    void showRuneSelected(short index);
+    void cleanCommandLine();
 }; 
 
 #endif

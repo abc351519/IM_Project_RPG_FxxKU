@@ -10,7 +10,7 @@ const short MAX_RUNEPOINT = 15;
 const short INIT_RUNEPOINTS = 7;
 const short RUNEPOINT_GET_ROUNDLY = 3;
 //可議再商量
-const short RUNE_PER_COST = 6; 
+const short RUNE_PER_COST = 2;//6 
 const short RUNE_SOLD_NORMAL_EARN = 4;
 const short RUNE_SOLD_FUNCTION_EARN = 5;
 
@@ -54,7 +54,6 @@ enum class RuneEffect
     FLAMEDEBUFF,
     AQUADEBUFF,
     VITALITYDEBUFF,
-
     FLAMEATTACK,
     AQUAATTACK,
     VITALITYATTACK
@@ -84,14 +83,15 @@ public:
     RuneBag(); //init 
     ~RuneBag(){};
     void runeGet(); //每回合隨機給予符文
-    bool runeSelectToUse(short index); //回傳選取是否有效
-    bool runeSelectToSell(short index);
+    short runeSelectToUse(short index); //回傳選取是否有效
+    short runeSelectToSell(short index);
     bool buyRune(short& runePoint);
     bool use(double& attackRate, RuneEffect& effect);
     bool sell(short& runePoints);
     void selectReset();
     short getRuneCount();
     short getRune(short index);
+    bool isRuneSelected(short index);
 };
 
 #endif

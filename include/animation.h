@@ -90,8 +90,11 @@ namespace ansi_color
 
         const std::string RUNEBAG_FRAME = "\033[38;2;235;235;255m";
         const std::string RUNEBAG_FRAME_DARK = "\033[38;2;129;129;193m";
+        const std::string RUNEBAG_FRAME_SELECTED = "\033[38;2;235;235;255m";
+        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[38;2;129;129;193m";
         const std::string RUNEBAG_BACKGROUND = "\033[38;2;38;38;38m";
         const std::string RUNEBAG_INDEX = "\033[38;2;40;0;77m";
+        const std::string RUNEBAG_SELECTED_INDEX = "\033[38;2;40;0;77m";
 
     };
     namespace background{
@@ -100,8 +103,11 @@ namespace ansi_color
 
         const std::string RUNEBAG_FRAME = "\033[48;2;235;235;255m";
         const std::string RUNEBAG_FRAME_DARK = "\033[48;2;129;129;193m";
+        const std::string RUNEBAG_FRAME_SELECTED = "\033[48;2;235;235;255m";
+        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[48;2;129;129;193m";
         const std::string RUNEBAG_BACKGROUND = "\033[48;2;38;38;38m";
         const std::string RUNEBAG_INDEX = "\033[48;2;235;235;255m";
+        const std::string RUNEBAG_SELECTED_INDEX = "\033[48;2;40;0;77m";
 
         const std::string RUNE_AQUA_STONE = "\033[48;2;41;148;255m";
         const std::string RUNE_AQUA_STONE_DARK = "\033[48;2;30;115;200m";
@@ -119,7 +125,9 @@ struct Position
 {
     short x;
     short y;
-    Position(const short x, const short y);
+    Position(const short x, const short y);    
+    Position operator+(unsigned short dx) const;
+    Position operator-(unsigned short dx) const;
 };
 
 struct Pixel
@@ -183,6 +191,7 @@ namespace ani{
     void renderGrapgh(const Position& startPoint,const Picture& graph);
     void runMessage(const Position& startPoint,const std::string& message,std::string color);
     void renderRuneFrame(const Position& startPoint,const Picture& graph,short amount, short time);
+    void numberChange(const Position& startPoint, const int start, const int end, short time, short unit);
 }
 
 #endif

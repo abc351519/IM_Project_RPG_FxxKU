@@ -77,7 +77,7 @@ void RuneBag::runeGet() //每回合拿到符文
     return;
 }
 
-bool RuneBag::runeSelectToUse(short index)
+short RuneBag::runeSelectToUse(short index)
 {
     if ( index < 1 || index > 8 ) //選取要合理
         return false;
@@ -92,20 +92,20 @@ bool RuneBag::runeSelectToUse(short index)
             functionType = 0;
             selectedNum--;
             isSelected[index-1] = false;
-            return true;
+            return  index;
         }
 
         if( (runes[index-1] >= 1 && runes[index-1] <= 3) && selectedNum == 1 ){
             selectedNum--;
             isSelected[index-1] = false;
             attackType = 0;
-            return true;
+            return  index;
         }
 
         if( (runes[index-1] >= 1 && runes[index-1] <= 3) && selectedNum > 1 ){
             selectedNum--;
             isSelected[index-1] = false;
-            return true;
+            return  index;
         }
     } 
     
@@ -118,7 +118,7 @@ bool RuneBag::runeSelectToUse(short index)
             functionType = runes[index-1];
             isSelected[index - 1] = true;
             selectedNum++;
-            return true;
+            return  index;
         }
         return false; // 選擇功能牌時在第三張
     }
@@ -128,7 +128,7 @@ bool RuneBag::runeSelectToUse(short index)
             isSelected[index-1] = true;
             attackType = runes[index-1];
             selectedNum++;
-            return true;
+            return  index;
         }
 
         if( !isFunction ){ // 尚未選擇功能牌
@@ -136,13 +136,13 @@ bool RuneBag::runeSelectToUse(short index)
                 isSelected[index-1] = true;
                 selectedNum++;
                 attackType = runes[index-1];
-                return true;
+                return  index;
             }
 
             if(runes[index-1] == attackType && selectedNum <= 2){ // 多張一般牌
                 isSelected[index-1] = true;
                 selectedNum++;
-                return true;
+                return  index;
             }
         }
         return false;
@@ -339,7 +339,7 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect)
     }
 }
 
-bool RuneBag::runeSelectToSell(short index){
+short RuneBag::runeSelectToSell(short index){
     if ( index < 1 || index > 8 ) //選取要合理
         return false;
     if ( index > runes.size() ) {
@@ -348,12 +348,12 @@ bool RuneBag::runeSelectToSell(short index){
     
     if ( isSelected[index-1] ) { //已經被選取
         isSelected[index-1] = false; //取消選取
-        return true;
+        return index;
     }
 
     if( !isSelected[index-1] ){
         isSelected[index-1] = true; //紀錄已經選取
-        return true;
+        return index;
     }
     
     return false;
@@ -386,9 +386,12 @@ bool RuneBag::buyRune(short& runePoint)
         return false;
     if ( runePoint < RUNE_PER_COST )//如果點數不夠
         return false;
-    runePoint -= RUNE_PER_COST;    //減掉符文點數
-    runes.push_back(randomRune());  //隨機購入一個符文
-    return true;
+    if ( runePoint >= RUNE_PER_COST ) {
+        runePoint -= RUNE_PER_COST;    //減掉符文點數
+        runes.push_back(randomRune());  //隨機購入一個符文
+        return true;
+    }
+    return false;
 }
 
 //選取重置，所有取消選取
@@ -410,4 +413,9 @@ short RuneBag::getRune(short index)
     if ( index < runes.size() && index >=0 )
         return runes[index];
     return -69;
+}
+
+bool RuneBag::isRuneSelected(short index)
+{
+    return isSelected[index];
 }
