@@ -101,7 +101,7 @@ public:
     short getRuneCount();
     short getRune(short index);
     bool isRuneSelected(short index);
-    RuneCondition getConditionType();
+    RuneCondition getConditionType() const;
 };
 
 #endif

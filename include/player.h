@@ -11,7 +11,6 @@ class Player : public Creature
 {
 private:
     RuneBag* myRunes;
-    
     short exp;
     short runePoint;
 public:
