@@ -22,7 +22,7 @@ namespace BATTLE{
         const Position PLAYER_HP = {5,7};
         const Position ENEMY_HP = {46,7};
         const Position PLAYER_LV = {5,9};
-        const Position ENEMY_LV = {70,9};
+        const Position ENEMY_LV = {46,9};
         const Position PLAYER_STATE = {5,11};
         const Position ENEMY_STATE = {77,11};
         const Position ENEMY_CD = {77,13};
