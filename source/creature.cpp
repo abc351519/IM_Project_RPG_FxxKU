@@ -9,6 +9,11 @@ Creature::Creature(std::string n){
     def = 20; // defend
 }
 
-void Creature::normalAttackDamage(short damage){
+bool Creature::normalAttackDamageIsDead(short damage){
     nowHp -= damage*(def/(100+def));
+    if ( nowHp < 0 ) { //這是完完全全的死了
+        nowHp = 0;
+        return true;
+    }
+    return false;
 }

@@ -38,7 +38,6 @@ void Battle::init()
     FLUSH;
     //std::cout << player->maxHp << ' ' << enemy ->maxHp;
     //使用者介面，畫圖
-
     //玩家
     
     ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
@@ -48,11 +47,7 @@ void Battle::init()
     return;
 }
 
-void Battle::close()
-{
-
-
-}
+void Battle::close(){}
 
 void Battle::gameLoop() //結束條件：玩家死掉、玩家退出
 {
@@ -61,9 +56,15 @@ void Battle::gameLoop() //結束條件：玩家死掉、玩家退出
     {
         if ( gameFlag == gameLoopFlag::PLAYER_BATTLE ) { //如果在戰鬥中
             playerTime();
-            //敵人死未
-            //敵人回合
-            //玩家死未
+            if ( gameFlag == gameLoopFlag::PLAYER_WIN ) {
+                //玩家贏了
+                break;
+            }
+            enemyTime(); //敵人回合
+            if ( gameFlag == gameLoopFlag::PLAYER_LOSE ) {  //玩家死未
+                //玩家輸了
+                break;
+            }
             //更新回合
         } 
 
@@ -76,19 +77,19 @@ void Battle::playerTime()
     double atkRate = 1.0;
     bool isFirst = true;
     RuneEffect effect = RuneEffect::USELESS;
+    Event::loadPromptFrame(RESET);
+    ani::runMessage(EVENT::POS::PROMPT_LINE,"You find a " + enemy->name + ". Use your runes to beat it",RESET);
     while ( true )
     {
-        Event::loadPromptFrame(RESET);
-        //提示輸入模式
-
-        //清除message
-        //ani::runMessage(,,);
         ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,0);
+        
         if ( isFirst ) {
             isFirst = false;
+            loadPromptMessage(BATTLE::MESSAGE::CHOOSING_SESSION); //提示輸入模式
             updateRune(ani::RUNE_SHOW_TIME);
         } else {
             updateRune(0);
+            loadPromptMessage(BATTLE::MESSAGE::CHOOSING_SESSION); //提示輸入模式
         }
         //choosing session 更新現在模式
         std::string input = receiveCommand(); //接收指令
@@ -98,6 +99,7 @@ void Battle::playerTime()
             if ( useMode(atkRate,effect) ) { //如果使用成功則進入下一關
                 break;
             } else { //使用失敗，請重新來過
+                //更新使用模式
                 continue;
             }
         } else if ( input == BATTLE::Command::BUY ) {//進入購買模式
@@ -105,6 +107,7 @@ void Battle::playerTime()
             if ( player->myRunes->buyRune(player->runePoint) ) {
                 updateRune(0);  //更新符文
                 changeRunePoint(originPoint,1000); //更新點數
+                loadPromptMessage(BATTLE::MESSAGE::BUY_RUNE_SUCCESS);
             }
             continue;
         } else if ( input == BATTLE::Command::SELL ) { //進入選賣
@@ -112,15 +115,12 @@ void Battle::playerTime()
             continue;
         }
         else if ( input == BATTLE::Command::QUIT ) { //你不能放棄
-            //清除message
-            //輸出
+            loadPromptMessage(BATTLE::MESSAGE::ESCAPE_TRYING);
             continue;
         } else if ( input == BATTLE::Command::SKIP ) {
-            //輸出你跳過這回合
             return; //到敵人的回合
         } else { //輸入錯誤
-            //清除message
-            //輸出
+            loadPromptMessage(BATTLE::MESSAGE::INPUT_ERROR);
             continue;
         }
     }
@@ -133,7 +133,6 @@ void Battle::playerTime()
         } else if ( enemy->element == EnemyElement::VITALITY ) { //被克制
             atkRate *= BATTLE::atkRateCounter::COUNTERED;
         }
-        enemy->normalAttackDamage(static_cast<short>(static_cast<double>(player->atk)*atkRate));
         break;
     case RuneEffect::FLAMENORMAL:
         if ( enemy->element == EnemyElement::VITALITY ) { //克制
@@ -141,7 +140,6 @@ void Battle::playerTime()
         } else if ( enemy->element == EnemyElement::AQUA ) { //被克制
             atkRate *= BATTLE::atkRateCounter::COUNTERED;
         }
-        enemy->normalAttackDamage(static_cast<short>(static_cast<double>(player->atk)*atkRate));
         break;
     case RuneEffect::VITALITYNORMAL:
         if ( enemy->element == EnemyElement::AQUA ) { //克制
@@ -149,7 +147,6 @@ void Battle::playerTime()
         } else if ( enemy->element == EnemyElement::FLAME ) { //被克制
             atkRate *= BATTLE::atkRateCounter::COUNTERED;
         }
-        enemy->normalAttackDamage(static_cast<short>(static_cast<double>(player->atk)*atkRate));
         break;/*
     case RuneEffect:::
         break;
@@ -173,13 +170,26 @@ void Battle::playerTime()
         break;
     case RuneEffect::VITALITYATTACK:
         break;*/
+    
     default:
-        break;
+        break;    
     }
+
     //輸出訊息
+
+    //更新血量（已更新）
+    if ( enemy->normalAttackDamageIsDead(static_cast<short>(static_cast<double>(player->atk)*atkRate)) ) { //如果敵人死掉
+        gameFlag = gameLoopFlag::PLAYER_WIN; 
+        return;
+    }
     //更新效果
-    //更新血量
+    
     return;
+}
+
+void Battle::enemyTime()
+{
+
 }
 
 bool Battle::useMode(double& atkRate,RuneEffect& effect)
@@ -240,16 +250,17 @@ void Battle::sellMode()
         if ( input == BATTLE::Command::SELL ) { //如果要賣的話
             short originalCNT = player->runePoint;
             player->myRunes->sell(player->runePoint);
-            //輸出訊息
+            loadPromptMessage("You have sold some runes to get " + std::to_string(player->runePoint-originalCNT) + " Rune Points successfully!!");
             changeRunePoint(originalCNT,100); //更新符文點數
             return;
         }
         short index = player->myRunes->runeSelectToSell(strToShort(input));
         if ( index ) { //選擇成功
             showRuneSelected(index-1); //更新符文選擇
+            loadPromptMessage(BATTLE::MESSAGE::SELECT_SUCCESS); 
             continue;
         } else { //選擇失敗
-            //你人生失敗 訊息輸出
+            loadPromptMessage(BATTLE::MESSAGE::SELECT_FAIL); //你人生失敗 訊息輸出
             continue;
         }
     }
@@ -328,12 +339,14 @@ void Battle::showRuneSelected(short index)
         pos.y += 4;
         ani::setPos(pos);
         std::cout << ansi_color::background::RUNEBAG_SELECTED_INDEX << ansi_color::font::RUNEBAG_SELECTED_INDEX << index+1;
+        //loadPromptMessage(BATTLE::MESSAGE::SELECT_SUCCESS); 
     } else
     {
         ani::renderGraph(pos,BATTLE::ICON::RUNE_FRAME_DISSELECTED);
         pos.y += 4;
         ani::setPos(pos);
         std::cout << ansi_color::background::RUNEBAG_INDEX << ansi_color::font::RUNEBAG_INDEX << index+1;
+        //loadPromptMessage(BATTLE::MESSAGE::SELECT_CANCEL); 
     }
     FLUSH;
     mtx.unlock();

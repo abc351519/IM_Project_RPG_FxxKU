@@ -120,8 +120,8 @@ namespace ansi_color
 
         const std::string RUNEBAG_FRAME = "\033[38;2;235;235;255m";
         const std::string RUNEBAG_FRAME_DARK = "\033[38;2;129;129;193m";
-        const std::string RUNEBAG_FRAME_SELECTED = "\033[38;2;217;180;180m";
-        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[38;2;174;91;91m";
+        const std::string RUNEBAG_FRAME_SELECTED = "\033[38;2;255;219;226m";
+        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[38;2;217;84;171m";
         const std::string RUNEBAG_BACKGROUND = "\033[38;2;38;38;38m";
         const std::string RUNEBAG_INDEX = "\033[38;2;40;0;77m";
         const std::string RUNEBAG_SELECTED_INDEX = "\033[38;2;96;47;47m";
@@ -137,8 +137,8 @@ namespace ansi_color
 
         const std::string RUNEBAG_FRAME = "\033[48;2;235;235;255m";
         const std::string RUNEBAG_FRAME_DARK = "\033[48;2;129;129;193m";
-        const std::string RUNEBAG_FRAME_SELECTED = "\033[48;2;217;180;180m";
-        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[48;2;174;91;91m";
+        const std::string RUNEBAG_FRAME_SELECTED = "\033[48;2;255;219;226m";
+        const std::string RUNEBAG_FRAME_SELECTED_DARK = "\033[48;2;217;84;171m";
         const std::string RUNEBAG_BACKGROUND = "\033[48;2;38;38;38m";
         const std::string RUNEBAG_INDEX = "\033[48;2;235;235;255m";
         const std::string RUNEBAG_SELECTED_INDEX = "\033[48;2;217;180;180m";
@@ -222,7 +222,7 @@ namespace ani{
     const short RUNEBAG_RUN_TIME = 80;
     const short RUNE_SHOW_TIME = 150;
     const short RUNE_POINT_RUN_TIME = 1000;
-
+    const short MESSAGE_STOP_TIME = 950;
 
     void clearScreen();
     void setPos(short x, short y);

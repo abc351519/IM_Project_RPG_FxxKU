@@ -10,15 +10,15 @@ const short MAX_RUNEPOINT = 15;
 const short INIT_RUNEPOINTS = 7;
 const short RUNEPOINT_GET_ROUNDLY = 3;
 //可議再商量
-const short RUNE_PER_COST = 2;//6 
+const short RUNE_PER_COST = 6; 
 const short RUNE_SOLD_NORMAL_EARN = 4;
 const short RUNE_SOLD_FUNCTION_EARN = 5;
 
 namespace odds
 {
     //各種符文出現機率
-    const short APPEAR_FUNCTION_RUNE = 50;//15;
-    const short APPEAR_NORMAL_RUNE = 50;//85;
+    const short APPEAR_FUNCTION_RUNE = 15;
+    const short APPEAR_NORMAL_RUNE = 85;
     //等級合成機率
     const short MAKE_UP_LV_TWO = 80;
     const short MAKE_UP_LV_THREE = 60;

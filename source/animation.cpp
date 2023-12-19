@@ -15,6 +15,7 @@ void printNiceLy(short number, short unit)
     for ( int i = 0; i < unit - s.size(); i++ )
         std::cout << ' '; 
     std::cout << number;
+    std::cout << RESET;
     return;
 }
 
@@ -336,6 +337,8 @@ void ani::runMessage(const Position& startPoint,const std::string& message,std::
         currentPos.x++; //向右移動1
         SLEEP(MESSAGE_PER_CHAR_LOAD_TIME);
     }
+    std::cout << RESET;
+    SLEEP(ani::MESSAGE_STOP_TIME);
     return;
 }
 

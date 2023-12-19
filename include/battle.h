@@ -30,8 +30,14 @@ namespace BATTLE{
         const Position RUNE_POINT = {13,15};
     };
     namespace MESSAGE{
-        
+        const std::string SELECT_SUCCESS = "Choose successfully!";
+        const std::string SELECT_FAIL = "Failed choose.";
         const std::string WRONG_COMMAND = "u r typing the wrong command.";
+        const std::string CHOOSING_SESSION = "Select your Freakin action mode.";
+        const std::string SELECT_CANCEL = "Cancel successfully!";
+        const std::string INPUT_ERROR = "Something is wrong with your BraXX.. input command.";
+        const std::string ESCAPE_TRYING = "You cannot escape from this battle.";
+        const std::string BUY_RUNE_SUCCESS = "You purchase a rune successfully!!!";
     };
     namespace ICON{
         extern Picture RUNE_FRAME;
@@ -54,7 +60,6 @@ namespace BATTLE{
 enum class gameLoopFlag : short {
     PLAYER_LOSE,
     PLAYER_WIN,
-    PLAYER_QUIT,
     PLAYER_BATTLE,
 };
 

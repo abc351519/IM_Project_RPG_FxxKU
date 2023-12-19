@@ -88,9 +88,21 @@ std::string Event::receiveCommand()
     return input;
 }
 
-// void Event::loadPromptMessage(const std::string& message)
-// {
+void Event::loadPromptMessage(const std::string& message, const std::string& frameColor, const std::string& messageColor)
+{   
+    mtx.lock();
+    ani::setPos(EVENT::POS::COMMAND_LINE);
+    std::cout << RESET;    
+    for ( int i = 0; i < Global::Screen::winWith; i++ ) 
+        std::cout << ' ';
+    mtx.unlock();
+    loadPromptFrame(frameColor);
+    ani::runMessage(EVENT::POS::PROMPT_LINE,message,messageColor);
+    return;
+}
 
-
-//     return;
-// }
+void Event::loadPromptMessage(const std::string& message)
+{
+    Event::loadPromptMessage(message,RESET,RESET);
+    return;
+}

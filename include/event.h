@@ -43,6 +43,7 @@ public:
     std::string receiveCommand(); //輸入指令
     void loadPromptFrame(const std::string& color);
     void loadPromptMessage(const std::string& message, const std::string& frameColor, const std::string& Color);
+    void loadPromptMessage(const std::string& message);
     virtual void init() = 0; //開啟活動
     virtual void close() = 0;//關閉活動
     virtual void gameLoop() = 0; //該事件的遊戲循環
