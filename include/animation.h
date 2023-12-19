@@ -29,11 +29,13 @@ namespace winapi {
     void write( wchar_t const* const s, int const n );
     void write( std::wstring const& s );
 }
+#define WRITE_UNI(wstr) winapi::write(wstr);
 
 #define SET_CONST_SPSYMBOL(name, value) const spSymbol name = L##value
 #elif defined(__APPLE__) || defined(__MACH__)
 typedef std::string spSymbol; //mac下用c++string
 #define SET_CONST_SPSYMBOL(name, value) const spSymbol name = value
+#define WRITE_UNI(str) std::cout << str
 #endif
 
 void printNiceLy(short number, short unit);
@@ -72,6 +74,8 @@ namespace unicode{
     SET_CONST_SPSYMBOL(RUNE_AQUA_SYMBOL,"𝕬");//𝓐");
     SET_CONST_SPSYMBOL(RUNE_FLAME_SYMBOL,"𝕴");
     
+
+
 };
 
 namespace ansi_color

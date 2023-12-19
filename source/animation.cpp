@@ -283,7 +283,7 @@ void ani::HPLoading(const Position& startPoint, const short maxHMP, const std::s
         mtx.lock();
         ani::setPos(currentPos);
         std::cout << color;
-        std::cout << unicode::FULL_PIXEL;
+        WRITE_UNI(unicode::FULL_PIXEL);
         FLUSH;
         currentPos.x++;
         mtx.unlock();

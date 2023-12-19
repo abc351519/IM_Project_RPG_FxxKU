@@ -1,5 +1,6 @@
 #include "rune.h"
 #include "def.h"
+#include <stdlib.h>
 #include <vector>
 short randomRune()
 {
