@@ -15,6 +15,12 @@ const short RUNE_PER_COST = 6;
 const short RUNE_SOLD_NORMAL_EARN = 3;
 const short RUNE_SOLD_FUNCTION_EARN = 6;
 
+namespace attackRate{
+    const double RUNE_ONE = 1.0;
+    const double RUNE_TWO = 1.6;
+    const double RUNE_THREE = 2.5;
+};
+
 namespace odds
 {
     //各種符文出現機率
