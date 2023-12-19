@@ -56,7 +56,6 @@ void Battle::init()
     eName.join();
     pHp.join();
     eHp.join();
-    ani::runMessage(EVENT::POS::PROMPT_LINE,"You find a " + enemy->name + ". Use your runes to beat it",RESET);
     ani::setPos(BATTLE::POS::ENEMY_LV);
     std::cout << RESET;
     std::cout << "Level:";
@@ -68,8 +67,12 @@ void Battle::init()
 
     ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
     ani::setPos(BATTLE::POS::RUNE_POINT);
-    std::cout << "Rune Point:";
+    std::cout << ansi_color::background::RUNEBAG_FRAME_SELECTED_DARK << ansi_color::font::RUNEBAG_FRAME_SELECTED << "Rune Point:";
+    std::cout <<RESET;
     changeRunePoint(0,ani::RUNE_POINT_RUN_TIME);
+
+    loadPromptMessage("You find a " + enemy->name + ". Use your runes to beat it");
+
     return;
 }
 
@@ -396,7 +399,7 @@ void Battle::changeRunePoint(short originalCNT,short time)
     Position pos(BATTLE::POS::RUNE_POINT);
     short gap = abs(originalCNT-player->runePoint);
     pos.x += 11;
-    ani::numberChange(pos,originalCNT,player->runePoint,time/gap,2,ansi_color::font::RUNE_POINT_COLOR);
+    ani::numberChange(pos,originalCNT,player->runePoint,time/gap,2,ansi_color::font::RUNE_POINT_COLOR+ansi_color::background::RUNEBAG_FRAME_SELECTED_DARK);
     return;
 }
 
