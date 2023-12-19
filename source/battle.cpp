@@ -289,6 +289,7 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
                 switch (player->myRunes->getConditionType())
                 {
                 case RuneCondition::RuneNotEnough:
+                    loadPromptMessage("Your runePoints are not enough to use!");
                     player->myRunes->selectReset();
                     break;
                 

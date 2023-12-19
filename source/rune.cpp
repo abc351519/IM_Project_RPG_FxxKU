@@ -264,6 +264,18 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
             }
         }
         else if (!isFunction && selectedNum >= 1){
+            if(selectedNum == 1 && runePoint < 4){
+                conditionType = RuneCondition::RuneNotEnough;
+                return false;
+            }
+            else if(selectedNum == 2 && runePoint < 6){
+                conditionType = RuneCondition::RuneNotEnough;
+                return false;
+            }
+            else if(selectedNum == 3 && runePoint < 10){
+                conditionType = RuneCondition::RuneNotEnough;
+                return false;
+            }
             switch (attackType)
             {
                 case FLAME:
