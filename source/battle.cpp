@@ -72,7 +72,7 @@ void Battle::init()
     std::cout <<RESET;
     changeRunePoint(0,ani::RUNE_POINT_RUN_TIME);
 
-    loadPromptMessage("You find a " + enemy->name + ". Use your runes to beat it");
+    loadPromptMessage("You find a " + enemy->name + "; use your runes to beat it.");
 
     return;
 }

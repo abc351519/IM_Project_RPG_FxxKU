@@ -7,12 +7,13 @@ const short MAX_RUNE_COUNT = 8; //最多持有的符文數量
 const short INIT_RUNE_COUNT = 4; //一開始給的符文數
 const short RUNE_GET_ROUNDLY = 2; //每回合給的
 const short MAX_RUNEPOINT = 15;
+
 const short INIT_RUNEPOINTS = 7;
 const short RUNEPOINT_GET_ROUNDLY = 3;
 //可議再商量
 const short RUNE_PER_COST = 6; 
-const short RUNE_SOLD_NORMAL_EARN = 4;
-const short RUNE_SOLD_FUNCTION_EARN = 5;
+const short RUNE_SOLD_NORMAL_EARN = 3;
+const short RUNE_SOLD_FUNCTION_EARN = 6;
 
 namespace odds
 {
@@ -31,8 +32,8 @@ namespace mpConsume
 {
     const short NORMAL_RUNE_ONE = 3; //使用一個攻擊符文
     const short FUNCTION_RUNE = 6; //使用功能符文
-    const short MAKE_UP_LV_TWO = 6; //合成兩個符文
-    const short MAKE_UP_LV_THREE = 10; //合成三個符文
+    const short MAKE_UP_LV_TWO = 5; //合成兩個符文
+    const short MAKE_UP_LV_THREE = 8; //合成三個符文
 };
 
 enum class RuneCondition{
