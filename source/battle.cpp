@@ -41,12 +41,11 @@ void Battle::init()
 
     //玩家
     
-
-
     ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
     ani::setPos(BATTLE::POS::RUNE_POINT);
     std::cout << "Rune Point:";
     changeRunePoint(0,ani::RUNE_POINT_RUN_TIME);
+    Event::loadPromptFrame(RESET);
     return;
 }
 
@@ -71,24 +70,6 @@ void Battle::gameLoop() //結束條件：玩家死掉、玩家退出
 
     }
     return;
-}
-
-std::string Battle::receiveCommand()
-{
-    mtx.lock();
-    std::string input;
-    ani::setPos(BATTLE::POS::COMMAND_LINE); //設定輸入位置
-    std::cout << ansi_color::font::COMMAND_LINE_COLOR << "Type command here: ";
-    ani::curserShow(true); //開啟游標
-
-    std::getline(std::cin,input);
-    
-    std::cout << RESET;
-    FLUSH;
-
-    ani::curserShow(false); //關閉游標
-    mtx.unlock();
-    return input;
 }
 
 void Battle::playerTime()
@@ -362,7 +343,7 @@ void Battle::showRuneSelected(short index)
 
 void Battle::cleanCommandLine()
 {
-    ani::setPos(BATTLE::POS::COMMAND_LINE);
+    ani::setPos(EVENT::POS::COMMAND_LINE);
     std::cout << RESET;
     for ( int i = 0; i < 77; i++ )
         std::cout << ' ';

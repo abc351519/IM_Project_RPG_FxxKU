@@ -17,8 +17,6 @@ namespace BATTLE{
     };
     
     namespace POS{
-        const Position COMMAND_LINE = {3,23};
-        const Position PROMPT_LINE = {0,0}; 
         const Position PLAYER_NAME = {5,5};
         const Position ENEMY_NAME = {46,5};
         const Position PLAYER_HP = {5,7};
@@ -78,7 +76,6 @@ public:
     void init() override; //開啟活動
     void close() override; //關閉活動
     void gameLoop() override; //遊戲循環
-    std::string receiveCommand() override; //輸入指令
     void playerTime();
     void enemyTime();
     bool useMode(double& atkRate,RuneEffect& effect);

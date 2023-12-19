@@ -15,6 +15,15 @@
 short strToShort(std::string str);
 std::string toSmall(std::string str);
 
+namespace EVENT{
+    namespace POS{
+        const Position COMMAND_LINE = {3,23};
+        const Position PROMPT_FRAME = {2,24};
+        const Position PROMPT_LINE = {3,25};
+    };
+};
+
+
 //所有
 enum class Activity : short
 {
@@ -31,10 +40,15 @@ protected:
 public:
     Event(){}
     ~Event(){}
+    std::string receiveCommand(); //輸入指令
+    void loadPromptFrame(const std::string& color);
+    void loadPromptMessage(const std::string& message, const std::string& frameColor, const std::string& Color);
     virtual void init() = 0; //開啟活動
     virtual void close() = 0;//關閉活動
     virtual void gameLoop() = 0; //該事件的遊戲循環
-    virtual std::string receiveCommand() = 0; //輸入指令
+
 };
+
+
 
 #endif

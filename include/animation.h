@@ -70,7 +70,13 @@ namespace unicode{
     SET_CONST_SPSYMBOL(L_PIXEL_5_8,"▋");
     SET_CONST_SPSYMBOL(L_PIXEL_6_8,"▊");
     SET_CONST_SPSYMBOL(L_PIXEL_7_8,"▉");
-    //▓▒░■ █   ▚▞
+    SET_CONST_SPSYMBOL(CORNER_LINE_LD,"┗");
+    SET_CONST_SPSYMBOL(CORNER_LINE_RD,"┛");
+    SET_CONST_SPSYMBOL(CORNER_LINE_RU,"┓");
+    SET_CONST_SPSYMBOL(CORNER_LINE_LU,"┏");
+    SET_CONST_SPSYMBOL(LINE_VERTICAL,"┃");
+    SET_CONST_SPSYMBOL(LINE_HORIZONTAL,"━");
+    //▓▒░■ █   ▚ ▞ ◢ ◣ ◤ ◥       
     SET_CONST_SPSYMBOL(RUNE_AQUA_SYMBOL,"𝕬");//𝓐");
     SET_CONST_SPSYMBOL(RUNE_FLAME_SYMBOL,"𝕴");
     SET_CONST_SPSYMBOL(RUNE_VITALITY_SYMBOL,"𝖁");
