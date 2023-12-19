@@ -313,7 +313,7 @@ void Battle::updateRune(short time)
             break;
         }
         if ( toPrint )
-            ani::renderGrapgh(currentPos,*graph);
+            ani::renderGraph(currentPos,*graph);
         FLUSH;
         mtx.unlock();
         currentPos.x += 7;
@@ -340,13 +340,13 @@ void Battle::showRuneSelected(short index)
     if ( index )
         pos.x += 7*index;
     if ( player->myRunes->isRuneSelected(index) ) { //如果被選了
-        ani::renderGrapgh(pos,BATTLE::ICON::RUNE_FRAME_SELECTED);
+        ani::renderGraph(pos,BATTLE::ICON::RUNE_FRAME_SELECTED);
         pos.y += 4;
         ani::setPos(pos);
         std::cout << ansi_color::background::RUNEBAG_SELECTED_INDEX << ansi_color::font::RUNEBAG_SELECTED_INDEX << index+1;
     } else
     {
-        ani::renderGrapgh(pos,BATTLE::ICON::RUNE_FRAME_DISSELECTED);
+        ani::renderGraph(pos,BATTLE::ICON::RUNE_FRAME_DISSELECTED);
         pos.y += 4;
         ani::setPos(pos);
         std::cout << ansi_color::background::RUNEBAG_INDEX << ansi_color::font::RUNEBAG_INDEX << index+1;

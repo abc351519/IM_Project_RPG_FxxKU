@@ -124,7 +124,7 @@ namespace ansi_color
     };
     namespace background{
         //"\033[48;2;;;m";
-        const std::string BATTLE_COLOR = "\033[48;2;108;51;101m";
+        const std::string BATTLE_COLOR = "\033[48;2;135;206;250m";
 
         const std::string RUNEBAG_FRAME = "\033[48;2;235;235;255m";
         const std::string RUNEBAG_FRAME_DARK = "\033[48;2;129;129;193m";
@@ -204,7 +204,7 @@ namespace ani{
     const short blockWidth = 2; //一格方塊的字元寬度
     const short RUNEBAG_RUN_TIME = 80;
     const short RUNE_SHOW_TIME = 150;
-    const short RUNE_POINT_RUN_TIME = 1000;
+    const short RUNE_POINT_RUN_TIME = 650;
 
 
     void clearScreen();
@@ -222,5 +222,4 @@ namespace ani{
     void renderRuneFrame(const Position& startPoint,const Picture& graph,short amount, short time);
     void numberChange(const Position& startPoint, const int start, const int end, short time, short unit,const std::string& color);
 }
-
 #endif

@@ -367,6 +367,7 @@ void ani::numberChange(const Position& startPoint, const int start, const int en
         {   
             mtx.lock();
             ani::setPos(startPoint);
+            std::cout << color;
             printNiceLy(i,unit);
             mtx.unlock();
             FLUSH;

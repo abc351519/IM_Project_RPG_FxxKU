@@ -75,19 +75,19 @@ void graph::init()
     pixel.change(unicode::CORNER_PIXEL_NORU);
     BATTLE::ICON::RUNE_FLAME_ICON.graph[1][2] = pixel;
 
-    ///////////////////////VITALITY RUNE圖形（火焰形）////////////////////
+    ///////////////////////VITALITY RUNE圖形（地精）////////////////////
     pixel.change(unicode::FULL_PIXEL,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_VITALITY_STONE);
     BATTLE::ICON::RUNE_VITALITY_ICON.graph[2][0] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[3][1] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[1][1] = pixel;
+    BATTLE::ICON::RUNE_VITALITY_ICON.graph[4][1] = pixel;
 
     pixel.change(unicode::DOWN_PIXEL);
     BATTLE::ICON::RUNE_VITALITY_ICON.graph[1][0] = pixel;
     BATTLE::ICON::RUNE_VITALITY_ICON.graph[3][0] = pixel;
-    BATTLE::ICON::RUNE_VITALITY_ICON.graph[1][1] = pixel;
-    BATTLE::ICON::RUNE_VITALITY_ICON.graph[3][1] = pixel;
 
     pixel.change(unicode::CORNER_PIXEL_NOLU);
     BATTLE::ICON::RUNE_VITALITY_ICON.graph[4][0] = pixel;
-    BATTLE::ICON::RUNE_VITALITY_ICON.graph[4][1] = pixel;
 
     pixel.change(unicode::UP_PIXEL);
     BATTLE::ICON::RUNE_VITALITY_ICON.graph[3][2] = pixel;
@@ -98,6 +98,7 @@ void graph::init()
 
     pixel.change(unicode::CORNER_PIXEL_NORU,ansi_color::background::RUNEBAG_BACKGROUND,ansi_color::font::RUNE_VITALITY_STONE_DARK);
     BATTLE::ICON::RUNE_VITALITY_ICON.graph[0][0] = pixel;
+    pixel.change(unicode::FULL_PIXEL);
     BATTLE::ICON::RUNE_VITALITY_ICON.graph[0][1] = pixel;
     pixel.change(unicode::UP_PIXEL);
     BATTLE::ICON::RUNE_VITALITY_ICON.graph[3][2] = pixel;
