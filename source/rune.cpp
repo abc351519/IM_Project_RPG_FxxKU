@@ -471,6 +471,6 @@ bool RuneBag::isRuneSelected(short index)
     return isSelected[index];
 }
 
-RuneCondition RuneBag::getConditionType(){
+RuneCondition RuneBag::getConditionType() const{
     return conditionType;
 }
