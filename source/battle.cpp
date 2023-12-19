@@ -270,18 +270,15 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
         if ( input == BATTLE::Command::USE ) { //玩家確定要使用符文
             short originRunePoints = player->runePoint;
             if ( player->myRunes->use(atkRate,effect, player->runePoint) ) { 
-                //if  使用成功
-                if(effect != RuneEffect::USELESS){
-                    loadPromptMessage("use successfully!");
+                if(effect != RuneEffect::USELESS){ //使用成功
+                    loadPromptMessage(BATTLE::MESSAGE::USE_SUCCESS);
                     changeRunePoint(originRunePoints, ani::RUNE_POINT_RUN_TIME);
                 }
-                    //傳出訊息
-                //if 使用失敗 
-                else if(effect == RuneEffect::USELESS){
-                    loadPromptMessage("use failed!");
+                else if(effect == RuneEffect::USELESS){ //使用失敗
+                    loadPromptMessage(BATTLE::MESSAGE::USE_FAILED);
                     changeRunePoint(originRunePoints, ani::RUNE_POINT_RUN_TIME);
                 }
-                    //傳出訊息
+                //傳出訊息
                 ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
                 updateRune(ani::RUNE_SHOW_TIME); 
                 return true;
@@ -301,14 +298,12 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
                 return false;
             }
         }
-        
         short index = player->myRunes->runeSelectToUse(strToShort(input)); //選擇符文
         if ( index ) { //成功選取
             showRuneSelected(index-1);
         } else { //為成功選取
             //輸出錯誤
         }
-
     }
     return false;
 }
