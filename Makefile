@@ -15,7 +15,7 @@ _DEPS=def.h creature.h animation.h enemy.h player.h area.h event.h battle.h rune
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 #.o file output
 #有新的.o檔打在後面
-_OBJ=main.o creature.o animation.o enemy.o player.o area.o event.o
+_OBJ=main.o creature.o animation.o enemy.o player.o event.o battle.o graph.o rune.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 #原始碼，新的.cpp檔放這裡
 _SRC=main.cpp creature.cpp animation.cpp enemy.cpp player.cpp event.cpp battle.cpp game.cpp rune.cpp graph.cpp
