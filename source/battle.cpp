@@ -56,7 +56,7 @@ void Battle::init()
     eName.join();
     pHp.join();
     eHp.join();
-
+    ani::runMessage(EVENT::POS::PROMPT_LINE,"You find a " + enemy->name + ". Use your runes to beat it",RESET);
     ani::setPos(BATTLE::POS::ENEMY_LV);
     std::cout << RESET;
     std::cout << "Level:";
@@ -65,10 +65,7 @@ void Battle::init()
     std::cout << "Level:";
     printNiceLy(player->lv,2);
     FLUSH;
-    //std::cout << player->maxHp << ' ' << enemy ->maxHp;
-    //使用者介面，畫圖
-    //玩家
-    
+
     ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
     ani::setPos(BATTLE::POS::RUNE_POINT);
     std::cout << "Rune Point:";
@@ -113,7 +110,6 @@ void Battle::playerTime()
     bool isFirst = true;
     RuneEffect effect = RuneEffect::USELESS;
     Event::loadPromptFrame(RESET);
-    ani::runMessage(EVENT::POS::PROMPT_LINE,"You find a " + enemy->name + ". Use your runes to beat it",RESET);
     while ( true )
     {
         ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,0);
@@ -256,8 +252,6 @@ void Battle::enemyTime()
 
 bool Battle::useMode(double& atkRate,RuneEffect& effect)
 {
-    //清除message
-    //輸出
     while ( true )
     {
         std::string input = receiveCommand(); //接收指令

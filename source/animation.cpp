@@ -335,7 +335,7 @@ void ani::runMessage(const Position& startPoint,const std::string& message,std::
         mtx.unlock();
         
         currentPos.x++; //向右移動1
-        SLEEP(MESSAGE_PER_CHAR_LOAD_TIME);
+        SLEEP(ani::MESSAGE_LOAD_TIME/message.length());
     }
     std::cout << RESET;
     SLEEP(ani::MESSAGE_STOP_TIME);

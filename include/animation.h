@@ -216,13 +216,13 @@ namespace ani{
     const short maxHMPSize = 20;
     const int HMP_run_time = 750;
     const int WIN_LOAD_TIME = 1000;
-    const int MESSAGE_PER_CHAR_LOAD_TIME = 1000/30;
+    const int MESSAGE_LOAD_TIME = 1000;
     const short HP_CHAR_WIDTH = 4;
     const short blockWidth = 2; //一格方塊的字元寬度
     const short RUNEBAG_RUN_TIME = 80;
     const short RUNE_SHOW_TIME = 150;
     const short RUNE_POINT_RUN_TIME = 1000;
-    const short MESSAGE_STOP_TIME = 950;
+    const short MESSAGE_STOP_TIME = 1000;
 
     void clearScreen();
     void setPos(short x, short y);

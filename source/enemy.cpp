@@ -10,7 +10,7 @@ std::string Enemy::getSkillName()
 Goblin::Goblin(std::string n)
     : Enemy(n)
 {
-    coolDown = 3;
+    coolDown = 1;
     skillPoint = 0;
     lv = 1;
     maxHp = creature::creatureHpByLv[lv];
