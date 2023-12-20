@@ -219,7 +219,6 @@ void Battle::playerTime()
     }
 
     //輸出訊息
-    
     short originalHp = enemy->nowHp;
     bool enemyIsDead = enemy->normalAttackDamageIsDead(static_cast<short>(static_cast<double>(player->atk)*atkRate));
     short hpGap = originalHp - enemy->nowHp;
@@ -241,7 +240,7 @@ void Battle::enemyTime()
     bool playerIsDead = player->normalAttackDamageIsDead(damage);
     short hpGap = originalHp - player->nowHp;
     if ( attackFlag == Skill::NORMAL ) {
-        loadPromptMessage(enemy->name+" has cause "+std::to_string(hpGap)+" damage on "+player->name+".");
+        loadPromptMessage(enemy->name+" has caused "+std::to_string(hpGap)+" damage on "+player->name+".");
     } else if( attackFlag == Skill::DOUBLE_CRITICAL ) {
         loadPromptMessage(enemy->name+" use skill, \"DOUBLE CRITICAL\", cause "+std::to_string(hpGap)+" damage on "+player->name+"!!?");
     } else {

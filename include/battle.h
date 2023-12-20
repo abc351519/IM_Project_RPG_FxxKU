@@ -36,7 +36,7 @@ namespace BATTLE{
         const std::string CHOOSING_SESSION = "Select your Freakin action mode.";
         const std::string SELECT_CANCEL = "Cancel successfully!";
         const std::string INPUT_ERROR = "Something is wrong with your input command.";
-        const std::string ESCAPE_TRYING = "You cannot escape from this battle.";
+        const std::string ESCAPE_TRYING = "You cannot escape from this battle lol.";
         const std::string BUY_RUNE_SUCCESS = "You purchase a rune successfully!!!";
         const std::string PLAYER_WIN = "Congrates, you'v win the battle! ! !";
         const std::string PLAYER_LOSE = "Wasted. You are dead.";
