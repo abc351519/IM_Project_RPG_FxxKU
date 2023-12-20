@@ -342,13 +342,13 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
                     break;
                 case VITALITY:
                     if(selectedNum == 1){
-                        attackRate = 1;
+                        attackRate = attackRate::RUNE_ONE;
                         effect = RuneEffect::VITALITYNORMAL;
                         runePoint -= mpConsume::NORMAL_RUNE_ONE;
                     }
                     else if(selectedNum == 2){
                         if(makeUpLevelTwoRate()){
-                            attackRate = 1.6;
+                            attackRate = attackRate::RUNE_TWO;
                             effect = RuneEffect::VITALITYNORMAL;
                             runePoint -= mpConsume::MAKE_UP_LV_TWO;
                         }
@@ -360,7 +360,7 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
                     }
                     else if(selectedNum == 3){
                         if(makeUpLevelThreeRate()){
-                            attackRate = 2.5;
+                            attackRate = attackRate::RUNE_THREE
                             effect = RuneEffect::VITALITYATTACK;   
                             runePoint -= mpConsume::MAKE_UP_LV_THREE;
                         }
