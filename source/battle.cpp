@@ -215,19 +215,22 @@ void Battle::playerTime()
     case RuneEffect::VITALITYATTACK:
         break;*/
     default:
+         std::cout << enemy->nowHp;
         break;    
     }
 
     //輸出訊息
     short originalHp = enemy->nowHp;
-    bool enemyIsDead = enemy->normalAttackDamageIsDead(static_cast<short>(static_cast<double>(player->atk)*atkRate));
+    bool enemyIsDead = enemy->normalAttackDamageIsDead(static_cast<short>((static_cast<double>(player->atk))*atkRate));
     short hpGap = originalHp - enemy->nowHp;
-    ani::numberChange(BATTLE::POS::ENEMY_HP+22,originalHp,enemy->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
+    if(hpGap)
+        ani::numberChange(BATTLE::POS::ENEMY_HP+22,originalHp,enemy->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
     loadPromptMessage("You have made " + std::to_string(hpGap) + " damage to the " + enemy->name + ".");
     if ( enemyIsDead ) { //如果敵人死掉
         gameFlag = gameLoopFlag::PLAYER_WIN; //宣告玩家勝利
         return;
     }
+    
     return;
 }
 
@@ -246,7 +249,8 @@ void Battle::enemyTime()
     } else {
         std::cerr << "SOMTHIN WENT WRONG.";
     }
-    ani::numberChange(BATTLE::POS::PLAYER_HP+22,originalHp,player->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
+    if(hpGap)
+        ani::numberChange(BATTLE::POS::PLAYER_HP+22,originalHp,player->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
     if ( playerIsDead ) {
         gameFlag = gameLoopFlag::PLAYER_LOSE;
     }

@@ -360,7 +360,7 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
                     }
                     else if(selectedNum == 3){
                         if(makeUpLevelThreeRate()){
-                            attackRate = attackRate::RUNE_THREE
+                            attackRate = attackRate::RUNE_THREE;
                             effect = RuneEffect::VITALITYATTACK;   
                             runePoint -= mpConsume::MAKE_UP_LV_THREE;
                         }
