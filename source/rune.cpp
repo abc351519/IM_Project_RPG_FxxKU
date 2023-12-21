@@ -276,98 +276,73 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
                 conditionType = RuneCondition::RuneNotEnough;
                 return false;
             }
+            bool checkSuccess = false;
+            if(selectedNum == 1){
+                attackRate = attackRate::RUNE_ONE;
+                runePoint -= mpConsume::NORMAL_RUNE_ONE;
+            }
+            if(selectedNum == 2){
+                if(makeUpLevelTwoRate()){
+                    attackRate = attackRate::RUNE_TWO;
+                    runePoint -= mpConsume::MAKE_UP_LV_TWO;
+                    checkSuccess = true;
+                }
+                else{
+                    attackRate = 0;
+                    effect = RuneEffect::USELESS;
+                    runePoint -= (mpConsume::MAKE_UP_LV_TWO/2);
+                }
+            }
+            if(selectedNum == 3){
+                if(makeUpLevelThreeRate()){
+                    attackRate = attackRate::RUNE_THREE;
+                    runePoint -= mpConsume::MAKE_UP_LV_THREE;
+                    checkSuccess = true;
+                }
+                else{
+                    attackRate = 0;
+                    effect = RuneEffect::USELESS;
+                    runePoint -= (mpConsume::MAKE_UP_LV_THREE/2);
+                }
+            }
             switch (attackType)
             {
                 case FLAME:
-                    if(selectedNum == 1){
-                        attackRate = 1;
+                    if(selectedNum == 1)
                         effect = RuneEffect::FLAMENORMAL;
-                        runePoint -= mpConsume::NORMAL_RUNE_ONE;
-                    }
+                    
                     else if(selectedNum == 2){
-                        if(makeUpLevelTwoRate()){
-                            attackRate = 1.6;
+                        if(checkSuccess)
                             effect = RuneEffect::FLAMENORMAL;
-                            runePoint -= mpConsume::MAKE_UP_LV_TWO;
-                        }
-                        else{
-                            attackRate = 0;
-                            effect = RuneEffect::USELESS;
-                            runePoint -= (mpConsume::MAKE_UP_LV_TWO/2);
-                        }
+                        
                     }
                     else if(selectedNum == 3){
-                        if(makeUpLevelThreeRate()){
-                            attackRate = 2.5;
+                        if(checkSuccess)
                             effect = RuneEffect::FLAMEATTACK;
-                            runePoint -= mpConsume::MAKE_UP_LV_THREE;
-                        }
-                        else{
-                            attackRate = 0;
-                            effect = RuneEffect::USELESS;
-                            runePoint -= (mpConsume::MAKE_UP_LV_THREE/2);
-                        }
                     }
                     break;
                 case AQUA:
-                    if(selectedNum == 1){
-                        attackRate = 1;
+                    if(selectedNum == 1)
                         effect = RuneEffect::AQUANORMAL;
-                        runePoint -= mpConsume::NORMAL_RUNE_ONE;
-                    }
                     else if(selectedNum == 2){
-                        if(makeUpLevelTwoRate()){
-                            attackRate = 1.6;
+                        if(checkSuccess)
                             effect = RuneEffect::AQUANORMAL;
-                            runePoint -= mpConsume::MAKE_UP_LV_TWO;
-                        }
-                        else{
-                            attackRate = 0;
-                            effect = RuneEffect::USELESS;
-                            runePoint -= (mpConsume::MAKE_UP_LV_TWO/2);
-                        }
                     }
                     else if(selectedNum == 3){
-                        if(makeUpLevelThreeRate()){
-                            attackRate = 2.5;
+                        if(checkSuccess)
                             effect = RuneEffect::AQUAATTACK;
-                            runePoint -= mpConsume::MAKE_UP_LV_THREE;
-                        }
-                        else{
-                            attackRate = 0;
-                            effect = RuneEffect::USELESS;
-                            runePoint -= (mpConsume::MAKE_UP_LV_THREE/2);
-                        }
                     }
                     break;
                 case VITALITY:
-                    if(selectedNum == 1){
-                        attackRate = attackRate::RUNE_ONE;
+                    if(selectedNum == 1)
                         effect = RuneEffect::VITALITYNORMAL;
-                        runePoint -= mpConsume::NORMAL_RUNE_ONE;
-                    }
                     else if(selectedNum == 2){
-                        if(makeUpLevelTwoRate()){
-                            attackRate = attackRate::RUNE_TWO;
+                        if(checkSuccess)
                             effect = RuneEffect::VITALITYNORMAL;
-                            runePoint -= mpConsume::MAKE_UP_LV_TWO;
-                        }
-                        else{
-                            attackRate = 0;
-                            effect = RuneEffect::USELESS;
-                            runePoint -= (mpConsume::MAKE_UP_LV_TWO/2);
-                        }
                     }
                     else if(selectedNum == 3){
-                        if(makeUpLevelThreeRate()){
-                            attackRate = attackRate::RUNE_THREE;
+                        if(checkSuccess){
                             effect = RuneEffect::VITALITYATTACK;   
-                            runePoint -= mpConsume::MAKE_UP_LV_THREE;
-                        }
-                        else{
-                            attackRate = 0;
-                            effect = RuneEffect::USELESS;
-                            runePoint -= (mpConsume::MAKE_UP_LV_THREE/2);
                         }
                     }
                     break;

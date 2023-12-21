@@ -215,7 +215,6 @@ void Battle::playerTime()
     case RuneEffect::VITALITYATTACK:
         break;*/
     default:
-         std::cout << enemy->nowHp;
         break;    
     }
 
