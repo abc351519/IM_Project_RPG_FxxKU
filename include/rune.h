@@ -82,8 +82,8 @@ enum Rune : short
     VITALITY,
     
     HEAL,
-    DEBUFF,
-    BUFF
+    BUFF,
+    DEBUFF
 };
 
 class RuneBag
