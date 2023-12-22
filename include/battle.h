@@ -44,6 +44,9 @@ namespace BATTLE{
         const std::string RUNE_POINT_NOT_ENOUGH = "Your runePoints are not enough to use!";
         const std::string USE_SUCCESS = "Use successfully!";
         const std::string USE_FAILED = "Use failed!";
+        const std::string USE_FLAMEBUFF = "Use " + ansi_color::font::RUNE_FLAME_STONE + "FLAMEBUFF" + RESET + " increase your ATK.";
+        const std::string USE_AQUABUFF = "Use " + ansi_color::font::RUNE_AQUA_STONE + "AQUABUFF" + RESET + " decrease the damage from Enemy.";
+        const std::string USE_VITALITYBUFF = "Use " + ansi_color::font::RUNE_VITALITY_STONE + "VATILITYBUFF" + RESET + " increase your DEF.";
         std::string RETURN_POINT(short n);
     };
     namespace ICON{

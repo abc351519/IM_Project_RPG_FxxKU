@@ -171,11 +171,12 @@ void Battle::playerTime()
             continue;
         }
     }
+    double buffDamageRate = 1.0;
     switch ( effect ) //結算傷害 ， 增加效果
     {
     case RuneEffect::AQUAATTACK:
-    
-    case RuneEffect::AQUANORMAL: 
+    case RuneEffect::AQUANORMAL:
+        enemy->effect = effect; //敵人的效果
         if ( enemy->element == EnemyElement::FLAME ) { //克制
             atkRate *= BATTLE::atkRateCounter::DOMINANT;
         } else if ( enemy->element == EnemyElement::VITALITY ) { //被克制
@@ -183,8 +184,8 @@ void Battle::playerTime()
         }
         break;
     case RuneEffect::FLAMEATTACK:
-
     case RuneEffect::FLAMENORMAL:
+        enemy->effect = effect; //敵人的效果
         if ( enemy->element == EnemyElement::VITALITY ) { //克制
             atkRate *= BATTLE::atkRateCounter::DOMINANT;
         } else if ( enemy->element == EnemyElement::AQUA ) { //被克制
@@ -192,43 +193,63 @@ void Battle::playerTime()
         }
         break;
     case RuneEffect::VITALITYATTACK:
-
     case RuneEffect::VITALITYNORMAL:
+        enemy->effect = effect; //敵人的效果
         if ( enemy->element == EnemyElement::AQUA ) { //克制
             atkRate *= BATTLE::atkRateCounter::DOMINANT;
         } else if ( enemy->element == EnemyElement::FLAME ) { //被克制
             atkRate *= BATTLE::atkRateCounter::COUNTERED;
         }
         break;
+    //ＢＵＦＦ
     case RuneEffect::FLAMEBUFF:
-        
-        break;
-    case RuneEffect::FLAMEDEBUFF:
-        
+        effect = RuneEffect::USELESS;
+        //增加玩家攻擊力
+        player->atkbuff += static_cast<unsigned short>(static_cast<double>(player->atk)*function::FLAMEBUFF_RATE); 
+        loadPromptMessage(BATTLE::MESSAGE::USE_FLAMEBUFF);
         break;
     case RuneEffect::AQUABUFF:
-        
-        break;
-    case RuneEffect::AQUADEBUFF:
-        
+        effect = RuneEffect::USELESS;
+        player->effect = RuneEffect::AQUABUFF;
+        loadPromptMessage(BATTLE::MESSAGE::USE_AQUABUFF);
         break;
     case RuneEffect::VITALITYBUFF:
-        
+        effect = RuneEffect::USELESS;
+        //增加玩家防禦力
+        player->defbuff += static_cast<unsigned short>(static_cast<double>(player->def)*function::VITALITYBUFF_RATE); 
+        loadPromptMessage(BATTLE::MESSAGE::USE_VITALITYBUFF);
+        break;
+    //ＤＥＢＵＦＦ
+    case RuneEffect::FLAMEDEBUFF:
+        enemy->defbuff -= static_cast<unsigned short>(static_cast<double>(enemy->def)*function::); 
+        loadPromptMessage("FDB");
+        break;
+    case RuneEffect::AQUADEBUFF:
+        loadPromptMessage("ADB");
         break;
     case RuneEffect::VITALITYDEBUFF:
-        
+        loadPromptMessage("VDB");
+        break;
+    case RuneEffect::FLAMEHEAL:
+        loadPromptMessage("FH");
+        break;
+    case RuneEffect::AQUAHEAL:
+        loadPromptMessage("AH");
+        break;
+    case RuneEffect::VITALITYHEAL:
+        loadPromptMessage("VH");
         break;
     case RuneEffect::USELESS:
         break;
     default:
-        std::cerr << "SKILL IS WRONG";
+        loadPromptMessage("FUCKYOU");
         break;    
     }
-
+    
     //輸出訊息
-    if ( effect != RuneEffect::USELESS ) { //如果成功攻擊
+    if ( effect != RuneEffect::USELESS && effect <= RuneEffect::VITALITYATTACK ) { //如果成功攻擊而且是一般攻擊
         short originalHp = enemy->nowHp;
-        bool enemyIsDead = enemy->normalAttackDamageIsDead(static_cast<short>((static_cast<double>(player->getAtk()))*atkRate));
+        bool enemyIsDead = enemy->normalAttackDamageIsDead(static_cast<short>((static_cast<double>(player->getAtk()))*buffDamageRate*atkRate));
         short hpGap = originalHp - enemy->nowHp;
         if ( hpGap ) {
             ani::numberChange(BATTLE::POS::ENEMY_HP+22,originalHp,enemy->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
@@ -239,7 +260,6 @@ void Battle::playerTime()
             return;
         }
     }
-    
     return;
 }
 

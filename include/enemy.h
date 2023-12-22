@@ -30,6 +30,7 @@ public:
         : Creature(n)
     {};
     ~Enemy(){};
+    bool normalAttackDamageIsDead(short damage);
     friend class Battle;
     std::string getSkillName();
     virtual short skill(Skill& skill) = 0; //敵人的技能

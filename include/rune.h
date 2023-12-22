@@ -15,6 +15,13 @@ const short RUNE_PER_COST = 6;
 const short RUNE_SOLD_NORMAL_EARN = 3;
 const short RUNE_SOLD_FUNCTION_EARN = 6;
 
+namespace function{
+    const double AQUABUFF_RATE = 0.5;
+    const double FLAMEBUFF_RATE = 0.3;
+    const double VITALITYBUFF_RATE = 0.5;
+    const double 
+};
+
 namespace attackRate{
     const double RUNE_ONE = 1.0;
     const double RUNE_TWO = 1.6;
@@ -24,8 +31,8 @@ namespace attackRate{
 namespace odds
 {
     //各種符文出現機率
-    const short APPEAR_FUNCTION_RUNE = 15;
-    const short APPEAR_NORMAL_RUNE = 85;
+    const short APPEAR_FUNCTION_RUNE = 50;//15;
+    const short APPEAR_NORMAL_RUNE = 50;//85;
     //等級合成機率
     const short MAKE_UP_LV_TWO = 70;
     const short MAKE_UP_LV_THREE = 40;
@@ -50,13 +57,17 @@ enum class RuneCondition{
 };
 
 
-enum class RuneEffect
+enum class RuneEffect : short
 {
     USELESS,
 
     FLAMENORMAL,
     AQUANORMAL,
     VITALITYNORMAL,
+
+    FLAMEATTACK,
+    AQUAATTACK,
+    VITALITYATTACK,
 
     FLAMEHEAL,
     AQUAHEAL,
@@ -70,9 +81,7 @@ enum class RuneEffect
     AQUADEBUFF,
     VITALITYDEBUFF,
     
-    FLAMEATTACK,
-    AQUAATTACK,
-    VITALITYATTACK
+
 };
 
 enum Rune : short

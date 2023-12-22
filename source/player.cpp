@@ -14,10 +14,21 @@ Player::Player(std::string n)
 Player::~Player()
 {}
 
+bool Player::normalAttackDamageIsDead(short damage)
+{
+    if ( effect == RuneEffect::AQUABUFF ) { //如果玩家有這個buff則減傷
+        damage *= function::AQUABUFF_RATE;
+    }
+    return Creature::normalAttackDamageIsDead(damage);
+}
+
 void Player::startGameValueSet(){
-    runePoint = INIT_RUNEPOINTS;
-    nowHp = maxHp;
-    myRunes = new RuneBag();
+    runePoint = INIT_RUNEPOINTS; //符文點數重置
+    nowHp = maxHp; //血量重置
+    //buff數值重置
+    atkbuff = 0;
+    defbuff = 0;
+    myRunes = new RuneBag(); //符文包包重置
 }
 
 void Player::refreshRoundly()

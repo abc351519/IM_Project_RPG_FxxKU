@@ -16,6 +16,7 @@ class Battle;
 class Creature
 {
 protected:
+    RuneEffect effect = RuneEffect::USELESS;
     std::string name; // name
     short maxHp; // health
     short nowHp; 

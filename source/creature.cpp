@@ -17,10 +17,14 @@ bool Creature::normalAttackDamageIsDead(short damage){
 
 short Creature::getAtk()
 {
+    if ( atkbuff + atk < 0 )
+        return 0;
     return atk + atkbuff;
 }
 
 short Creature::getDef()
 {
+    if ( def + defbuff < 0 )
+        return 0;
     return def + defbuff;
 }

@@ -7,6 +7,11 @@ std::string Enemy::getSkillName()
     return skillName;
 }
 
+bool Enemy::normalAttackDamageIsDead(short damage)
+{
+    return Creature::normalAttackDamageIsDead(damage);
+}
+
 Goblin::Goblin(std::string n)
     : Enemy(n)
 {
@@ -31,8 +36,10 @@ short Goblin::skill(Skill& skill)
 }
 
 
+
 short Goblin::attack(Skill& skil)
 {
+    
     if ( skillPoint >= coolDown ) {
         return skill(skil);
     }

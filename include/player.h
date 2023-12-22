@@ -16,6 +16,7 @@ public:
     Player(std::string n);
     ~Player();
     friend class Battle;
+    bool normalAttackDamageIsDead(short damage);
     void startGameValueSet();
     void refreshRoundly();
     bool refreshExp(short enemyLv); //return if level up
