@@ -38,8 +38,8 @@ namespace mpConsume
 {
     const short NORMAL_RUNE_ONE = 3; //使用一個攻擊符文
     const short FUNCTION_RUNE = 6; //使用功能符文
-    const short MAKE_UP_LV_TWO = 5; //合成兩個符文
-    const short MAKE_UP_LV_THREE = 8; //合成三個符文
+    const short MAKE_UP_LV_TWO = 6; //合成兩個符文
+    const short MAKE_UP_LV_THREE = 10; //合成三個符文
 };
 
 enum class RuneCondition{

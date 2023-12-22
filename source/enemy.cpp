@@ -14,6 +14,7 @@ Goblin::Goblin(std::string n)
     skillPoint = 0;
     lv = 1;
     maxHp = creature::creatureHpByLv[lv];
+    nowHp = maxHp;
     def = creature::creatureDefByLv[lv];
     atk = creature::creatureAtkByLv[lv];
     element = EnemyElement::VITALITY;

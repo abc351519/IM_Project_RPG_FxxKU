@@ -2,6 +2,11 @@
 #include "thread"
 #include <cmath>
 
+std::string BATTLE::MESSAGE::RETURN_POINT(short n)
+{
+    return "Return " + std::to_string(n) + " Rune Points.";
+}
+
 void Battle::loadMode(const std::string& opt)
 {
     mtx.lock();
@@ -195,34 +200,44 @@ void Battle::playerTime()
             atkRate *= BATTLE::atkRateCounter::COUNTERED;
         }
         break;
-    /*
     case RuneEffect::FLAMEBUFF:
+        
         break;
     case RuneEffect::FLAMEDEBUFF:
+        
         break;
     case RuneEffect::AQUABUFF:
+        
         break;
     case RuneEffect::AQUADEBUFF:
+        
         break;
     case RuneEffect::VITALITYBUFF:
+        
         break;
     case RuneEffect::VITALITYDEBUFF:
+        
         break;
-    */
+    case RuneEffect::USELESS:
+        break;
     default:
+        std::cerr << "SKILL IS WRONG";
         break;    
     }
 
     //輸出訊息
-    short originalHp = enemy->nowHp;
-    bool enemyIsDead = enemy->normalAttackDamageIsDead(static_cast<short>((static_cast<double>(player->atk))*atkRate));
-    short hpGap = originalHp - enemy->nowHp;
-    if(hpGap)
-        ani::numberChange(BATTLE::POS::ENEMY_HP+22,originalHp,enemy->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
-    loadPromptMessage("You have made " + std::to_string(hpGap) + " damage to the " + enemy->name + ".");
-    if ( enemyIsDead ) { //如果敵人死掉
-        gameFlag = gameLoopFlag::PLAYER_WIN; //宣告玩家勝利
-        return;
+    if ( effect != RuneEffect::USELESS ) { //如果成功攻擊
+        short originalHp = enemy->nowHp;
+        bool enemyIsDead = enemy->normalAttackDamageIsDead(static_cast<short>((static_cast<double>(player->getAtk()))*atkRate));
+        short hpGap = originalHp - enemy->nowHp;
+        if ( hpGap ) {
+            ani::numberChange(BATTLE::POS::ENEMY_HP+22,originalHp,enemy->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
+        }
+        loadPromptMessage("You have made " + std::to_string(hpGap) + " damage to the " + enemy->name + ".");
+        if ( enemyIsDead ) { //如果敵人死掉
+            gameFlag = gameLoopFlag::PLAYER_WIN; //宣告玩家勝利
+            return;
+        }
     }
     
     return;
@@ -273,6 +288,10 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
                 }
                 else if(effect == RuneEffect::USELESS){ //使用失敗
                     loadPromptMessage(BATTLE::MESSAGE::USE_FAILED);
+                    short runePointGap = originRunePoints-player->runePoint;
+                    if ( runePointGap ) {
+                        loadPromptMessage(BATTLE::MESSAGE::RETURN_POINT(runePointGap));
+                    }
                     changeRunePoint(originRunePoints, ani::RUNE_POINT_RUN_TIME);
                 }
                 //傳出訊息
