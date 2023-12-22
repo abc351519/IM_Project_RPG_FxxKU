@@ -14,12 +14,11 @@ void RuneBag::clearUsedRune()
     return;
 }
 
-
+//選取重置，所有取消選取
 void RuneBag::clearSelectedRune()
 {    
     for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
         isSelected[i] = false;
-    
     attackType = 0;
     functionType = 0;
     isFunction = false;
@@ -180,9 +179,13 @@ short RuneBag::runeSelectToUse(short index)
 
 bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
 {   
-    if((isFunction && selectedNum == 1) || (selectedNum == 0))
+    if ( isFunction && selectedNum == 1 ) { //只選了一個功能牌
+        conditionType = RuneCondition::ONLY_ONE_FUNCTION; 
         return false;
-    else{
+    } else if ( selectedNum == 0 ) { //啥隆謀
+        conditionType = RuneCondition::NOTHING_CHOOSED;
+        return false;
+    } else {
         if(isFunction && (selectedNum == 2)){
             if(runePoint < 7){
                 conditionType = RuneCondition::RuneNotEnough;
@@ -430,15 +433,6 @@ bool RuneBag::buyRune(short& runePoint)
         return true;
     }
     return false;
-}
-
-//選取重置，所有取消選取
-void RuneBag::selectReset()
-{
-    selectedNum = 0;
-    for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
-        isSelected[i] = false;  //將所有的符文標記為未選取
-    return;
 }
 
 short RuneBag::getRuneCount()
