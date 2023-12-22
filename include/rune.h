@@ -21,6 +21,7 @@ namespace function{
     const double VITALITYBUFF_RATE = 0.5;
     const double FLAMEDEBUFF_RATE = 0.2;
     const double AQUADEBUFF_RATE = 0.3;
+    const double AQUAHEAL_RATE = 0.3;
 };
 
 namespace attackRate{
@@ -120,6 +121,8 @@ public:
     short getRune(short index);
     bool isRuneSelected(short index);
     RuneCondition getConditionType() const;
+    void clearSelectedRune();
+    void clearUsedRune();
 };
 
 #endif

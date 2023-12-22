@@ -2,6 +2,11 @@
 #include "thread"
 #include <cmath>
 
+std::string BATTLE::MESSAGE::USE_AQUAHEAL(short healHp)
+{
+    return "You've used AQUAHEAL and restored " + std::to_string(healHp) + " HP.";
+}
+
 std::string BATTLE::MESSAGE::RETURN_POINT(short n)
 {
     return "Return " + std::to_string(n) + " Rune Points.";
@@ -122,6 +127,7 @@ void Battle::playerTime()
 {
     double atkRate = 1.0;
     bool isFirst = true;
+    player->myRunes->clearSelectedRune();
     RuneEffect effect = RuneEffect::USELESS;
     Event::loadPromptFrame(RESET);
     while ( true )
@@ -142,6 +148,7 @@ void Battle::playerTime()
         cleanCommandLine();  //清除使用者的痕跡
         if ( input == BATTLE::Command::USE ) { //進入使用模式
             loadMode("use");
+            player->myRunes->clearSelectedRune(); //清空選擇
             if ( useMode(atkRate,effect) ) { //如果使用成功則進入下一關
                 loadMode("");
                 break;
@@ -155,9 +162,12 @@ void Battle::playerTime()
                 updateRune(0);  //更新符文
                 changeRunePoint(originPoint,1000); //更新點數
                 loadPromptMessage(BATTLE::MESSAGE::BUY_RUNE_SUCCESS);
+            } else { //購買失敗
+                loadPromptMessage(BATTLE::MESSAGE::BUY_RUNE_FAIL);
             }
             continue;
         } else if ( input == BATTLE::Command::SELL ) { //進入選賣
+            player->myRunes->clearSelectedRune();
             loadMode("sell");
             sellMode();
             continue;
@@ -174,6 +184,8 @@ void Battle::playerTime()
         }
     }
     double buffDamageRate = 1.0;
+    short originalHp = enemy->nowHp;
+    short hpGap = 0;
     switch ( effect ) //結算傷害 ， 增加效果
     {
     case RuneEffect::AQUAATTACK:
@@ -250,10 +262,20 @@ void Battle::playerTime()
         effect = RuneEffect::USELESS;
         loadPromptMessage("FH");
         break;
-    case RuneEffect::AQUAHEAL:
+    //立即回復
+    case RuneEffect::AQUAHEAL: //回血30%
         //表示非攻擊
         effect = RuneEffect::USELESS;
-        loadPromptMessage("AH");
+        //回血
+        originalHp = player->nowHp;
+        player->heal(function::AQUAHEAL_RATE);
+        //跑血量
+        hpGap = player->nowHp - originalHp;
+        loadPromptMessage(BATTLE::MESSAGE::USE_AQUAHEAL(hpGap));
+        if ( hpGap ) {
+            ani::numberChange(BATTLE::POS::PLAYER_HP+22,originalHp,player->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
+        }
+        
         break;
     case RuneEffect::VITALITYHEAL:
         //表示非攻擊
@@ -269,9 +291,9 @@ void Battle::playerTime()
     
     //輸出訊息
     if ( effect != RuneEffect::USELESS && effect <= RuneEffect::VITALITYATTACK ) { //如果成功攻擊而且是一般攻擊
-        short originalHp = enemy->nowHp;
+        originalHp = enemy->nowHp;
         bool enemyIsDead = enemy->normalAttackDamageIsDead(static_cast<short>((static_cast<double>(player->getAtk()))*buffDamageRate*atkRate));
-        short hpGap = originalHp - enemy->nowHp;
+        hpGap = originalHp - enemy->nowHp;
         if ( hpGap ) {
             ani::numberChange(BATTLE::POS::ENEMY_HP+22,originalHp,enemy->nowHp,ani::HMP_run_time/hpGap,4,RESET); //更新血量（已更新）
         }
@@ -336,6 +358,7 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
                     changeRunePoint(originRunePoints, ani::RUNE_POINT_RUN_TIME);
                 }
                 //傳出訊息
+                player->myRunes->clearSelectedRune();
                 ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,ani::RUNEBAG_RUN_TIME);
                 updateRune(ani::RUNE_SHOW_TIME); 
                 return true;

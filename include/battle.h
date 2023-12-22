@@ -39,6 +39,7 @@ namespace BATTLE{
         const std::string INPUT_ERROR = "Something is wrong with your input command.";
         const std::string ESCAPE_TRYING = "You cannot escape from this battle lol.";
         const std::string BUY_RUNE_SUCCESS = "You've purchased a rune successfully!!!";
+        const std::string BUY_RUNE_FAIL = "You don't have enough Rune Point to buy one.";
         const std::string PLAYER_WIN = "Congrates, you've win the battle! ! !";
         const std::string PLAYER_LOSE = "Wasted. You are dead lol.";
         const std::string RUNE_POINT_NOT_ENOUGH = "Your runePoints are not enough to use!";
@@ -50,6 +51,7 @@ namespace BATTLE{
         const std::string USE_FLAMEDEBUFF = "You've used FLAMEDEBUFF and decreased ENEMY'S DEF.";
         const std::string USE_AQUADEBUFF = "You've used AQUADEBUFF and decreased ENEMY'S ATK.";
         const std::string USE_VATILITYDEBUFF = "You've used VATILITYDEBUFF and rooted the ENEMY.";
+        std::string USE_AQUAHEAL(short healHp);
         std::string RETURN_POINT(short n);
     };
     namespace ICON{

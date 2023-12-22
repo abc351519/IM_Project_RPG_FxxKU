@@ -5,6 +5,28 @@
 #include <iostream>
 
 
+void RuneBag::clearUsedRune()
+{
+    for ( int i = runes.size() - 1; i >= 0; i-- )
+        if ( isSelected[i] ){
+            runes.erase( runes.begin()+i );
+        }
+    return;
+}
+
+
+void RuneBag::clearSelectedRune()
+{    
+    for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
+        isSelected[i] = false;
+    
+    attackType = 0;
+    functionType = 0;
+    isFunction = false;
+    selectedNum = 0;
+    return;
+}
+
 short randomRune()
 {
     
@@ -350,18 +372,7 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
                     break;
             }
         }
-        for ( int i = runes.size() - 1; i >= 0; i-- )
-            if ( isSelected[i] ){
-                runes.erase( runes.begin()+i );
-            }
-        
-        for ( int i = 0; i < MAX_RUNE_COUNT; i++ )
-            isSelected[i] = false;
-        
-        attackType = 0;
-        functionType = 0;
-        isFunction = false;
-        selectedNum = 0;
+        clearUsedRune(); //使用過的清除
         return true;
     }
 }

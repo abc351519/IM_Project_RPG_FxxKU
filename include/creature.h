@@ -31,6 +31,7 @@ public:
     Creature(std::string n); // constructor
     ~Creature(){}; // distructor
     bool normalAttackDamageIsDead(short damage); //根據對方的攻擊損失血量  
+    void heal(double rate);
     short getDef();
     short getAtk();
 };

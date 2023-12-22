@@ -28,3 +28,12 @@ short Creature::getDef()
         return 0;
     return def + defbuff;
 }
+
+void Creature::heal(double rate)
+{
+    nowHp += static_cast<short>(static_cast<double>(maxHp)*rate);
+    if ( nowHp > maxHp ) {
+        nowHp = maxHp;
+    }
+    return;
+}
