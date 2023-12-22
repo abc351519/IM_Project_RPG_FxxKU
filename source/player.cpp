@@ -7,6 +7,7 @@ Player::Player(std::string n)
     atk = creature::creatureAtkByLv[lv];
     def = creature::creatureDefByLv[lv];
     maxHp = creature::creatureHpByLv[lv];
+    nowHp = maxHp;
     myRunes = nullptr;
 }
 
@@ -49,6 +50,8 @@ bool Player::refreshExp(short enemyLv){
 void Player::sellToGetRunePoints(short gainPoints){ runePoint += gainPoints; }
 
 void Player::endBattle(){
+    atkbuff = 0;
+    defbuff = 0;
     delete myRunes;
     myRunes = nullptr;
 }

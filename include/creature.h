@@ -2,14 +2,7 @@
 #define CREATURE_H
 #include <iostream>
 #include <string>
-
-enum class Element //屬性
-{
-    FLAME, //火
-    AQUA, //水
-    VITALITY, //木
-    NONE //無屬
-};
+#include "rune.h"
 
 namespace creature{
     const short creatureHpByLv[11] = {0,100,200,330,500,700,900,1120,1400,1710,2000};
@@ -29,11 +22,16 @@ protected:
     short lv; // level
     short atk; // attack
     short def; // defend
+    short atkbuff;
+    short defbuff;
+
 public:
     Creature(){};
     Creature(std::string n); // constructor
     ~Creature(){}; // distructor
     bool normalAttackDamageIsDead(short damage); //根據對方的攻擊損失血量  
+    short getDef();
+    short getAtk();
 };
 
 #endif

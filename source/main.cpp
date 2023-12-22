@@ -21,9 +21,6 @@ int main()
 
     ani::curserShow(false);
     ani::clearScreen();
-    
-    
-
 
     Goblin e("GOBU");
     Battle b(p,&e);

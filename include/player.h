@@ -3,7 +3,6 @@
 
 #include <string>
 #include "creature.h"
-#include "rune.h"
 
 const short lvThreshold[9] = {100,150,200,275,350,425,550,675,800};
 

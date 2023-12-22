@@ -44,8 +44,7 @@ namespace BATTLE{
         const std::string RUNE_POINT_NOT_ENOUGH = "Your runePoints are not enough to use!";
         const std::string USE_SUCCESS = "Use successfully!";
         const std::string USE_FAILED = "Use failed!";
-
-            
+        std::string RETURN_POINT(short n);
     };
     namespace ICON{
         extern Picture RUNE_FRAME;
