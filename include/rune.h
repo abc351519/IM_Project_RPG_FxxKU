@@ -19,7 +19,8 @@ namespace function{
     const double AQUABUFF_RATE = 0.5;
     const double FLAMEBUFF_RATE = 0.3;
     const double VITALITYBUFF_RATE = 0.5;
-    const double 
+    const double FLAMEDEBUFF_RATE = 0.2;
+    const double AQUADEBUFF_RATE = 0.3;
 };
 
 namespace attackRate{

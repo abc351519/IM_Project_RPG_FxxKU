@@ -101,7 +101,9 @@ void Battle::gameLoop() //結束條件：玩家死掉、玩家退出
                 loadPromptMessage(BATTLE::MESSAGE::PLAYER_WIN);
                 break;
             }
-            enemyTime(); //敵人回合
+            if ( enemy->effect != RuneEffect::VITALITYDEBUFF ) { //如果沒被限制
+                enemyTime(); //敵人回合
+            }
             if ( gameFlag == gameLoopFlag::PLAYER_LOSE ) {  //玩家死未
                 loadPromptMessage(BATTLE::MESSAGE::PLAYER_LOSE);
                 break;
@@ -203,17 +205,20 @@ void Battle::playerTime()
         break;
     //ＢＵＦＦ
     case RuneEffect::FLAMEBUFF:
+        //表示非攻擊
         effect = RuneEffect::USELESS;
         //增加玩家攻擊力
         player->atkbuff += static_cast<unsigned short>(static_cast<double>(player->atk)*function::FLAMEBUFF_RATE); 
         loadPromptMessage(BATTLE::MESSAGE::USE_FLAMEBUFF);
         break;
     case RuneEffect::AQUABUFF:
+        //表示非攻擊
         effect = RuneEffect::USELESS;
         player->effect = RuneEffect::AQUABUFF;
         loadPromptMessage(BATTLE::MESSAGE::USE_AQUABUFF);
         break;
     case RuneEffect::VITALITYBUFF:
+        //表示非攻擊
         effect = RuneEffect::USELESS;
         //增加玩家防禦力
         player->defbuff += static_cast<unsigned short>(static_cast<double>(player->def)*function::VITALITYBUFF_RATE); 
@@ -221,22 +226,38 @@ void Battle::playerTime()
         break;
     //ＤＥＢＵＦＦ
     case RuneEffect::FLAMEDEBUFF:
-        enemy->defbuff -= static_cast<unsigned short>(static_cast<double>(enemy->def)*function::); 
-        loadPromptMessage("FDB");
+        //表示非攻擊
+        effect = RuneEffect::USELESS;
+        //降低敵人防禦力
+        enemy->defbuff -= static_cast<unsigned short>(static_cast<double>(enemy->def)*function::FLAMEDEBUFF_RATE); 
+        loadPromptMessage(BATTLE::MESSAGE::USE_FLAMEDEBUFF);
         break;
     case RuneEffect::AQUADEBUFF:
-        loadPromptMessage("ADB");
+        //表示非攻擊
+        effect = RuneEffect::USELESS;
+        //降低敵人攻擊力
+        enemy->defbuff -= static_cast<unsigned short>(static_cast<double>(enemy->atk)*function::AQUADEBUFF_RATE); 
+        loadPromptMessage(BATTLE::MESSAGE::USE_AQUADEBUFF);
         break;
     case RuneEffect::VITALITYDEBUFF:
-        loadPromptMessage("VDB");
+        //表示非攻擊
+        effect = RuneEffect::USELESS;
+        enemy->effect = RuneEffect::VITALITYDEBUFF;
+        loadPromptMessage(BATTLE::MESSAGE::USE_VATILITYDEBUFF);
         break;
     case RuneEffect::FLAMEHEAL:
+        //表示非攻擊
+        effect = RuneEffect::USELESS;
         loadPromptMessage("FH");
         break;
     case RuneEffect::AQUAHEAL:
+        //表示非攻擊
+        effect = RuneEffect::USELESS;
         loadPromptMessage("AH");
         break;
     case RuneEffect::VITALITYHEAL:
+        //表示非攻擊
+        effect = RuneEffect::USELESS;
         loadPromptMessage("VH");
         break;
     case RuneEffect::USELESS:

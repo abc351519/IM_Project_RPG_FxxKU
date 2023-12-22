@@ -38,15 +38,18 @@ namespace BATTLE{
         const std::string SELECT_CANCEL = "Cancel successfully!";
         const std::string INPUT_ERROR = "Something is wrong with your input command.";
         const std::string ESCAPE_TRYING = "You cannot escape from this battle lol.";
-        const std::string BUY_RUNE_SUCCESS = "You'v purchased a rune successfully!!!";
-        const std::string PLAYER_WIN = "Congrates, you'v win the battle! ! !";
+        const std::string BUY_RUNE_SUCCESS = "You've purchased a rune successfully!!!";
+        const std::string PLAYER_WIN = "Congrates, you've win the battle! ! !";
         const std::string PLAYER_LOSE = "Wasted. You are dead lol.";
         const std::string RUNE_POINT_NOT_ENOUGH = "Your runePoints are not enough to use!";
         const std::string USE_SUCCESS = "Use successfully!";
         const std::string USE_FAILED = "Use failed!";
-        const std::string USE_FLAMEBUFF = "Use " + ansi_color::font::RUNE_FLAME_STONE + "FLAMEBUFF" + RESET + " increase your ATK.";
-        const std::string USE_AQUABUFF = "Use " + ansi_color::font::RUNE_AQUA_STONE + "AQUABUFF" + RESET + " decrease the damage from Enemy.";
-        const std::string USE_VITALITYBUFF = "Use " + ansi_color::font::RUNE_VITALITY_STONE + "VATILITYBUFF" + RESET + " increase your DEF.";
+        const std::string USE_FLAMEBUFF = "You've used FLAMEBUFF and increased your ATK."; // /*+ ansi_color::font::RUNE_FLAME_STONE*/ + "" + /*RESET +*/ "";
+        const std::string USE_AQUABUFF = "You've used AQUABUFF and decreased the damage from Enemy."; // /*+ ansi_color::font::RUNE_AQUA_STONE*/ + "" /*+ RESET*/ + "";
+        const std::string USE_VITALITYBUFF = "You've used VATILITYBUFF and increased your DEF." ; // /*+ ansi_color::font::RUNE_VITALITY_STONE*/ + "" + /*RESET*/ + "";
+        const std::string USE_FLAMEDEBUFF = "You've used FLAMEDEBUFF and decreased ENEMY'S DEF.";
+        const std::string USE_AQUADEBUFF = "You've used AQUADEBUFF and decreased ENEMY'S ATK.";
+        const std::string USE_VATILITYDEBUFF = "You've used VATILITYDEBUFF and rooted the ENEMY.";
         std::string RETURN_POINT(short n);
     };
     namespace ICON{
