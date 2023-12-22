@@ -26,9 +26,6 @@ int main()
     
     b.gameLoop();
     FLUSH;
- //   ani::loadWindow(ansi_color::background::RUNE_AQUA_STONE_DARK);
-
-    //SLEEP(1000000);
 
     return 0;
 }

@@ -132,7 +132,6 @@ namespace ansi_color
 
     };
     namespace background{
-        //"\033[48;2;;;m";
         const std::string BATTLE_COLOR = "\033[48;2;129;129;193m";
 
         const std::string RUNEBAG_FRAME = "\033[48;2;235;235;255m";
@@ -222,7 +221,7 @@ namespace ani{
     const short RUNEBAG_RUN_TIME = 80;
     const short RUNE_SHOW_TIME = 150;
     const short RUNE_POINT_RUN_TIME = 1000;
-    const short MESSAGE_STOP_TIME = 1000;
+    const short MESSAGE_STOP_TIME = 500;
 
     void clearScreen();
     void setPos(short x, short y);

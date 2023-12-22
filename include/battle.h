@@ -17,6 +17,7 @@ namespace BATTLE{
     };
     
     namespace POS{
+        const Position INIT_MESSAGE = {0,0};
         const Position PLAYER_NAME = {5,5};
         const Position ENEMY_NAME = {46,5};
         const Position PLAYER_HP = {5,7};
@@ -32,14 +33,14 @@ namespace BATTLE{
     namespace MESSAGE{
         const std::string SELECT_SUCCESS = "Choose successfully!";
         const std::string SELECT_FAIL = "Failed choose.";
-        const std::string WRONG_COMMAND = "u r typing the wrong command.";
-        const std::string CHOOSING_SESSION = "Select your Freakin action mode.";
+        const std::string WRONG_COMMAND = "You are typing the wrong command.";
+        const std::string CHOOSING_SESSION = "Select your action mode.";
         const std::string SELECT_CANCEL = "Cancel successfully!";
         const std::string INPUT_ERROR = "Something is wrong with your input command.";
         const std::string ESCAPE_TRYING = "You cannot escape from this battle lol.";
-        const std::string BUY_RUNE_SUCCESS = "You purchase a rune successfully!!!";
+        const std::string BUY_RUNE_SUCCESS = "You'v purchased a rune successfully!!!";
         const std::string PLAYER_WIN = "Congrates, you'v win the battle! ! !";
-        const std::string PLAYER_LOSE = "Wasted. You are dead.";
+        const std::string PLAYER_LOSE = "Wasted. You are dead lol.";
         const std::string RUNE_POINT_NOT_ENOUGH = "Your runePoints are not enough to use!";
         const std::string USE_SUCCESS = "Use successfully!";
         const std::string USE_FAILED = "Use failed!";

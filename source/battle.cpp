@@ -47,6 +47,9 @@ Battle::~Battle()
 
 void Battle::init()
 {
+    ani::setPos(BATTLE::POS::INIT_MESSAGE);
+    std::cout << "press enter to play this game......";
+    std::cin.get();
     ani::loadWindow(ansi_color::background::BATTLE_COLOR);
     player->startGameValueSet(); //玩家的點數血量
     std::thread pName(ani::runMessage,BATTLE::POS::PLAYER_NAME,player->name,RESET);
@@ -192,28 +195,19 @@ void Battle::playerTime()
             atkRate *= BATTLE::atkRateCounter::COUNTERED;
         }
         break;/*
-    case RuneEffect:::
+    case RuneEffect::FLAMEBUFF:
         break;
-    case RuneEffect::VITALITYATTACK:
+    case RuneEffect::FLAMEDEBUFF:
         break;
-    case RuneEffect::VITALITYATTACK:
+    case RuneEffect::AQUABUFF:
         break;
-    case RuneEffect::VITALITYATTACK:
+    case RuneEffect::AQUADEBUFF:
         break;
-    case RuneEffect::VITALITYATTACK:
+    case RuneEffect::VITALITYBUFF:
         break;
-    case RuneEffect::VITALITYATTACK:
+    case RuneEffect::VITALITYDEBUFF:
         break;
-    case RuneEffect::VITALITYATTACK:
-        break;
-    case RuneEffect::VITALITYATTACK:
-        break;
-    case RuneEffect::VITALITYATTACK:
-        break;
-    case RuneEffect::VITALITYATTACK:
-        break;
-    case RuneEffect::VITALITYATTACK:
-        break;*/
+    */
     default:
         break;    
     }
