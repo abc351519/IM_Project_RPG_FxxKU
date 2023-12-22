@@ -3,6 +3,22 @@
 
 #include <cctype>
 
+void EVENT::init(Player*& p)
+{
+    mtx.lock();
+    ani::clearScreen();
+    ani::setPos(Global::Screen::winStartPosX,Global::Screen::winStartPosY);
+    std::cout << EVENT::MESSAGE::INTI_PLAYER_NAME;
+    std::string name;
+    getline(std::cin, name);
+    if ( name.length() > 10 ) {
+        name.erase(name.begin()+10,name.end());
+    }
+    p = new Player(name);
+    mtx.unlock();
+    return;
+}
+
 ///string 轉數字
 short strToShort(std::string str)
 {

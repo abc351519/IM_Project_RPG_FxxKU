@@ -9,11 +9,9 @@
 
 int main()
 {
-    for ( int i = 0; i < 20; i++ )
-    {
-        std::cout << i << ' ';
-        SLEEP(100);
-        FLUSH;
-    }
+    std::string name;
+    std::cin >> name;
+    name [5] = '\0';
+    std::cout << name;
     return 0;
 }

@@ -19,7 +19,7 @@ void printNiceLy(short number, short unit)
     return;
 }
 
-#if defined(WIN32) || defined(WIN32) || defined(_WIN64) || defined(__CYGWIN) || defined(WIN32) || defined(_WIN32) || defined(MINGW32) || defined(WINNT) || defined(WINNT) || defined(__WINNT) || defined(X86) || defined(i386) || defined(__i386)
+#if defined(_WIN64) || defined(__CYGWIN) || defined(WIN32) || defined(_WIN32) || defined(MINGW32) || defined(WINNT) || defined(__WINNT) || defined(X86) || defined(i386) || defined(__i386)
 void winapi::write( wchar_t const* const s, int const n )
 {
     DWORD n_written;

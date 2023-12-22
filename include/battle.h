@@ -4,7 +4,7 @@
 #include "event.h"
 #include "enemy.h"
 #include "animation.h"
-
+#include "def.h"
 
 namespace BATTLE{
     
@@ -17,7 +17,7 @@ namespace BATTLE{
     };
     
     namespace POS{
-        const Position INIT_MESSAGE = {0,0};
+        const Position INIT_MESSAGE = {Global::Screen::winStartPosX,Global::Screen::winStartPosY};
         const Position PLAYER_NAME = {5,5};
         const Position ENEMY_NAME = {46,5};
         const Position PLAYER_HP = {5,7};

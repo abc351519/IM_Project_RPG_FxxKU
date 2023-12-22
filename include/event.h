@@ -16,11 +16,15 @@ short strToShort(std::string str);
 std::string toSmall(std::string str);
 
 namespace EVENT{
+    void init(Player*& p);
     namespace POS{
         const Position COMMAND_LINE = {3,23};
         const Position PROMPT_FRAME = {2,24};
         const Position PROMPT_LINE = {3,25};
     };
+    namespace MESSAGE{
+        const std::string INTI_PLAYER_NAME = "Enter your name: ";
+    }
 };
 
 

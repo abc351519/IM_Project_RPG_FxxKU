@@ -7,22 +7,26 @@
 #include <chrono>
 
 namespace dick{
-    void init()
+    void init(Player*& p)
     {
         graph::init();
+        EVENT::init(p);
     }
 };
 
 int main()
 {   
-    dick::init();
+    Player* p;
+    dick::init(p);
 
     ani::curserShow(false);
     ani::clearScreen();
     
-    Player p("Hsiang Dick");
+    
+
+
     Goblin e("GOBU");
-    Battle b(&p,&e);
+    Battle b(p,&e);
     
     b.gameLoop();
     FLUSH;

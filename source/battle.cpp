@@ -47,9 +47,9 @@ Battle::~Battle()
 
 void Battle::init()
 {
-    ani::setPos(BATTLE::POS::INIT_MESSAGE);
-    std::cout << "press enter to play this game......";
-    std::cin.get();
+    // ani::setPos(BATTLE::POS::INIT_MESSAGE);
+    // std::cout << "press enter to play this game......";
+    // std::cin.get();
     ani::loadWindow(ansi_color::background::BATTLE_COLOR);
     player->startGameValueSet(); //玩家的點數血量
     std::thread pName(ani::runMessage,BATTLE::POS::PLAYER_NAME,player->name,RESET);
