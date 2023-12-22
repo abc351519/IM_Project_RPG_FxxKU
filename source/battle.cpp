@@ -194,7 +194,8 @@ void Battle::playerTime()
         } else if ( enemy->element == EnemyElement::FLAME ) { //被克制
             atkRate *= BATTLE::atkRateCounter::COUNTERED;
         }
-        break;/*
+        break;
+    /*
     case RuneEffect::FLAMEBUFF:
         break;
     case RuneEffect::FLAMEDEBUFF:

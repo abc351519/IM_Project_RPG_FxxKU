@@ -73,9 +73,9 @@ RuneBag::RuneBag()
     }
 }
 
-void RuneBag::runeGet() //每回合拿到符文
+void RuneBag::runeGet(short runeGetNumber) //每回合拿到符文
 {
-    for ( int i = 0; i < RUNE_GET_ROUNDLY; i++ )
+    for ( int i = 0; i < runeGetNumber; i++ )
     {
         runes.push_back(randomRune()); //隨機分配一個符文
     }

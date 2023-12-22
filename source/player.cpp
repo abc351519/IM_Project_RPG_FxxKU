@@ -21,8 +21,15 @@ void Player::startGameValueSet(){
 
 void Player::refreshRoundly()
 {
-    myRunes->runeGet(); //增加符文
-    runePoint += RUNEPOINT_GET_ROUNDLY; //增加點數
+    if(this->myRunes->getRuneCount() >= (MAX_RUNE_COUNT-1)){
+        short addRuneCnt = MAX_RUNE_COUNT - this->myRunes->getRuneCount();
+        myRunes->runeGet(addRuneCnt); //增加符文
+        runePoint += (RUNEPOINT_GET_ROUNDLY + (RUNE_GET_ROUNDLY - addRuneCnt)); //增加點數
+    }
+    else{
+        myRunes->runeGet(RUNE_GET_ROUNDLY); //增加符文
+        runePoint += RUNEPOINT_GET_ROUNDLY; //增加點數
+    }
     return;
 }
 

@@ -44,7 +44,8 @@ namespace mpConsume
 
 enum class RuneCondition{
     RuneNotEnough,
-    cancelSucceed
+    cancelSucceed,
+    runeLimitExceed
 
 };
 
@@ -98,7 +99,7 @@ private:
 public:
     RuneBag(); //init 
     ~RuneBag(){};
-    void runeGet(); //每回合隨機給予符文
+    void runeGet(short runeGetNumber); //每回合隨機給予符文
     short runeSelectToUse(short index); //回傳選取是否有效
     short runeSelectToSell(short index);
     bool buyRune(short& runePoint);
