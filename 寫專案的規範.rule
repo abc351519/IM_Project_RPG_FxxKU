@@ -1,0 +1,19 @@
+命名規範
+
+Thanks for your question about naming conventions in programming!
+
+There are many different naming conventions that programmers use, and the specific conventions can vary depending on the programming language and the project. However, there are some general guidelines that can be helpful to follow:
+
+Use descriptive names that accurately reflect the purpose of the variable, function, or other entity. This can make your code easier to read and understand.
+
+Use camelCase or PascalCase for variable and function names. CamelCase starts with a lowercase letter and capitalizes the first letter of each subsequent word (e.g. myVariableName), while PascalCase capitalizes the first letter of each word (e.g. MyVariableName). Use underscores (_) sparingly, if at all.
+
+Use all caps for constants, and separate words with underscores (e.g. MY_CONSTANT_VALUE).
+
+Use namespaces to group related code together and avoid naming conflicts. Namespaces should be lowercase and use underscores to separate words (e.g. my_namespace).
+
+Use enums to define a set of related values. Enum names should be PascalCase, and enum values should be all caps with underscores to separate words (e.g. MyEnum::MY_ENUM_VALUE).
+
+It's important to note that these are just guidelines, and different projects or teams may have their own conventions. The most important thing is to be consistent within your own code and to make sure that your naming conventions make sense and are easy to understand.
+
+I hope this helps! Let me know if you have any further questions.
