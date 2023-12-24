@@ -184,7 +184,7 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
         return false;
     else{
         if(isFunction && (selectedNum == 2)){
-            if(runePoint < 7){
+            if(runePoint < mpConsume::FUNCTION_RUNE){
                 conditionType = RuneCondition::RuneNotEnough;
                 return false;
             }
@@ -286,15 +286,15 @@ bool RuneBag::use(double& attackRate, RuneEffect& effect, short& runePoint)
             }
         }
         else if (!isFunction && (selectedNum >= 1)){
-            if(selectedNum == 1 && runePoint < 4){
+            if(selectedNum == 1 && runePoint < mpConsume::NORMAL_RUNE_ONE){
                 conditionType = RuneCondition::RuneNotEnough;
                 return false;
             }
-            else if(selectedNum == 2 && runePoint < 6){
+            else if(selectedNum == 2 && runePoint < mpConsume::MAKE_UP_LV_TWO){
                 conditionType = RuneCondition::RuneNotEnough;
                 return false;
             }
-            else if(selectedNum == 3 && runePoint < 10){
+            else if(selectedNum == 3 && runePoint < mpConsume::MAKE_UP_LV_THREE){
                 conditionType = RuneCondition::RuneNotEnough;
                 return false;
             }
