@@ -54,8 +54,9 @@ namespace mpConsume
 enum class RuneCondition{
     RuneNotEnough,
     cancelSucceed,
-    runeLimitExceed
-
+    runeLimitExceed,
+    ONLY_ONE_FUNCTION,
+    NOTHING_CHOOSED
 };
 
 
@@ -116,7 +117,6 @@ public:
     bool buyRune(short& runePoint);
     bool use(double& attackRate, RuneEffect& effect, short& runePoints);
     bool sell(short& runePoints);
-    void selectReset();
     short getRuneCount();
     short getRune(short index);
     bool isRuneSelected(short index);

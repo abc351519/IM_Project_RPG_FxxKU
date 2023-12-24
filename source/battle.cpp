@@ -337,7 +337,7 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
         input = toSmall(input); //轉小寫
         cleanCommandLine();   //清除玩家使用痕跡
         if ( input == BATTLE::Command::QUIT ) { //回到選擇模式
-            player->myRunes->selectReset(); //重置選擇
+            player->myRunes->clearSelectedRune(); //重置選擇
             ani::renderRuneFrame(BATTLE::POS::RUNEBAG,BATTLE::ICON::RUNE_FRAME,MAX_RUNE_COUNT,0);
             updateRune(0);    //更新螢幕顯示
             return false;
@@ -368,13 +368,17 @@ bool Battle::useMode(double& atkRate,RuneEffect& effect)
                 {
                 case RuneCondition::RuneNotEnough:
                     loadPromptMessage(BATTLE::MESSAGE::RUNE_POINT_NOT_ENOUGH);
-                    player->myRunes->selectReset();
                     break;
-                
+                case RuneCondition::ONLY_ONE_FUNCTION:
+                    loadPromptMessage(BATTLE::MESSAGE::ONLY_ONE_CHOOSED);
+                    break;
+                case RuneCondition::NOTHING_CHOOSED:
+                    loadPromptMessage(BATTLE::MESSAGE::NOTHING_CHOOSED);
+                    break;
                 default:
                     break;
                 }
-                
+                player->myRunes->clearSelectedRune();
                 return false;
             }
         }
@@ -399,7 +403,7 @@ void Battle::sellMode()
         input = toSmall(input); //轉小寫
         cleanCommandLine();  //清除玩家使用痕跡
         if ( input == BATTLE::Command::QUIT ) { //回到選擇模式
-            player->myRunes->selectReset(); //重置選擇
+            player->myRunes->clearSelectedRune(); //重置選擇
             return;
         }        
         if ( input == BATTLE::Command::SELL ) { //如果要賣的話

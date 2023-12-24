@@ -51,6 +51,8 @@ namespace BATTLE{
         const std::string USE_FLAMEDEBUFF = "You've used FLAMEDEBUFF and decreased ENEMY'S DEF.";
         const std::string USE_AQUADEBUFF = "You've used AQUADEBUFF and decreased ENEMY'S ATK.";
         const std::string USE_VATILITYDEBUFF = "You've used VATILITYDEBUFF and rooted the ENEMY.";
+        const std::string ONLY_ONE_CHOOSED = "You've only choosed ONE function Rune.";
+        const std::string NOTHING_CHOOSED = "You've choosed NOTHING.";
         std::string USE_AQUAHEAL(short healHp);
         std::string RETURN_POINT(short n);
     };
