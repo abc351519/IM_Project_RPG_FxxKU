@@ -47,11 +47,12 @@ short Goblin::attack(Skill& skil)
     skillPoint++;
     short odd = odds::rand()%100;
     double rate = 1.0;
-    if ( odd < 75 && odd >= 60 ) {
+    //一般60%
+    if ( odd < 75 && odd >= 60 ) { //15%
         rate = 1.25;
-    } else if ( odd >= 75 && odd < 90 ) {
+    } else if ( odd >= 75 && odd < 90 ) { //15%
         rate = 0.8;
-    } else if ( odd >=90 ) {
+    } else if ( odd >=90 ) { //10%
         rate = 1.5;
     }
     return static_cast<short>(static_cast<double>(atk)*rate);

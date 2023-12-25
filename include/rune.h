@@ -33,8 +33,8 @@ namespace attackRate{
 namespace odds
 {
     //各種符文出現機率
-    const short APPEAR_FUNCTION_RUNE = 50;//15;
-    const short APPEAR_NORMAL_RUNE = 50;//85;
+    const short APPEAR_FUNCTION_RUNE = 15;
+    const short APPEAR_NORMAL_RUNE = 85;
     //等級合成機率
     const short MAKE_UP_LV_TWO = 70;
     const short MAKE_UP_LV_THREE = 40;
